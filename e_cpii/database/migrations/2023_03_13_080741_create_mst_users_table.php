@@ -17,6 +17,7 @@ return new class extends Migration
             $table->id();
             $table->string('email');
             $table->string('password');
+            $table->tinyInteger('role')->default(0)->comment('0=customer, 1=user, 2=admin');
             $table->string('name');
             $table->string('phone');
             $table->string('remember_token');

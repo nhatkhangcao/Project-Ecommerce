@@ -1,7 +1,24 @@
-import React from 'react';
+import React, { useState } from 'react';
+import axios from 'axios';
+import { useNavigate } from 'react-router-dom';
 
 function Login(props) {
-    const handleSubmit = () => {
+    const [data, setData] = useState();
+    const navigate = useNavigate();
+    const handleChange = (e) => {
+        let value = e.target.value.trim();
+        setData({
+            ...data,
+            [e.target.name]: value
+        })
+    }
+    const handleSubmit = e => {
+        e.preventDefault(); 
+        axios.post("http://127.0.0.1:8000/api/admin/login",data).then((response)=> {
+            if(response.data.user.role) {
+                navigate('../dashboard', { replace: true });
+            }
+        })
     }
     return (
         <div className='container'>
@@ -13,13 +30,13 @@ function Login(props) {
                     <form onSubmit={handleSubmit}>
                         <div className="row mb-3 d-flex justify-content-center">
                             <div className="col-md-6 ">
-                                <input name="email" placeholder="Email" className="form-control form-control-lg"
+                                <input onChange={handleChange} name="email" placeholder="Email" className="form-control form-control-lg"
                                 />
                             </div>
                         </div>
                         <div className="row mb-3 d-flex justify-content-center">
                             <div className="col-md-6">
-                                <input name="password" placeholder="Password" type="password" className="form-control form-control-lg"
+                                <input onChange={handleChange} name="password" placeholder="Password" type="password" className="form-control form-control-lg"
                                 />
                             </div>
                         </div>
@@ -36,9 +53,9 @@ function Login(props) {
                             </div>
                         </div>
                         <div className="d-flex justify-content-center ">
-                            <a href='/home' className="btn btn-danger btn-lg w-50">
+                            <button type='submit' className="btn btn-danger btn-lg w-50">
                                 Login
-                            </a>
+                            </button>
                         </div>
                     </form>
                 </div>

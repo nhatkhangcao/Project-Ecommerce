@@ -15,16 +15,29 @@ class LoginController extends Controller
     {
         $this->repo = $loginRepository;
     }
+
     public function login(Request $request)
     {
-        $data = [
+        $account = [
             'email' => $request->email,
-            'password' => $request->password,      
+            'password' => $request->password,    
         ];
-        if (Auth::attempt($data)) {
-            dd(123);
+        if (Auth::attempt($account)) {
+            $token = $this->repo->createTokenUser($request);
+            return response()-> json(
+                [
+                'message' => 'Login Successfully',
+                'user' => [
+                    'name' => auth()->user()->name,
+                    'role' => auth()->user()->role,
+                ],
+                'token' => $token
+                ]
+            );
         }
-        dd(1);
+        return response()-> json(
+            ['message' => 'Password or Email is Wrong',]
+        );
         // $setting = $this->repo->login();
     }
 }

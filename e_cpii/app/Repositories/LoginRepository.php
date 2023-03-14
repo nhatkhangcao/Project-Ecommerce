@@ -2,11 +2,16 @@
 
 namespace App\Repositories;
 
+use App\Models\MstUser;
+use Illuminate\Http\Response;
+
 class LoginRepository
 {
 
-    public function login()
+    public function createTokenUser($request)
     {
-        // dd(123);
+        $token = MstUser::where('email', $request->email)->first();
+        return $token->createToken('token')->plainTextToken;
     }
+
 }
