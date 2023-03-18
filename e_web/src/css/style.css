@@ -275,6 +275,7 @@
     background: var(--dark);
     border-color: var(--primary);
 }
+
 .nav-bg {
     background: var(--light);
 }

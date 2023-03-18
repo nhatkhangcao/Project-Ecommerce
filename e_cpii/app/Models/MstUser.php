@@ -16,6 +16,7 @@ class MstUser extends Authenticatable
         "email",
         "password",
         "remember_token",
-        "role"
+        "role",
+        "deleted"
     ];
 }

@@ -1,5 +1,6 @@
 import React from 'react';
 import { Outlet } from 'react-router-dom';
+
 import NavBarComponent from '../../layout/admin/NavbarComponent';
 import SideBarComponent from '../../layout/admin/SideBarComponent';
 
@@ -9,10 +10,11 @@ function AdminContainer(props) {
             <SideBarComponent />
             <div className='content '>
                 <NavBarComponent />
-                <div class="container-fluid pt-4 px-4">
-                    <Outlet/>
+                <div className="container-fluid pt-4 px-4">
+                    <Outlet />
                 </div>
             </div>
+            {/* <FooterComponent /> */}
         </div>
     );
 }

@@ -4,7 +4,7 @@ import PageNotMatch from '../component/layout/PageNotMatch';
 import AdminContainer from '../component/page/admin/AdminContainer';
 import Dashboard from '../component/page/admin/dashboard/Dashboard';
 import Login from '../component/page/admin/login/Login';
-import UserManagamentContainer from '../component/page/admin/user-management/UserManagamentContainer';
+import UserManagementContainer from '../component/page/admin/user-management/UserManagementContainer';
 
 
 function Routing(props) {
@@ -15,7 +15,7 @@ function Routing(props) {
                     <Route exact path='login' element={<Login />} />
                     <Route element={<AdminContainer />}>
                         <Route exact path='dashboard' element={<Dashboard />} />
-                        <Route exact path='user-management' element={<UserManagamentContainer />} />
+                        <Route exact path='user-management' element={<UserManagementContainer />} />
                     </Route>
                 </Route>
 

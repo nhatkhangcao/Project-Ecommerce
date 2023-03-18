@@ -20,24 +20,32 @@ class LoginController extends Controller
     {
         $account = [
             'email' => $request->email,
-            'password' => $request->password,    
+            'password' => $request->password,
         ];
         if (Auth::attempt($account)) {
             $token = $this->repo->createTokenUser($request);
-            return response()-> json(
+            return response()->json(
                 [
-                'message' => 'Login Successfully',
-                'user' => [
-                    'name' => auth()->user()->name,
-                    'role' => auth()->user()->role,
-                ],
-                'token' => $token
+                    'message' => 'Login Successfully',
+                    'user' => [
+                        'name' => auth()->user()->name,
+                        'role' => auth()->user()->role,
+                    ],
+                    'token' => $token
                 ]
             );
         }
-        return response()-> json(
+        return response()->json(
             ['message' => 'Password or Email is Wrong',]
         );
         // $setting = $this->repo->login();
+    }
+
+    public function logout(Request $request)
+    {
+        Auth::logout();
+        return response()->json(
+            ['message' => 'Logout Successfully',]
+        );
     }
 }

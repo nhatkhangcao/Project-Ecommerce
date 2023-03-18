@@ -23,7 +23,7 @@ function SideBarComponent(props) {
                         isActive ? 'active nav-item nav-link' : 'text-dark nav-item nav-link'
                     }><i className="fa fa-tachometer-alt me-2"></i>Dashboard</NavLink>
                     <div className="nav-item dropdown">
-                        <Link to="ecommerce" className="nav-link dropdown-toggle" data-bs-toggle="dropdown"><i class="fas fa-utensils me-2"></i>Meals</Link>
+                        <Link to="ecommerce" className="nav-link dropdown-toggle" data-bs-toggle="dropdown"><i className="fas fa-utensils me-2"></i>Meals</Link>
                         <div className="dropdown-menu bg-transparent border-0">
                             <a href="button.html" className="dropdown-item">Buttons</a>
                             <a href="typography.html" className="dropdown-item">Typography</a>
@@ -36,7 +36,7 @@ function SideBarComponent(props) {
                         isActive ? 'active nav-item nav-link' : 'text-dark nav-item nav-link'
                     }><i className="fas fa-user-cog me-2"></i>User</NavLink>
                     <Link to="mail" className="nav-item nav-link"><i className="fas fa-envelope me-2"></i>Mail</Link>
-                    <Link to="chat" className="nav-item nav-link"><i class="fas fa-comment-dots me-2"></i>Chat</Link>
+                    <Link to="chat" className="nav-item nav-link"><i className="fas fa-comment-dots me-2"></i>Chat</Link>
                 </div>
             </nav>
         </div>

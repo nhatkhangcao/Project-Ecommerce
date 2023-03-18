@@ -18,6 +18,7 @@ function Login(props) {
             if (response.data.user.role) {
                 navigate('../dashboard', { replace: true });
             }
+            localStorage.setItem('account', JSON.stringify(response.data))
         })
     }
     return (
@@ -25,7 +26,7 @@ function Login(props) {
             <div className=" row justify-content-center pt-5">
                 <div className=" col-md-8 ">
                     <div className="py-4" >
-                        <h1 className='text-center text-danger'>Login</h1>
+                        <h1 className='text-center text-success'>Login</h1>
                     </div>
                     <form onSubmit={handleSubmit}>
                         <div className="row mb-3 d-flex justify-content-center">
@@ -53,7 +54,7 @@ function Login(props) {
                             </div>
                         </div>
                         <div className="d-flex justify-content-center ">
-                            <button type='submit' className="btn btn-danger btn-lg w-50">
+                            <button type='submit' className="btn btn-success btn-lg w-50">
                                 Login
                             </button>
                         </div>
