@@ -13,7 +13,7 @@ function UserManagementContainer(props) {
     }
 
     const handleEditUser = (item, e) => {
-        console.log(123)
+
     }
 
     const handleDeleteUser = (item, e) => {
