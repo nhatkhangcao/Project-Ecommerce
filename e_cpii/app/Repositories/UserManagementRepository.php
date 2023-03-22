@@ -10,7 +10,7 @@ class UserManagementRepository
 
     public function index()
     {
-        $data = MstUser::where('deleted', 0)->select('id', 'name', 'email', 'role', 'deleted', 'phone')->get();
+        $data = MstUser::where('deleted', 0)->select('id', 'name', 'email', 'role', 'deleted', 'phone', 'password')->get();
         return $data;
     }
     public function delete($id)

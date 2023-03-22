@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { Button, Form, Modal } from 'react-bootstrap';
+import { useForm } from 'react-hook-form';
 
 function EditUserModal(props) {
     const handleEditUser = props.handleEditUser
@@ -8,14 +9,25 @@ function EditUserModal(props) {
     const [show, setShow] = useState(false);
     const [disabled, setDisabled] = useState(true);
     const [checked, setChecked] = useState(false);
-
     const handleClose = () => setShow(false);
     const handleShow = () => setShow(true);
-
+    
     const handleChangePassword = () => {
         setDisabled(!disabled);
         setChecked(!checked);
     }
+
+    const {
+        register,
+        handleSubmit,
+        formState: { errors },
+      } = useForm({
+        defaultValues: {
+            email: item.email,
+            name: item.name,
+            phone:item.phone,
+          }
+      });
     return (
         <>
             <i onClick={handleShow} className="far fa-edit pe-4 text-primary fw-bold" role="button" title="edit" />
@@ -25,13 +37,13 @@ function EditUserModal(props) {
                     <Modal.Title>Edit User</Modal.Title>
                 </Modal.Header>
                 <Modal.Body>
-                    <Form>
+                    <Form >
                         <Form.Group className="mb-3" controlId="exampleForm.ControlInput1">
                             <Form.Label>Email</Form.Label>
                             <Form.Control
                                 disabled
                                 type="email"
-                                value={item.email}
+                                {...register("email")}
                                 placeholder="name@example.com"
 
                             />
@@ -40,18 +52,16 @@ function EditUserModal(props) {
                             <Form.Label>Name</Form.Label>
                             <Form.Control
                                 type="name"
-                                value={item.name}
                                 placeholder="Example"
-
+                                {...register("name")}
                             />
                         </Form.Group>
                         <Form.Group className="mb-3" controlId="exampleForm.ControlInput1">
                             <Form.Label>Phone</Form.Label>
                             <Form.Control
                                 type="number"
-                                value={item.phone}
                                 placeholder="Example"
-
+                                {...register("phone")}
                             />
                         </Form.Group>
                         <Form.Group className="mb-3" controlId="exampleForm.ControlInput1">
@@ -71,20 +81,18 @@ function EditUserModal(props) {
                             />
                         </Form.Group>
                         <Form.Group className="mb-3 d-flex justify-content-end pt-1" controlId="exampleForm.ControlInput1">
-
                             <input checked={checked} onChange={handleChangePassword} type="checkbox" />
                             <label className='ms-2'>Change Password</label>
                         </Form.Group>
-
-                    </Form>
-                </Modal.Body>
-                <Modal.Footer>
+                        <Button variant="primary" type='button' onSubmit={handleSubmit(handleEditUser)} >
+                        Save Changes
+                    </Button>
                     <Button variant="secondary" onClick={handleClose}>
                         Close
                     </Button>
-                    <Button variant="primary" onClick={handleClose}>
-                        Save Changes
-                    </Button>
+                    </Form>
+                </Modal.Body>
+                <Modal.Footer>
                 </Modal.Footer>
             </Modal>
         </>
