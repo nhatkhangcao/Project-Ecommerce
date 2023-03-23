@@ -23,6 +23,7 @@ Route::prefix('admin')->group(function () {
     Route::post('/logout', [LoginController::class, 'logout']);
     Route::get('/user-management', [UserManagementController::class, 'index']);
     Route::post('/user-deleted/{id}', [UserManagementController::class, 'delete']);
+    Route::post('/user-edited/{id}', [UserManagementController::class, 'edit']);
 });
 
 

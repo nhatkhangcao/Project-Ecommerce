@@ -13,6 +13,11 @@ class UserManagementRepository
         $data = MstUser::where('deleted', 0)->select('id', 'name', 'email', 'role', 'deleted', 'phone', 'password')->get();
         return $data;
     }
+    public function edit($id, $request)
+    {
+        $data = MstUser::find($id)->update($request);
+        return $data;
+    }
     public function delete($id)
     {
         $dataDelete = MstUser::find($id)->update(['deleted' => 1]);

@@ -6,7 +6,6 @@ function UserManagementComponent(props) {
     const getUserData = props.getUserData
     const userData = props.userData
     const handleDeleteUser = props.handleDeleteUser
-    const handleEditUser = props.handleEditUser
 
     useEffect(() => {
         getUserData()
@@ -15,7 +14,18 @@ function UserManagementComponent(props) {
         <div>
             <div className="card ">
                 <div className="card-header bg-white">
-                    Featured
+                    <form>
+                        <div class="row row-cols-auto">
+                            <div class="col">
+                                <span>Name</span>
+                                <input type="text" class="form-control" placeholder="Enter email" name="email" />
+                            </div>
+                            <div class="col">
+                                <span>Email</span>
+                                <input type="password" class="form-control" placeholder="Enter password" name="pswd" />
+                            </div>
+                        </div>
+                    </form>
                 </div>
                 <div className="card-body">
                     <table className="table table-striped">
@@ -39,7 +49,7 @@ function UserManagementComponent(props) {
                                         <td>{item.phone}</td>
                                         <td>{item.role && (item.role === 2 ? "Admin" : "User")}</td>
                                         <td className='text-center' >
-                                            <EditUserModal item={item} handleEditUser={handleEditUser} />
+                                            <EditUserModal item={item} getUserData={getUserData} />
                                             <i onClick={(e) => handleDeleteUser(item, e)} role="button" className="fas fa-user-times text-danger pe-auto" title="delete"></i>
                                         </td>
                                     </tr>

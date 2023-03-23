@@ -18,11 +18,24 @@ class UserManagementController extends Controller
         $data = $this->repo->index();
         return $data;
     }
+    public function edit($id, Request $request)
+    {
+        $updated = $this->repo->edit($id, $request->all());
+        if ($updated) {
+            return response()->json(
+                ['message' => 'User is edited']
+            );
+        } else {
+            return response()->json(
+                ['message' => 'Edit user fail']
+            );
+        }
+    }
     public function delete($id)
     {
         $dataDelete = $this->repo->delete($id);
         return response()->json(
-            ['message' => 'User is deleted',]
-        );;
+            ['message' => 'User is deleted']
+        );
     }
 }
