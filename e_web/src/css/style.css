@@ -279,3 +279,6 @@
 .nav-bg {
     background: var(--light);
 }
+.page-item {
+    color: #921313 !important;
+}

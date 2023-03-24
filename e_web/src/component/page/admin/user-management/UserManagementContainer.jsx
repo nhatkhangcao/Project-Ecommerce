@@ -5,10 +5,19 @@ import Swal from "sweetalert2";
 
 function UserManagementContainer(props) {
     const [userData, setUserData] = useState();
-    const getUserData = () => {
-        axios.get('http://127.0.0.1:8000/api/admin/user-management').then((response) => {
+    const [paginate, setPaginate] = useState();
+
+    const getUserData = (url) => {
+        if (!url) {
+            url = 'http://127.0.0.1:8000/api/admin/user-management'
+        }
+        axios.get(url).then((response) => {
             setUserData(response.data)
+            pagination(response)
         });
+    }
+    const pagination = (response) => {
+        setPaginate(response.data)
     }
 
     const handleDeleteUser = (item, e) => {
@@ -40,6 +49,7 @@ function UserManagementContainer(props) {
             getUserData={getUserData}
             userData={userData}
             handleDeleteUser={handleDeleteUser}
+            paginate={paginate}
         />
     );
 }
