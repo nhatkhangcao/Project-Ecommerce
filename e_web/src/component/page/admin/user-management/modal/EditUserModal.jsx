@@ -31,7 +31,7 @@ function EditUserModal(props) {
         }
     });
 
-    const onSubmit = (item) => {
+    const editUser = (item) => {
         axios.post('http://127.0.0.1:8000/api/admin/user-edited/' + item.id, item).then((response) => {
             Swal.fire(
                 'Good job!',
@@ -44,25 +44,13 @@ function EditUserModal(props) {
 
     return (
         <>
-            <i onClick={handleShow} className="far fa-edit pe-4 text-primary fw-bold" role="button" title="edit" />
-
-            <Modal show={show} onHide={handleClose}>
+            <i onClick={handleShow} className="far fa-edit pe-2 text-primary fw-bold" role="button" title="edit" />
+            <Modal backdrop="static" show={show} onHide={handleClose}>
                 <Modal.Header closeButton>
                     <Modal.Title>Edit User</Modal.Title>
                 </Modal.Header>
                 <Modal.Body>
-
-                    <Form onSubmit={handleSubmit(onSubmit)} >
-
-                        {/* <Form.Group className="mb-3" controlId="exampleForm.ControlInput1">
-                            <Form.Label>Id</Form.Label>
-                            <Form.Control
-                                disabled
-                                type="email"
-                                {...register("id")}
-                                placeholder="name@example.com"
-                            />
-                        </Form.Group> */}
+                    <Form onSubmit={handleSubmit(editUser)} >
                         <Form.Group className="mb-3" controlId="exampleForm.ControlInput1">
                             <Form.Label>Email</Form.Label>
                             <Form.Control
@@ -121,7 +109,6 @@ function EditUserModal(props) {
                         </Form.Group>
                     </Form>
                 </Modal.Body>
-
             </Modal >
         </>
     );

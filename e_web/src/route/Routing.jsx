@@ -5,12 +5,14 @@ import AdminContainer from '../component/page/admin/AdminContainer';
 import Dashboard from '../component/page/admin/dashboard/Dashboard';
 import Login from '../component/page/admin/login/Login';
 import UserManagementContainer from '../component/page/admin/user-management/UserManagementContainer';
+import CustomerContainer from '../component/page/customer/CustomerContainer';
 
 
 function Routing(props) {
     return (
         <>
             <Routes>
+                //ADMIN ROUTING
                 <Route path='admin'>
                     <Route exact path='login' element={<Login />} />
                     <Route element={<AdminContainer />}>
@@ -18,6 +20,9 @@ function Routing(props) {
                         <Route exact path='user-management' element={<UserManagementContainer />} />
                     </Route>
                 </Route>
+
+                //CUSTOMER ROUTING
+                <Route path='' element={<CustomerContainer />} />
 
                 <Route exact path='*' element={<PageNotMatch />} />
             </Routes>

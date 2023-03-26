@@ -1,39 +1,56 @@
 import axios from 'axios';
 import React, { useEffect, useState } from 'react';
+import { useForm } from 'react-hook-form';
 import EditUserModal from './modal/EditUserModal';
 
 function UserManagementComponent(props) {
     const getUserData = props.getUserData
     const userData = props.userData
     const paginate = props.paginate
+    const searchUser = props.searchUser
     const handleDeleteUser = props.handleDeleteUser
+    const clearSearch = props.clearSearch
+
+    const {
+        register,
+        handleSubmit,
+        reset,
+        formState: { errors },
+    } = useForm();
 
     useEffect(() => {
         getUserData()
     }, []);
+
     return (
         <div>
             <div className="card ">
                 <div className="card-header bg-white">
-                    <form>
+                    <form onSubmit={handleSubmit(searchUser)}>
                         <div class="row row-cols-auto">
                             <div class="col-3">
                                 <span className='fw-bold'>Name</span>
-                                <input class="form-control" />
+                                <input
+                                    class="form-control"
+                                    {...register("name")}
+                                />
                             </div>
                             <div class="col-3">
                                 <span className='fw-bold'>Email</span>
-                                <input class="form-control" />
+                                <input
+                                    class="form-control"
+                                    {...register("email")}
+                                />
                             </div>
                         </div>
                         <div class="row row-cols-auto d-flex justify-content-end">
                             <div class="col">
-                                <button type='button' className="btn bg-dark  text-white">
+                                <button type='submit' className="btn bg-dark  text-white">
                                     <i class="px-4 fas fa-search"></i>
                                 </button>
                             </div>
                             <div class="col">
-                                <button type='reset' className="btn bg-secondary text-white">
+                                <button type='button' onClick={() => reset(clearSearch)} className="btn bg-secondary text-white">
                                     <i class="px-4 fas fa-eraser"></i>
                                 </button>
                             </div>
@@ -61,18 +78,18 @@ function UserManagementComponent(props) {
                             {
                                 userData && userData.data && userData.data.length > 0 ? userData.data.map((item, index) =>
                                     <tr key={item.id}>
-                                        <th scope="row">{item.id}</th>
+                                        <th scope="row">{(userData.current_page - 1) * userData.per_page + index + 1}</th>
                                         <td>{item.name}</td>
                                         <td>{item.email}</td>
                                         <td>{item.phone}</td>
                                         <td>{item.role && (item.role === 2 ? "Admin" : "User")}</td>
                                         <td className='text-center' >
                                             <EditUserModal item={item} getUserData={getUserData} />
-                                            <i onClick={(e) => handleDeleteUser(item, e)} role="button" className="fas fa-user-times text-danger pe-auto" title="delete"></i>
+                                            <i onClick={(e) => handleDeleteUser(item, e)} role="button" className="fas fa-user-times text-danger" title="delete"></i>
                                         </td>
                                     </tr>
                                 ) :
-                                    <tr><td className='text-danger'>NO DATA!</td></tr>
+                                    <tr><td className='text-danger text-center'>NO DATA!</td></tr>
                             }
                         </tbody>
                     </table>
@@ -85,7 +102,8 @@ function UserManagementComponent(props) {
                                     <li className={className} key={link.label}>
                                         <button className="page-link" onClick={e => getUserData(url)}>{link.label}</button>
                                     </li>
-                                )})
+                                )
+                            })
                             }
                         </ul>
                     </nav>

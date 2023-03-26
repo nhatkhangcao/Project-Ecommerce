@@ -10,7 +10,7 @@ class UserManagementRepository
 
     public function index()
     {
-        $data = MstUser::where('deleted', 0)->select('id', 'name', 'email', 'role', 'deleted', 'phone', 'password')->paginate(2);
+        $data = MstUser::where('deleted', 0)->select('id', 'name', 'email', 'role', 'deleted', 'phone')->orderBy('id', 'DESC')->paginate(10);
         return $data;
     }
     public function edit($id, $request)
@@ -22,5 +22,16 @@ class UserManagementRepository
     {
         $dataDelete = MstUser::find($id)->update(['deleted' => 1]);
         return $dataDelete;
+    }
+    public function search($request)
+    {
+        $data = MstUser::where('deleted', 0);
+        if (isset($request['name'])) {
+            $data->where('name', 'LIKE', '%' . $request['name'] . '%');
+        }
+        if (isset($request['email'])) {
+            $data->where('email', 'LIKE', '%' . $request['email'] . '%');
+        }
+        return $data->orderBy('id', 'DESC')->paginate(10);
     }
 }

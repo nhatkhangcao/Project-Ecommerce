@@ -38,4 +38,9 @@ class UserManagementController extends Controller
             ['message' => 'User is deleted']
         );
     }
+    public function search(Request $request)
+    {
+        $dataSearch = $this->repo->search($request->all());
+        return $dataSearch;
+    }
 }

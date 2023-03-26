@@ -2,6 +2,7 @@ import axios from 'axios';
 import React, { useState } from 'react';
 import UserManagementComponent from './UserManagementComponent';
 import Swal from "sweetalert2";
+import { set } from 'react-hook-form';
 
 function UserManagementContainer(props) {
     const [userData, setUserData] = useState();
@@ -18,6 +19,17 @@ function UserManagementContainer(props) {
     }
     const pagination = (response) => {
         setPaginate(response.data)
+    }
+
+    const searchUser = (data) => {
+        axios.post('http://127.0.0.1:8000/api/admin/search-user', data).then((response) => {
+            setUserData(response.data)
+            pagination(response)
+        });
+    }
+
+    const clearSearch = (data) => {
+        getUserData();
     }
 
     const handleDeleteUser = (item, e) => {
@@ -50,6 +62,8 @@ function UserManagementContainer(props) {
             userData={userData}
             handleDeleteUser={handleDeleteUser}
             paginate={paginate}
+            searchUser={searchUser}
+            clearSearch={clearSearch}
         />
     );
 }

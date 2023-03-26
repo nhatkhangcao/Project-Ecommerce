@@ -279,6 +279,15 @@
 .nav-bg {
     background: var(--light);
 }
+
 .page-item {
     color: #921313 !important;
+}
+
+.nav-bar-customer {
+    background-color: var(--primary);
+}
+
+.customer-login {
+    width: 400px;
 }
