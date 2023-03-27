@@ -14,21 +14,22 @@ const LoginModal = () => {
         formState: { errors },
     } = useForm();
 
-    const login = () => {
-        console.log(123)
+    const login = (data) => {
+        console.log(data)
     }
 
     return (
         <>
             <i onClick={handleShow} class="fas fa-user" role="button" title="login"></i>
-            <Modal backdrop="static" show={show} onHide={handleClose}>
+            <Modal dialogClassName="modal-width" backdrop="static" show={show} onHide={handleClose}>
                 <Modal.Header className="text-center" closeButton>
-                    <Modal.Title className='w-100 fw-bold' >Login</Modal.Title>
+                    <Modal.Title className='text-title w-100 fw-bold text-success' >Login</Modal.Title>
                 </Modal.Header>
                 <Modal.Body>
                     <Form onSubmit={handleSubmit(login)} >
                         <Form.Group className="mb-4" controlId="exampleForm.ControlInput1">
                             <Form.Control
+                                className='input-size'
                                 type="text"
                                 {...register("email", {
                                     required: "Email is required",
@@ -39,7 +40,8 @@ const LoginModal = () => {
                         </Form.Group>
                         <Form.Group className="mb-4" controlId="exampleForm.ControlInput1">
                             <Form.Control
-                                type="text"
+                                className='input-size'
+                                type="password"
                                 placeholder="Password"
                                 {...register("name", {
                                     required: "Name is required",
@@ -49,9 +51,12 @@ const LoginModal = () => {
                         </Form.Group>
 
                         <Form.Group className='d-flex justify-content-center'>
-                            <Button className='me-3' variant="success" type='submit'>
+                            <Button className='me-3 btn-login' variant="success" type='submit'>
                                 LOGIN
                             </Button>
+                        </Form.Group>
+                        <Form.Group className='d-flex justify-content-center pt-1'>
+                            Don't have an account?<span className='ps-2 text-success fw-bold'>Join us</span>
                         </Form.Group>
                     </Form>
                 </Modal.Body>

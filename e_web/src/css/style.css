@@ -288,6 +288,19 @@
     background-color: var(--primary);
 }
 
-.customer-login {
-    width: 400px;
+.modal-width {
+    width: 400px !important;
+}
+
+.text-title {
+    font-size: 30px !important;
+}
+
+.input-size {
+    height: 45px !important;
+    font-size: 18px !important;
+}
+
+.btn-login {
+    width: 100px !important;
 }
