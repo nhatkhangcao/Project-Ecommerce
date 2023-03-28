@@ -19,9 +19,9 @@ use Illuminate\Support\Facades\Route;
 
 
 
+Route::post('/login', [LoginController::class, 'login']);
+Route::post('/logout', [LoginController::class, 'logout']);
 Route::prefix('admin')->group(function () {
-    Route::post('/login', [LoginController::class, 'login']);
-    Route::post('/logout', [LoginController::class, 'logout']);
     Route::get('/user-management', [UserManagementController::class, 'index']);
     Route::post('/user-deleted/{id}', [UserManagementController::class, 'delete']);
     Route::post('/user-edited/{id}', [UserManagementController::class, 'edit']);
@@ -29,7 +29,6 @@ Route::prefix('admin')->group(function () {
 });
 
 Route::prefix('customer')->group(function () {
-    Route::post('/login', [CustomerLoginController::class, 'login']);
 });
 
 // Route::middleware('auth:sanctum')->get('/user', function (Request $request) {

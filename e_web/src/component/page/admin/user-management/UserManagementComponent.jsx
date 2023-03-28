@@ -82,7 +82,7 @@ function UserManagementComponent(props) {
                                         <td>{item.name}</td>
                                         <td>{item.email}</td>
                                         <td>{item.phone}</td>
-                                        <td>{item.role && (item.role === 2 ? "Admin" : "User")}</td>
+                                        <td>{item.role && (item.role == 2 ? "Admin" : "User")}</td>
                                         <td className='text-center' >
                                             <EditUserModal item={item} getUserData={getUserData} />
                                             <i onClick={(e) => handleDeleteUser(item, e)} role="button" className="fas fa-user-times text-danger" title="delete"></i>

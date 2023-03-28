@@ -64,10 +64,6 @@ return [
             'driver' => 'eloquent',
             'model' => App\Models\MstUser::class,
         ],
-        'customer' => [
-            'driver' => 'eloquent',
-            'model' => App\Models\MstCustomer::class,
-        ]
         // 'users' => [
         //     'driver' => 'database',
         //     'table' => 'users',
