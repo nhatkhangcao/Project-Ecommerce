@@ -13,6 +13,11 @@ class UserManagementRepository
         $data = MstUser::where('deleted', 0)->select('id', 'name', 'email', 'role', 'deleted', 'phone')->orderBy('id', 'DESC')->paginate(10);
         return $data;
     }
+    public function getEmailByMember($request)
+    {
+        $data = MstUser::where('email', $request)->first();
+        return $data;
+    }
     public function edit($id, $request)
     {
         $data = MstUser::find($id)->update($request);

@@ -56,6 +56,17 @@ function UserManagementContainer(props) {
         })
     }
 
+    const setRole = (role) => {
+        if (role === 2) {
+            return 'Admin';
+        } else if (role === 1) {
+            return 'User';
+        } else {
+            return 'Customer';
+        }
+
+    }
+
     return (
         <UserManagementComponent
             getUserData={getUserData}
@@ -64,6 +75,7 @@ function UserManagementContainer(props) {
             paginate={paginate}
             searchUser={searchUser}
             clearSearch={clearSearch}
+            setRole={setRole}
         />
     );
 }

@@ -18,6 +18,25 @@ class UserManagementController extends Controller
         $data = $this->repo->index();
         return $data;
     }
+    public function getEmailByMember(Request $request)
+    {
+        $data = $this->repo->getEmailByMember($request->email);
+        if ($data) {
+            return response()->json(
+                [
+                    'message' => 'Email Exists',
+                    'status' => false,
+                ]
+            );
+        } else {
+            return response()->json(
+                [
+                    'message' => 'Valid Email',
+                    'status' => true,
+                ]
+            );
+        }
+    }
     public function edit($id, Request $request)
     {
         $updated = $this->repo->edit($id, $request->all());

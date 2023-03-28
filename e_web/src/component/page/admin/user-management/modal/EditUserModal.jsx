@@ -47,7 +47,7 @@ function EditUserModal(props) {
             <i onClick={handleShow} className="far fa-edit pe-2 text-primary fw-bold" role="button" title="edit" />
             <Modal backdrop="static" show={show} onHide={handleClose}>
                 <Modal.Header closeButton>
-                    <Modal.Title>Edit User</Modal.Title>
+                    <Modal.Title>EDIT MEMBER</Modal.Title>
                 </Modal.Header>
                 <Modal.Body>
                     <Form onSubmit={handleSubmit(editUser)} >

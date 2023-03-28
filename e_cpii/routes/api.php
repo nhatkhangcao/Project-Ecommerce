@@ -26,6 +26,7 @@ Route::prefix('admin')->group(function () {
     Route::post('/user-deleted/{id}', [UserManagementController::class, 'delete']);
     Route::post('/user-edited/{id}', [UserManagementController::class, 'edit']);
     Route::post('/search-user', [UserManagementController::class, 'search']);
+    Route::get('/get-email', [UserManagementController::class, 'getEmailByMember']);
 });
 
 Route::prefix('customer')->group(function () {
