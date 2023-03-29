@@ -6,7 +6,10 @@ import Swal from 'sweetalert2';
 
 function AddUserModal(props) {
     const [show, setShow] = useState(false);
-    const [notice, setNotice] = useState();
+    const [notice, setNotice] = useState({
+        password_confirm: "",
+        email_exist: ""
+    });
     const regexEmail = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
 
     const handleClose = () => setShow(false);
@@ -19,16 +22,21 @@ function AddUserModal(props) {
     } = useForm();
 
     const addUser = (data) => {
-        axios.get('http://127.0.0.1:8000/api/admin/get-email', {
-            params: { email: data.email }
-        }).then((response => {
-            if (response.data.status === true) {
-                setNotice()
+        if(data.password === data.confirm_password) {
+            axios.get('http://127.0.0.1:8000/api/admin/get-email', {
+                params: { email: data.email }
+            }).then((response => {
+                if (response.data.status === true) {
 
-            } else {
-                setNotice(response.data.message)
-            }
-        }))
+                    setNotice({})
+    
+                } else {
+                    setNotice({email_exist: 'Email Exist'})
+                }
+            }))
+        } else {
+            setNotice({password_confirm: 'Password Not Match'})
+        }
     }
     return (
         <>
@@ -52,7 +60,7 @@ function AddUserModal(props) {
                                 placeholder="abc@example.com"
                             />
                             {errors.email && (<span className="text-danger">{errors.email.message}</span>)
-                                || <span className="text-danger">{notice}</span>}
+                                || ( notice && <span className="text-danger">{notice.email_exist}</span>)}
                         </Form.Group>
                         <Form.Group className="mb-3" >
                             <Form.Label>Name</Form.Label>
@@ -85,7 +93,8 @@ function AddUserModal(props) {
                                     required: "Confirm password is required",
                                 })}
                             />
-                            {errors.confirm_password && (<span className="text-danger">{errors.confirm_password.message}</span>)}
+                            {errors.confirm_password && (<span className="text-danger">{errors.confirm_password.message}</span>)
+                            || ( notice && <span className="text-danger">{notice.password_confirm}</span>)}
                         </Form.Group>
                         <Form.Group className='d-flex justify-content-end'>
                             <Button className='me-3' variant="primary" type='submit'>
