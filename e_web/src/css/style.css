@@ -1,8 +1,15 @@
-/********** Template CSS **********/
 :root {
     --primary: #46852d;
     --light: #d0d1d3;
     --dark: #191C24;
+    --bg: rgb(233, 237, 231);
+}
+
+@import url('https://fonts.googleapis.com/css2?family=Oswald&family=Playfair+Display:ital@1&display=swap');
+
+* {
+    font-family: 'Oswald', sans-serif;
+    font-size: 16px;
 }
 
 .back-to-top {
@@ -74,7 +81,7 @@
     width: 250px;
     height: 100vh;
     overflow-y: auto;
-    background: var(--light);
+    background: var(--bg);
     transition: 0.5s;
     z-index: 999
 }
@@ -277,7 +284,7 @@
 }
 
 .nav-bg {
-    background: var(--light);
+    background: var(--bg);
 }
 
 .page-item {
@@ -285,7 +292,7 @@
 }
 
 .nav-bar-customer {
-    background-color: var(--primary);
+    background-color: var(--bg);
 }
 
 .modal-width {
@@ -310,6 +317,30 @@
     max-width: 80px;
     text-align: center;
 }
+
 .bg-content {
     background-color: #f8fafc;
+}
+
+.guide {
+    width: 100%;
+    text-align: center;
+    padding: 60px 0px 60px 0px;
+    background-color: rgb(233, 237, 231);
+    box-shadow: 0 6px 10px -2px rgb(21, 21, 21);
+}
+
+.guide__container {
+    display: flex;
+    width: 100%;
+}
+
+.guide .guide__container--card {
+    width: 33%;
+    padding-top: 30px;
+}
+
+.guide .guide__container--card img {
+    width: 33%;
+    height: auto;
 }

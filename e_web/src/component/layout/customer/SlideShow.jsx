@@ -10,13 +10,13 @@ function SlideShow(props) {
             </div>
             <div class="carousel-inner">
                 <div class="carousel-item active">
-                    <img class="object-fit-md-contain  w-100" style={{ height: "80vh" }} src="/images/slider1.jpg" alt="..." />
+                    <img class="object-fit-scale  w-100" style={{ height: "85vh" }} src="/images/slider1.jpg" alt="..." />
                 </div>
                 <div class="carousel-item">
-                    <img class="object-fit-md-contain w-100 " style={{ height: "80vh" }} src="/images/slider2.jpg" alt="..." />
+                    <img class="object-fit-scale w-100 " style={{ height: "85vh" }} src="/images/slider2.jpg" alt="..." />
                 </div>
                 <div class="carousel-item">
-                    <img class="object-fit-md-contain w-100" style={{ height: "80vh" }} src="/images/slider3.jpg" alt="..." />
+                    <img class="object-fit-scale w-100" style={{ height: "85vh" }} src="/images/slider3.jpg" alt="..." />
                 </div>
             </div>
             <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="prev">
