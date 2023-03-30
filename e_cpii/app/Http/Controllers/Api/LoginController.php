@@ -26,17 +26,21 @@ class LoginController extends Controller
             $token = $this->repo->createTokenUser($request);
             return response()->json(
                 [
-                    'message' => 'Login Successfully',
-                    'user' => [
+                    'user'      => [
                         'name' => auth()->user()->name,
                         'role' => auth()->user()->role,
                     ],
-                    'token' => $token
+                    'message'   => 'Login Successfully',
+                    'token'     => $token,
+                    'status'    => true
                 ]
             );
         }
         return response()->json(
-            ['message' => 'Password or Email is Wrong',]
+            [
+                'message' => 'Password or Email is Wrong',
+                'status'  => false
+            ]
         );
         // $setting = $this->repo->login();
     }

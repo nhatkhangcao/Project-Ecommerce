@@ -15,13 +15,13 @@ return new class extends Migration
     {
         Schema::create('mst_users', function (Blueprint $table) {
             $table->id();
-            $table->string('email');
-            $table->string('password');
+            $table->string('email', 255);
+            $table->string('password', 255);
             $table->tinyInteger('role')->default(0)->comment('0=customer, 1=user, 2=admin');
             $table->tinyInteger('deleted')->default(0)->comment('0=active, 1=deleted');
-            $table->string('name');
-            $table->string('phone');
-            $table->string('remember_token');
+            $table->string('name', 255);
+            $table->string('phone', 20)->nullable();
+            $table->string('remember_token')->default(0);
             $table->timestamps();
         });
     }

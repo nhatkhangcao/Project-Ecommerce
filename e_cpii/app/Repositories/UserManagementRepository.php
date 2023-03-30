@@ -39,4 +39,9 @@ class UserManagementRepository
         }
         return $data->orderBy('id', 'DESC')->paginate(10);
     }
+    public function add($request)
+    {
+        $dataAdd = MstUser::create($request);
+        return $dataAdd;
+    }
 }

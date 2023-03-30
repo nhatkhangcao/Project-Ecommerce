@@ -1,6 +1,7 @@
 import axios from 'axios';
-import React from 'react';
+import React, {useEffect} from 'react';
 import { useNavigate } from "react-router-dom";
+import $ from 'jquery'; 
 
 function NavBarComponent(props) {
     const navigate = useNavigate()
@@ -11,13 +12,19 @@ function NavBarComponent(props) {
             navigate('login')
         })
     }
+    
+    useEffect(() => {
+        $('#toggler').click(function () {
+          $('.sidebar, .content').toggleClass("open");
+          return false;
+        });
+      }, []);
     return (
-        <div className='wrapper'>
-            <nav className="navbar navbar-expand bg-light py-0">
+            <nav className="navbar navbar-expand bg-white navbar-light sticky-top px-4 py-0">
                 <a href="index.html" className="navbar-brand d-flex d-lg-none me-4">
                     <h2 className="text-success fw-bold mb-0">EAT CLEAN</h2>
                 </a>
-                <a className=" ms-4 flex-shrink-0 text-decoration-none">
+                <a id='toggler' className="sidebar-toggler flex-shrink-0 text-decoration-none" style={{ cursor: 'pointer'}}>
                     <i className="fa fa-bars text-success"></i>
                 </a>
                 <div className="navbar-nav align-items-center ms-auto me-3">
@@ -71,7 +78,6 @@ function NavBarComponent(props) {
                     </div>
                 </div >
             </nav >
-        </div>
     );
 }
 export default NavBarComponent;         

@@ -1,4 +1,3 @@
-import axios from 'axios';
 import React, { useEffect, useState } from 'react';
 import { useForm } from 'react-hook-form';
 import AddUserModal from './modal/AddUserModal';
@@ -48,7 +47,7 @@ function UserManagementComponent(props) {
                         <div className="row row-cols-auto d-flex justify-content-between pt-3">
                             <div className="col">
                                 <button className='btn bg-primary text-white'>
-                                    <AddUserModal />
+                                    <AddUserModal getUserData={getUserData} />
                                 </button>
                             </div>
                             <div className="col">
@@ -70,36 +69,38 @@ function UserManagementComponent(props) {
                             From {paginate && paginate.from}~{paginate && paginate.to} out of {paginate && paginate.total}&nbsp;<div className='text-danger'>User</div>
                         </div>
                     }
-                    <table className="table table-striped">
-                        <thead className="bg-dark text-white">
-                            <tr>
-                                <th scope="col">#</th>
-                                <th scope="col">Name</th>
-                                <th scope="col">Email</th>
-                                <th scope="col">Phone</th>
-                                <th scope="col">Role</th>
-                                <th className='text-center' scope="col">Action</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            {
-                                userData && userData.data && userData.data.length > 0 ? userData.data.map((item, index) =>
-                                    <tr key={item.id}>
-                                        <th scope="row">{(userData.current_page - 1) * userData.per_page + index + 1}</th>
-                                        <td>{item.name}</td>
-                                        <td>{item.email}</td>
-                                        <td>{item.phone}</td>
-                                        <td>{setRole(item.role)}</td>
-                                        <td className='text-center' >
-                                            <EditUserModal item={item.role} getUserData={getUserData} />
-                                            <i onClick={(e) => handleDeleteUser(item, e)} role="button" className="fas fa-user-times text-danger" title="delete"></i>
-                                        </td>
-                                    </tr>
-                                ) :
-                                    <tr><td className='text-danger text-center'>NO DATA!</td></tr>
-                            }
-                        </tbody>
-                    </table>
+                    <div className='table-responsive'>
+                        <table className="table table-bordered table-striped">
+                            <thead className="bg-dark text-white">
+                                <tr>
+                                    <th scope="col">#</th>
+                                    <th scope="col">Name</th>
+                                    <th scope="col">Email</th>
+                                    <th scope="col">Phone</th>
+                                    <th scope="col">Role</th>
+                                    <th className='text-center' scope="col">Action</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {
+                                    userData && userData.data && userData.data.length > 0 ? userData.data.map((item, index) =>
+                                        <tr key={item.id}>
+                                            <th scope="row">{(userData.current_page - 1) * userData.per_page + index + 1}</th>
+                                            <td>{item.name}</td>
+                                            <td>{item.email}</td>
+                                            <td>{item.phone}</td>
+                                            <td>{setRole(item.role)}</td>
+                                            <td className='text-center' >
+                                                <EditUserModal item={item} getUserData={getUserData} />
+                                                <i onClick={(e) => handleDeleteUser(item, e)} role="button" className="fas fa-user-times text-danger" title="delete"></i>
+                                            </td>
+                                        </tr>
+                                    ) :
+                                        <tr><td className='text-danger text-center'>NO DATA!</td></tr>
+                                }
+                            </tbody>
+                        </table>
+                    </div>
                     <nav aria-label="Page navigation example" className=''>
                         <ul className="pagination d-flex justify-content-center">
                             {paginate && paginate.last_page >= 2 && paginate.links && paginate.links.map((link) => {

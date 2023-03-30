@@ -1,7 +1,7 @@
 /********** Template CSS **********/
 :root {
     --primary: #46852d;
-    --light: #dee0e2;
+    --light: #d0d1d3;
     --dark: #191C24;
 }
 
@@ -309,4 +309,7 @@
     min-width: 80px;
     max-width: 80px;
     text-align: center;
+}
+.bg-content {
+    background-color: #f8fafc;
 }

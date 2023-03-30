@@ -1,10 +1,11 @@
 import axios from 'axios';
-import React, { useState } from 'react';
+import React, { Children, useState } from 'react';
 import { Button, Form, Modal } from 'react-bootstrap';
 import { useForm } from 'react-hook-form';
 import Swal from 'sweetalert2';
 
 function AddUserModal(props) {
+    const getUserData = props.getUserData;
     const [show, setShow] = useState(false);
     const [notice, setNotice] = useState({
         password_confirm: "",
@@ -19,6 +20,7 @@ function AddUserModal(props) {
         register,
         handleSubmit,
         formState: { errors },
+        reset,
     } = useForm();
 
     const addUser = (data) => {
@@ -27,9 +29,16 @@ function AddUserModal(props) {
                 params: { email: data.email }
             }).then((response => {
                 if (response.data.status === true) {
-
-                    setNotice({})
-    
+                    axios.post('http://127.0.0.1:8000/api/admin/user-added', data).then((response)=>
+                    {
+                        Swal.fire(
+                            'Good job!',
+                            'Expense Added Successfully',
+                            'success');
+                    });
+                    getUserData()
+                    reset()
+                    setShow(false);
                 } else {
                     setNotice({email_exist: 'Email Exist'})
                 }
@@ -41,7 +50,7 @@ function AddUserModal(props) {
     return (
         <>
             <i onClick={handleShow} className="fas fa-user-plus px-3 text-white fw-bold" role="button" title="edit" />
-            <Modal backdrop="static" show={show} onHide={handleClose}>
+            <Modal backdrop="static" show={show} onHide={() => reset(handleClose)}>
                 <Modal.Header closeButton>
                     <Modal.Title>ADD MEMBER</Modal.Title>
                 </Modal.Header>
@@ -89,18 +98,15 @@ function AddUserModal(props) {
                             <Form.Control
                                 type="password"
                                 placeholder="******"
-                                {...register("confirm_password", {
-                                    required: "Confirm password is required",
-                                })}
+                                {...register("confirm_password") }
                             />
-                            {errors.confirm_password && (<span className="text-danger">{errors.confirm_password.message}</span>)
-                            || ( notice && <span className="text-danger">{notice.password_confirm}</span>)}
+                            {notice && <span className="text-danger">{notice.password_confirm}</span>}
                         </Form.Group>
                         <Form.Group className='d-flex justify-content-end'>
                             <Button className='me-3' variant="primary" type='submit'>
                                 Save Changes
                             </Button>
-                            <Button variant="secondary" onClick={handleClose}>
+                            <Button variant="secondary" type='button'  onClick={() => reset(handleClose)}>
                                 Close
                             </Button>
                         </Form.Group>

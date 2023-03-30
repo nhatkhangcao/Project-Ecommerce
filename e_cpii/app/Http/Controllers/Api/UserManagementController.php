@@ -62,4 +62,13 @@ class UserManagementController extends Controller
         $dataSearch = $this->repo->search($request->all());
         return $dataSearch;
     }
+    public function add(Request $request)
+    {
+        $dataAdd = $this->repo->add($request->all());
+        return response()->json(
+            [
+                'message' => 'Member has been added'
+            ]
+        );
+    }
 }

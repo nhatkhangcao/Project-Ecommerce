@@ -35,7 +35,7 @@ function EditUserModal(props) {
         axios.post('http://127.0.0.1:8000/api/admin/user-edited/' + item.id, item).then((response) => {
             Swal.fire(
                 'Good job!',
-                'Expense Added Successfully',
+                'Expense Edited Successfully',
                 'success');
             getUserData()
         });
@@ -74,7 +74,7 @@ function EditUserModal(props) {
                         <Form.Group className="mb-3" controlId="exampleForm.ControlInput1">
                             <Form.Label>Phone</Form.Label>
                             <Form.Control
-                                type="phone"
+                                type="text"
                                 placeholder="Example"
                                 {...register("phone")}
                             />
