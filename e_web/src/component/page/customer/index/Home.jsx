@@ -63,6 +63,39 @@ function Home(props) {
                     </div>
                 </div>
             </div>
+            <div className='container'>
+                <h1 className='text-center'>Latest News</h1>
+                <div class="latest-news">
+                    <div class="latest-news__card">
+                        <div class="latest-news__card-img"><img src={"images/fruit.png"} /></div>
+                        <div class="latest-news__card-text">
+                            <span class="date">1 hours ago</span>
+                            <h2>Why breakfast is so important?</h2>
+                            <p>When you wake up from your overnight sleep, you may not have eaten for up to 10 hours. Breakfast
+                                replenishes the stores of energy and nutrients in your body.</p>
+                        </div>
+                    </div>
+                    <div class="latest-news__card">
+                        <div class="latest-news__card-img"><img src={"images/fruit.png"} /></div>
+                        <div class="latest-news__card-text">
+                            <span class="date">4 days ago</span>
+                            <h2>What is the eat clean diet?</h2>
+                            <p>The basic principles of eat clean will encourage you to consume more whole foods such as: fruits,
+                                vegetables, lean protein, whole grains and healthy fats and at the same time.</p>
+                        </div>
+                    </div>
+                    <div class="latest-news__card">
+                        <div class="latest-news__card-img"><img src={"images/fruit.png"} /></div>
+                        <div class="latest-news__card-text">
+                            <span class="date">Apr 21, 2022</span>
+                            <h2>How Do The Top Milks Stack Up?</h2>
+                            <p>We took a closer look at the non-dairy shelves to see how they stack up nutritionally and in uses
+                                in the kitchen so you can make an informed decision before your next
+                                milk run.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
     );
 }
