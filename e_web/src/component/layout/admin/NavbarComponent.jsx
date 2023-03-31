@@ -20,7 +20,7 @@ function NavBarComponent(props) {
         });
       }, []);
     return (
-            <nav className="navbar navbar-expand bg-white navbar-light sticky-top px-4 py-0">
+            <nav className="navbar navbar-expand bg-white navbar-light sticky-top px-4 py-0 shadow-style">
                 <a href="index.html" className="navbar-brand d-flex d-lg-none me-4">
                     <h2 className="text-success fw-bold mb-0">EAT CLEAN</h2>
                 </a>

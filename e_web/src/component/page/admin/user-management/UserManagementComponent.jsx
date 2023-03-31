@@ -25,7 +25,7 @@ function UserManagementComponent(props) {
     }, []);
     return (
         <div>
-            <div className="card ">
+            <div className="card shadow-style">
                 <div className="card-header bg-white">
                     <form onSubmit={handleSubmit(searchUser)}>
                         <div className="row row-cols-auto">

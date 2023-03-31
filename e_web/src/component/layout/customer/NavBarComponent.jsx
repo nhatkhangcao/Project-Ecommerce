@@ -1,6 +1,6 @@
 import axios from 'axios';
 import React from 'react';
-import { useNavigate } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import LoginModal from '../../page/customer/login/LoginModal';
 
 const NavBarComponent = () => {
@@ -13,48 +13,48 @@ const NavBarComponent = () => {
         })
     }
     return (
-        <nav class="navbar nav-bar-customer navbar-expand-lg navbar-light p-3">
-            <div class="container-fluid">
-                <a class="text-success fw-bold navbar-brand" href="#">EAT CLEAN</a>
-                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
-                    <span class="navbar-toggler-icon"></span>
+        <nav className="navbar nav-bar-customer navbar-expand-lg navbar-light p-3">
+            <div className="container-fluid">
+                <Link to="" className="text-success fw-bold navbar-brand" href="#">EAT CLEAN</Link>
+                <button className="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+                    <span className="navbar-toggler-icon"></span>
                 </button>
-                <div class=" collapse navbar-collapse" id="navbarNavDropdown">
-                    <ul class="navbar-nav ms-auto ">
-                        <li class="nav-item  ">
-                            <a class="text-dark fw-bold nav-link mx-2 active" aria-current="page" href="#">Home</a>
+                <div className=" collapse navbar-collapse" id="navbarNavDropdown">
+                    <ul className="navbar-nav ms-auto ">
+                        <li className="nav-item  ">
+                            <Link to="" className="text-dark nav-link mx-2 active" aria-current="page" href="#">Home</Link>
                         </li>
-                        <li class="nav-item">
-                            <a class="text-dark fw-bold nav-link mx-2" href="#">Products</a>
+                        <li className="nav-item">
+                            <Link to="meals" className="text-dark nav-link mx-2" href="#">Meals</Link>
                         </li>
-                        <li class="nav-item">
-                            <a class="text-dark fw-bold nav-link mx-2" href="#">Pricing</a>
+                        <li className="nav-item">
+                            <Link to="calculator" className="text-dark nav-link mx-2" href="#">Tdee</Link>
                         </li>
-                        <li class="nav-item dropdown">
-                            <a class="text-dark fw-bold nav-link mx-2" href="#" id="navbarDropdownMenuLink" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                        <li className="nav-item dropdown">
+                            <a className="text-dark nav-link mx-2" href="#" id="navbarDropdownMenuLink" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                                 Company
                             </a>
-                            <ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-                                <li><a class="dropdown-item" href="#">Blog</a></li>
-                                <li><a class="dropdown-item" href="#">About Us</a></li>
-                                <li><a class="dropdown-item" href="#">Contact us</a></li>
+                            <ul className="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+                                <li><a className="dropdown-item" href="#">Blog</a></li>
+                                <li><a className="dropdown-item" href="#">About Us</a></li>
+                                <li><a className="dropdown-item" href="#">Contact us</a></li>
                             </ul>
                         </li>
                     </ul>
-                    <ul class="navbar-nav ms-auto d-none d-lg-inline-flex">
-                        <li class="nav-item dropdown">
-                            <a class="text-dark fw-bold nav-link mx-2" href="#" id="navbarDropdownMenuLink" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                    <ul className="navbar-nav ms-auto d-none d-lg-inline-flex">
+                        <li className="nav-item dropdown">
+                            <a className="text-dark fw-bold nav-link mx-2" href="#" id="navbarDropdownMenuLink" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                                 {account?.user.name ? account?.user.name : <LoginModal />}
                             </a>
                             {account?.user.name ?
-                                <ul class="dropdown-menu dropdown-menu-end " aria-labelledby="navbarDropdownMenuLink">
-                                    <li><a onClick={handleLogout} class="dropdown-item">Logout</a></li>
+                                <ul className="dropdown-menu dropdown-menu-end " aria-labelledby="navbarDropdownMenuLink">
+                                    <li><a onClick={handleLogout} className="dropdown-item">Logout</a></li>
                                 </ul> : ''
                             }
                         </li>
-                        <li class="nav-item mx-2">
-                            <div class="nav-link text-dark"  >
-                                <i class="fas fa-cart-plus"></i>
+                        <li className="nav-item mx-2">
+                            <div className="nav-link text-dark"  >
+                                <i className="fas fa-cart-plus"></i>
                             </div>
                         </li>
                     </ul>

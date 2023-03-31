@@ -326,12 +326,12 @@
     width: 100%;
     text-align: center;
     padding: 60px 0px 60px 0px;
-    background-color: rgb(233, 237, 231);
+    background-color: var(--bg);
     box-shadow: 0 6px 10px -2px rgb(21, 21, 21);
 }
 
 .guide__container {
-    display: flex;
+   
     width: 100%;
 }
 
@@ -344,3 +344,28 @@
     width: 33%;
     height: auto;
 }
+
+.shadow-style {
+    box-shadow: 0px 8px 15px rgba(0, 0, 0, 0.1);
+}
+
+.diet {
+    width: 100%;
+    text-align: center;
+    padding: 60px 0px 60px 0px;
+}
+
+.diet__container {
+    width: 100%;
+}
+
+.diet .diet__container--card {
+    width: 15%;
+    padding-top: 30px;
+}
+
+.diet .diet__container--card img {
+    width: 33%;
+    height: auto;
+}
+

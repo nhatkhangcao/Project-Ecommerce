@@ -6,7 +6,9 @@ import Dashboard from '../component/page/admin/dashboard/Dashboard';
 import Login from '../component/page/admin/login/Login';
 import UserManagementContainer from '../component/page/admin/user-management/UserManagementContainer';
 import CustomerContainer from '../component/page/customer/CustomerContainer';
-
+import Home from '../component/page/customer/index/Home';
+import MealContainer from '../component/page/customer/meals/MealContainer';
+import Calculator from '../component/page/customer/tdee/Calculator';
 
 function Routing(props) {
     return (
@@ -22,8 +24,12 @@ function Routing(props) {
                 </Route>
 
                 //CUSTOMER ROUTING
-                <Route path='' element={<CustomerContainer />} />
-
+                <Route element={<CustomerContainer/>}>
+                    <Route path='' element={<Home />} />
+                    <Route exact path='calculator' element={<Calculator/>} />
+                    <Route exact path='meals' element={<MealContainer/>} />
+                </Route>
+                //PAGE NOT MATCH
                 <Route exact path='*' element={<PageNotMatch />} />
             </Routes>
         </>

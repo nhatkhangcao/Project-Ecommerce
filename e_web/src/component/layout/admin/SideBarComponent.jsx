@@ -9,9 +9,10 @@ function SideBarComponent(props) {
                     <h3 className="text-success fw-bold">EAT CLEAN</h3>
                 </a>
                 <div className="navbar-nav w-100">
-                    <NavLink to="dashboard" className={({ isActive }) =>
-                        isActive ? 'active nav-item nav-link' : 'text-dark nav-item nav-link'
-                    }><i className="fa fa-tachometer-alt me-2"></i>Dashboard</NavLink>
+                    <NavLink to="dashboard" className={({ isActive }) => isActive ? 'active nav-item nav-link' : 'text-dark nav-item nav-link'}>
+                        <i className="fa fa-tachometer-alt me-2"></i>
+                        Dashboard
+                    </NavLink>
                     <div className="nav-item dropdown">
                         <Link to="ecommerce" className="nav-link dropdown-toggle" data-bs-toggle="dropdown"><i className="fas fa-utensils me-2"></i>Meals</Link>
                         <div className="dropdown-menu bg-transparent border-0">
@@ -22,9 +23,10 @@ function SideBarComponent(props) {
                     </div>
                     <Link to="order" className="nav-item nav-link"><i className="fas fa-cart-plus me-2"></i>Order</Link>
                     <Link to="customer-management" className="nav-item nav-link"><i className="fas fa-users me-2"></i>Customer</Link>
-                    <NavLink to="user-management" className={({ isActive }) =>
-                        isActive ? 'active nav-item nav-link' : 'text-dark nav-item nav-link'
-                    }><i className="fas fa-user-cog me-2"></i>User</NavLink>
+                    <NavLink to="user-management" className={({ isActive }) => isActive ? 'active nav-item nav-link' : 'text-dark nav-item nav-link'}>
+                        <i className="fas fa-user-cog me-2"></i>
+                        User
+                    </NavLink>
                     <Link to="mail" className="nav-item nav-link"><i className="fas fa-envelope me-2"></i>Mail</Link>
                     <Link to="chat" className="nav-item nav-link"><i className="fas fa-comment-dots me-2"></i>Chat</Link>
                 </div>

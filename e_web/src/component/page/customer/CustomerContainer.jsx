@@ -1,14 +1,14 @@
 import React from 'react';
-import SlideShow from '../../layout/customer/SlideShow';
 import NavBarComponent from '../../layout/customer/NavBarComponent';
-import Home from './index/Home';
+import { Outlet } from 'react-router-dom';
 
 const CustomerContainer = () => {
     return (
         <>
             <NavBarComponent />
-            <SlideShow />
-            <Home/>
+            <div>
+                <Outlet/>
+            </div>
         </>
     );
 }

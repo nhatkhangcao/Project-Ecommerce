@@ -36,7 +36,7 @@ function UserManagementContainer(props) {
         Swal.fire({
             title: 'Are you sure?',
             text: "You want to delete " + "[" + item.name + "]",
-            icon: 'warning',
+            icon: 'info',
             showCancelButton: true,
             confirmButtonColor: '#3085d6',
             cancelButtonColor: '#d33',

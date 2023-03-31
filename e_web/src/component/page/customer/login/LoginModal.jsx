@@ -31,7 +31,7 @@ const LoginModal = () => {
 
     return (
         <>
-            <i onClick={handleShow} class="fas fa-user" role="button" title="login"></i>
+            <i onClick={handleShow} className="fas fa-user" role="button" title="login"></i>
             <Modal dialogClassName="modal-width" backdrop="static" show={show} onHide={handleClose}>
                 <Modal.Header className="text-center" closeButton>
                     <Modal.Title className='text-title w-100 fw-bold text-success' >Login</Modal.Title>
@@ -63,7 +63,6 @@ const LoginModal = () => {
                             />
                             {errors.name && (<span className="text-danger">{errors.password.message}</span>)}
                         </Form.Group>
-
                         <Form.Group className='d-flex justify-content-center'>
                             <Button className='me-3 btn-login' variant="success" type='submit'>
                                 LOGIN

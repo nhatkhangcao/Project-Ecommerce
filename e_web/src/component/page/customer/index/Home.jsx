@@ -1,41 +1,69 @@
 import React from 'react';
+import SlideShow from '../../../layout/customer/SlideShow';
 
 function Home(props) {
     return (
         <div>
-            <div class="guide">
-                <h1 class="guide__text">
-                    How to order?
+            <SlideShow />
+            <div className="guide">
+                <h1 className="guide__text">
+                    How it works?
                 </h1>
-                <div class="guide__container">
-                    <article class="guide__container--card">
+                <div className="guide__container d-flex justify-content-center">
+                    <article className="guide__container--card">
                         <figure>
                             <img src={"images/fruit.png"} />
                         </figure>
-
-                        <p class="card-excerpt">Choose your meals</p>
-
+                        <p className="card-excerpt">Choose your meals</p>
                     </article>
-
-                    <article class="guide__container--card">
+                    <article className="guide__container--card">
                         <figure>
                             <img src={"images/fruit.png"} />
                         </figure>
-                        <p class="card-excerpt">We cook</p>
-
+                        <p className="card-excerpt">We cook</p>
                     </article>
-
-                    <article class="guide__container--card">
+                    <article className="guide__container--card">
                         <figure>
                             <img src={"images/fruit.png"} />
                         </figure>
-                        <p class="card-excerpt">Delivery</p>
+                        <p className="card-excerpt">Delivery</p>
                     </article>
                 </div>
             </div>
-            ok
+            <div>
+                <div className="diet">
+                    <h1 className="diet__text">
+                        DIET
+                    </h1>
+                    <div className="diet__container d-flex justify-content-center">
+                        <article className="diet__container--card">
+                            <figure>
+                                <img src={"images/fruit.png"} />
+                            </figure>
+                            <p className="card-excerpt">Gain</p>
+                        </article>
+                        <article className="diet__container--card">
+                            <figure>
+                                <img src={"images/fruit.png"} />
+                            </figure>
+                            <p className="card-excerpt">Gain</p>
+                        </article>
+                        <article className="diet__container--card">
+                            <figure>
+                                <img src={"images/fruit.png"} />
+                            </figure>
+                            <p className="card-excerpt">Gain</p>
+                        </article>
+                        <article className="diet__container--card">
+                            <figure>
+                                <img src={"images/fruit.png"} />
+                            </figure>
+                            <p className="card-excerpt">Gain</p>
+                        </article>
+                    </div>
+                </div>
+            </div>
         </div>
-
     );
 }
 
