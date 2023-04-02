@@ -8,9 +8,9 @@ const CustomerContainer = () => {
         <>
             <NavBarComponent />
             <div>
-                <Outlet/>
+                <Outlet />
             </div>
-            <FooterComponent/>
+            <FooterComponent />
         </>
     );
 }

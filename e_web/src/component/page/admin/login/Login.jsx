@@ -15,11 +15,11 @@ function Login(props) {
 
     const onSubmit = (dataLogin) => {
         axios.post("http://127.0.0.1:8000/api/login", dataLogin).then((response) => {
-            if(response.data.status === true) {
+            if (response.data.status === true) {
                 if (response.data?.user.role == 2 || response.data?.user.role == 1) {
                     navigate('../dashboard', { replace: true });
                     localStorage.setItem('account', JSON.stringify(response.data))
-                }  
+                }
             }
             setLoginNotice("Email or Password is wrong")
         })

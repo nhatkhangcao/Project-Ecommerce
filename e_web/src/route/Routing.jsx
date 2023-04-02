@@ -19,15 +19,16 @@ function Routing(props) {
                     <Route exact path='login' element={<Login />} />
                     <Route element={<AdminContainer />}>
                         <Route exact path='dashboard' element={<Dashboard />} />
+                        <Route exact path='meals' element={<Dashboard />} />
                         <Route exact path='user-management' element={<UserManagementContainer />} />
                     </Route>
                 </Route>
 
                 //CUSTOMER ROUTING
-                <Route element={<CustomerContainer/>}>
+                <Route element={<CustomerContainer />}>
                     <Route path='' element={<Home />} />
-                    <Route exact path='calculator' element={<Calculator/>} />
-                    <Route exact path='meals' element={<MealContainer/>} />
+                    <Route exact path='calculator' element={<Calculator />} />
+                    <Route exact path='meals' element={<MealContainer />} />
                 </Route>
                 //PAGE NOT MATCH
                 <Route exact path='*' element={<PageNotMatch />} />

@@ -7,14 +7,18 @@ import { useNavigate } from 'react-router-dom';
 
 const LoginModal = () => {
     const [show, setShow] = useState(false);
-    const handleClose = () => setShow(false);
+    const [loginNotice, setLoginNotice] = useState()
+    const handleClose = () => {
+        setLoginNotice();
+        setShow(false);
+        reset()
+    }
     const handleShow = () => setShow(true);
-    const [loginNotice, setLoginNotice] = useState();
-    const navigate = useNavigate();
 
     const {
         register,
         handleSubmit,
+        reset,
         formState: { errors },
     } = useForm();
 
@@ -28,7 +32,6 @@ const LoginModal = () => {
             }
         })
     }
-
     return (
         <>
             <i onClick={handleShow} className="fas fa-user" role="button" title="login"></i>
@@ -38,11 +41,12 @@ const LoginModal = () => {
                 </Modal.Header>
                 <Modal.Body>
                     <Form onSubmit={handleSubmit(login)} >
-                        <Form.Group className="text-center mb-2" controlId="exampleForm.ControlInput1">
+                        <Form.Group className="text-center mb-2">
                             {loginNotice && (<span className="text-danger">{loginNotice}</span>)}
                         </Form.Group>
-                        <Form.Group className="mb-4" controlId="exampleForm.ControlInput1">
+                        <Form.Group className="mb-4">
                             <Form.Control
+                                id='email'
                                 className='input-size'
                                 type="text"
                                 {...register("email", {
@@ -52,8 +56,9 @@ const LoginModal = () => {
                             />
                             {errors.email && (<span className="text-danger">{errors.email.message}</span>)}
                         </Form.Group>
-                        <Form.Group className="mb-4" controlId="exampleForm.ControlInput1">
+                        <Form.Group className="mb-4">
                             <Form.Control
+                                id='password'
                                 className='input-size'
                                 type="password"
                                 placeholder="Password"

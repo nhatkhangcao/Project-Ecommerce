@@ -24,13 +24,12 @@ function AddUserModal(props) {
     } = useForm();
 
     const addUser = (data) => {
-        if(data.password === data.confirm_password) {
+        if (data.password === data.confirm_password) {
             axios.get('http://127.0.0.1:8000/api/admin/get-email', {
                 params: { email: data.email }
             }).then((response => {
                 if (response.data.status === true) {
-                    axios.post('http://127.0.0.1:8000/api/admin/user-added', data).then((response)=>
-                    {
+                    axios.post('http://127.0.0.1:8000/api/admin/user-added', data).then((response) => {
                         Swal.fire(
                             'Good job!',
                             'Expense Added Successfully',
@@ -40,11 +39,11 @@ function AddUserModal(props) {
                     reset()
                     setShow(false);
                 } else {
-                    setNotice({email_exist: 'Email Exist'})
+                    setNotice({ email_exist: 'Email Exist' })
                 }
             }))
         } else {
-            setNotice({password_confirm: 'Password Not Match'})
+            setNotice({ password_confirm: 'Password Not Match' })
         }
     }
     return (
@@ -69,7 +68,7 @@ function AddUserModal(props) {
                                 placeholder="abc@example.com"
                             />
                             {errors.email && (<span className="text-danger">{errors.email.message}</span>)
-                                || ( notice && <span className="text-danger">{notice.email_exist}</span>)}
+                                || (notice && <span className="text-danger">{notice.email_exist}</span>)}
                         </Form.Group>
                         <Form.Group className="mb-3" >
                             <Form.Label>Name</Form.Label>
@@ -98,7 +97,7 @@ function AddUserModal(props) {
                             <Form.Control
                                 type="password"
                                 placeholder="******"
-                                {...register("confirm_password") }
+                                {...register("confirm_password")}
                             />
                             {notice && <span className="text-danger">{notice.password_confirm}</span>}
                         </Form.Group>
@@ -106,7 +105,7 @@ function AddUserModal(props) {
                             <Button className='me-3' variant="primary" type='submit'>
                                 Save Changes
                             </Button>
-                            <Button variant="secondary" type='button'  onClick={() => reset(handleClose)}>
+                            <Button variant="secondary" type='button' onClick={() => reset(handleClose)}>
                                 Close
                             </Button>
                         </Form.Group>

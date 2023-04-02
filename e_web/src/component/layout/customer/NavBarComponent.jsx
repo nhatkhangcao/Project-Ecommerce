@@ -1,6 +1,6 @@
 import axios from 'axios';
 import React from 'react';
-import { Link, useNavigate } from 'react-router-dom';
+import { Link, NavLink, useNavigate } from 'react-router-dom';
 import LoginModal from '../../page/customer/login/LoginModal';
 
 const NavBarComponent = () => {
@@ -21,14 +21,14 @@ const NavBarComponent = () => {
                 </button>
                 <div className=" collapse navbar-collapse" id="navbarNavDropdown">
                     <ul className="navbar-nav ms-auto ">
-                        <li className="nav-item  ">
-                            <Link to="" className="text-dark nav-link mx-2 active" aria-current="page" href="#">Home</Link>
+                        <li className="nav-item">
+                            <NavLink to="" className={({ isActive }) => isActive ? 'active nav-item nav-link text-success' : 'text-dark nav-item nav-link'}>Home</NavLink>
                         </li>
                         <li className="nav-item">
-                            <Link to="meals" className="text-dark nav-link mx-2" href="#">Meals</Link>
+                            <NavLink to="meals" className={({ isActive }) => isActive ? 'active nav-item nav-link text-success' : 'text-dark nav-item nav-link'}>Meals</NavLink>
                         </li>
                         <li className="nav-item">
-                            <Link to="calculator" className="text-dark nav-link mx-2" href="#">Tdee</Link>
+                            <NavLink to="calculator" className={({ isActive }) => isActive ? 'active nav-item nav-link text-success' : 'text-dark nav-item nav-link'}>TDEE</NavLink>
                         </li>
                         <li className="nav-item dropdown">
                             <a className="text-dark nav-link mx-2" href="#" id="navbarDropdownMenuLink" role="button" data-bs-toggle="dropdown" aria-expanded="false">
@@ -43,15 +43,16 @@ const NavBarComponent = () => {
                     </ul>
                     <ul className="navbar-nav ms-auto d-none d-lg-inline-flex">
                         <li className="nav-item dropdown">
-                            <a className="text-dark fw-bold nav-link mx-2" href="#" id="navbarDropdownMenuLink" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                                {account?.user.name ? account?.user.name : <LoginModal />}
+                            <a className="text-dark fw-bold nav-link mx-2" id="navbarDropdownMenuLink1" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                {account?.user.name ? account.user.name : <LoginModal />}
                             </a>
-                            {account?.user.name ?
-                                <ul className="dropdown-menu dropdown-menu-end " aria-labelledby="navbarDropdownMenuLink">
+                            {account?.user.name && (
+                                <ul className="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdownMenuLink1">
                                     <li><a onClick={handleLogout} className="dropdown-item">Logout</a></li>
-                                </ul> : ''
-                            }
+                                </ul>
+                            )}
                         </li>
+
                         <li className="nav-item mx-2">
                             <div className="nav-link text-dark"  >
                                 <i className="fas fa-cart-plus"></i>
