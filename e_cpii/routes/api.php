@@ -19,9 +19,9 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::post('/login', [LoginController::class, 'login']);
+Route::post('/logout', [LoginController::class, 'logout']);
 
 Route::middleware('auth:sanctum')->group(function () {
-    Route::post('/logout', [LoginController::class, 'logout']);
     Route::prefix('admin')->group(function () {
         Route::get('/user-management', [UserManagementController::class, 'index']);
         Route::post('/user-deleted/{id}', [UserManagementController::class, 'delete']);
@@ -30,8 +30,8 @@ Route::middleware('auth:sanctum')->group(function () {
         Route::post('/search-user', [UserManagementController::class, 'search']);
         Route::get('/get-email', [UserManagementController::class, 'getEmailByMember']);
     });
+});
 
-    Route::prefix('customer')->group(function () {
-        Route::post('/calories-calculate', [CustomerController::class, 'caloriesCalculate']);
-    });
+Route::prefix('customer')->group(function () {
+    Route::post('/calories-calculate', [CustomerController::class, 'caloriesCalculate']);
 });

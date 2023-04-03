@@ -23,13 +23,15 @@ const LoginModal = () => {
     } = useForm();
 
     const login = (dataLogin) => {
-        axios.post("http://127.0.0.1:8000/api/login", dataLogin).then((response) => {
-            if (response.data?.user?.role == 0) {
-                localStorage.setItem('account_user', JSON.stringify(response.data))
-                window.location.reload(true)
-            } else {
-                setLoginNotice("Email or Password is wrong")
-            }
+        axios.get("http://127.0.0.1:8000/sanctum/csrf-cookie").then(() => {
+            axios.post("http://127.0.0.1:8000/api/login", dataLogin).then((response) => {
+                if (response.data?.user?.role == 0) {
+                    localStorage.setItem('account_user', JSON.stringify(response.data))
+                    window.location.reload(true)
+                } else {
+                    setLoginNotice("Email or Password is wrong")
+                }
+            }).catch(function (error) { console.log(error) })
         })
     }
     return (

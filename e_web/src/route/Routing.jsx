@@ -1,5 +1,5 @@
 import React from 'react';
-import { Route, Routes } from 'react-router-dom';
+import { Navigate, Outlet, Route, Routes } from 'react-router-dom';
 import PageNotMatch from '../component/layout/PageNotMatch';
 import AdminContainer from '../component/page/admin/AdminContainer';
 import Dashboard from '../component/page/admin/dashboard/Dashboard';
@@ -9,14 +9,20 @@ import CustomerContainer from '../component/page/customer/CustomerContainer';
 import Home from '../component/page/customer/index/Home';
 import MealContainer from '../component/page/customer/meals/MealContainer';
 import Calculator from '../component/page/customer/tdee/Calculator';
+import axios from 'axios';
 
 function Routing(props) {
+    const PrivateRoute = () => {
+        const isAuthorize = localStorage.getItem('account');
+        axios.defaults.headers.common['Authorization'] = `Bearer ${JSON.parse(localStorage.getItem('account'))?.token}`;
+        return isAuthorize ? <Outlet /> : <Navigate to="/error" />;
+    }
     return (
         <>
             <Routes>
                 //ADMIN ROUTING
-                <Route path='admin'>
-                    <Route exact path='login' element={<Login />} />
+                <Route exact path='admin/login' element={<Login />} />
+                <Route exact path='admin/' element={<PrivateRoute />}>
                     <Route element={<AdminContainer />}>
                         <Route exact path='dashboard' element={<Dashboard />} />
                         <Route exact path='meals' element={<Dashboard />} />
@@ -26,7 +32,7 @@ function Routing(props) {
 
                 //CUSTOMER ROUTING
                 <Route element={<CustomerContainer />}>
-                    <Route path='' element={<Home />} />
+                    <Route path='/' element={<Home />} />
                     <Route exact path='calculator' element={<Calculator />} />
                     <Route exact path='meals' element={<MealContainer />} />
                 </Route>
