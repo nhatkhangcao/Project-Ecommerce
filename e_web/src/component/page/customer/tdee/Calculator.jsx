@@ -4,7 +4,12 @@ import { useState } from 'react';
 import { useForm } from 'react-hook-form';
 
 function Calculator(props) {
-    const [calories, setCalories] = useState();
+    const [calories, setCalories] = useState({
+        goal: "",
+        moderateCarb: "",
+        higherCarb: "",
+        lowerCarb: ""
+    });
     const {
         register,
         handleSubmit,
@@ -21,7 +26,11 @@ function Calculator(props) {
     const handleCalculate = (data) => {
         axios.post('http://127.0.0.1:8000/api/customer/calories-calculate', data)
             .then((response) => {
-                setCalories(response.data)
+                console.log(response.data)
+                setCalories({
+                    goal: response.data.goal,
+                    moderateCarb: response.data.marco.moderateCarb,
+                })
             })
     }
     return (
@@ -119,52 +128,56 @@ function Calculator(props) {
                                     </div>
                                 </div>
                             </div>
-                            {calories ? (
-                               <div className='text-start h4'>
-                                    <hr/>
-                                    Calories per day: <span className='text-danger h4'> {calories}</span>
-                                    <br/>
-                                    <div className='row'>
-                                    <span className='text-center h4'>Marco</span>
-                                        <div className='col'>
-                                            Moderate Carb
+                            {calories.goal ? (
+                                <div className='text-start h4'>
+                                    <hr />
+                                    Calories per day: <span className='text-danger h4'> {calories.goal}</span>
+                                    <br />
+                                    <div className='row pt-2'>
+                                        <span className='text-center h4'>Marco</span>
+                                        <div className='col-sm-4'>
+                                            <span style={{ fontSize: '15px' }}>Moderate Carb</span>
                                             <div className='macrobox'>
-                                                <div>ok</div>
-                                                <hr/>
+                                                <div>
+                                                    <span>{calories.moderateCarb.protein}</span>
+                                                    <br />
+                                                    <span>Protein</span>
+                                                </div>
+                                                <hr />
                                                 <div>ko</div>
-                                                <hr/>
+                                                <hr />
                                                 <div>ko</div>
                                             </div>
                                         </div>
-                                        <div className='col'>
-                                            Lower Carb
+                                        <div className='col-sm-4'>
+                                            <span style={{ fontSize: '15px' }}>Lower Carb</span>
                                             <div className='macrobox'>
                                                 <div>ok</div>
-                                                <hr/>
+                                                <hr />
                                                 <div>ko</div>
-                                                <hr/>
+                                                <hr />
                                                 <div>ko</div>
                                             </div>
                                         </div>
-                                        <div className='col'>
-                                            Higher Carb
+                                        <div className='col-sm-4'>
+                                            <span style={{ fontSize: '15px' }}>Higher Carb</span>
                                             <div className='macrobox'>
                                                 <div>ok</div>
-                                                <hr/>
+                                                <hr />
                                                 <div>ko</div>
-                                                <hr/>
+                                                <hr />
                                                 <div>ko</div>
                                             </div>
                                         </div>
                                     </div>
-                               </div> 
-                               ) : ''
+                                </div>
+                            ) : ''
                             }
                         </div>
                     </form>
-                </div>
+                </div >
             </div >
-        </div>
+        </div >
     );
 }
 

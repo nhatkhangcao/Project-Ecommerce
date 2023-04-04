@@ -10,11 +10,11 @@ class CustomerRepository
     {
         $goal = '';
         if ($request['gender'] === "male") {
-            $bmr = 66 + 13.7*$request['weight'] + 5*$request['height'] - 6.8*$request['age'];
+            $bmr = 66 + 13.7 * $request['weight'] + 5 * $request['height'] - 6.8 * $request['age'];
         } else {
-            $bmr = 655 + 9.6*$request['weight'] + 1.8*$request['height'] - 4.7*$request['age'];
+            $bmr = 655 + 9.6 * $request['weight'] + 1.8 * $request['height'] - 4.7 * $request['age'];
         }
-        $tdee = $bmr*$request['activity'];
+        $tdee = $bmr * $request['activity'];
         if ($request['goal'] == 0) {
             $goal = $tdee - 500;
         } elseif ($request['goal'] == 2) {
@@ -22,6 +22,22 @@ class CustomerRepository
         } else {
             $goal = $tdee;
         }
-        return $goal;
+        // marco
+        $moderateCarb = [
+            'protein' => round(($goal * 30 / 100) / 4),
+            'carb'    => round(($goal * 35 / 100) / 4),
+            'fat'     => round(($goal * 35 / 100) / 9),
+        ];
+        $lowCarb = 1;
+        $higherCarb = 0;
+        $marco = [
+            'moderateCarb' => $moderateCarb,
+            'lowerCarb' => $lowCarb,
+            'higherCarb' => $higherCarb,
+        ];
+        return [
+            'goal' => round($goal),
+            'marco' => $marco
+        ];
     }
 }
