@@ -24,10 +24,10 @@ class DatabaseSeeder extends Seeder
         // ]);
         DB::table('mst_users')->insert([
             'name' => 'David',
-            'email' => 'david@gmail.com',
+            'email' => 'cbum@gmail.com',
             'password' => bcrypt('123456'),
             'phone' => '0889066088',
-            'role' => '2',
+            'role' => '0',
             'remember_token' => '1'
         ]);
     }

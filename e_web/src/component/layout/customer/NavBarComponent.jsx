@@ -1,10 +1,9 @@
 import axios from 'axios';
 import React from 'react';
-import { Link, NavLink, useNavigate } from 'react-router-dom';
-import LoginModal from '../../page/customer/login/LoginModal';
+import { Link, NavLink } from 'react-router-dom';
+import FormModal from '../../page/customer/form-modal/Modal/FormModal';
 
 const NavBarComponent = () => {
-    const navigate = useNavigate()
     const account = JSON.parse(localStorage.getItem('account_user'));
     const handleLogout = () => {
         axios.post("http://127.0.0.1:8000/api/logout").then(() => {
@@ -44,7 +43,7 @@ const NavBarComponent = () => {
                     <ul className="navbar-nav ms-auto d-none d-lg-inline-flex">
                         <li className="nav-item dropdown">
                             <a className="text-dark fw-bold nav-link mx-2" id="navbarDropdownMenuLink1" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                                {account?.user.name ? account.user.name : <LoginModal />}
+                                {account?.user.name ? account.user.name : <FormModal />}
                             </a>
                             {account?.user.name && (
                                 <ul className="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdownMenuLink1">
@@ -52,7 +51,6 @@ const NavBarComponent = () => {
                                 </ul>
                             )}
                         </li>
-
                         <li className="nav-item mx-2">
                             <div className="nav-link text-dark"  >
                                 <i className="fas fa-cart-plus"></i>

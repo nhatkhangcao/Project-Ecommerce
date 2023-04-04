@@ -1,8 +1,10 @@
 import axios from 'axios';
 import React from 'react';
+import { useState } from 'react';
 import { useForm } from 'react-hook-form';
 
 function Calculator(props) {
+    const [calories, setCalories] = useState();
     const {
         register,
         handleSubmit,
@@ -19,7 +21,7 @@ function Calculator(props) {
     const handleCalculate = (data) => {
         axios.post('http://127.0.0.1:8000/api/customer/calories-calculate', data)
             .then((response) => {
-                console.log(response)
+                setCalories(response.data)
             })
     }
     return (
@@ -117,6 +119,47 @@ function Calculator(props) {
                                     </div>
                                 </div>
                             </div>
+                            {calories ? (
+                               <div className='text-start h4'>
+                                    <hr/>
+                                    Calories per day: <span className='text-danger h4'> {calories}</span>
+                                    <br/>
+                                    <div className='row'>
+                                    <span className='text-center h4'>Marco</span>
+                                        <div className='col'>
+                                            Moderate Carb
+                                            <div className='macrobox'>
+                                                <div>ok</div>
+                                                <hr/>
+                                                <div>ko</div>
+                                                <hr/>
+                                                <div>ko</div>
+                                            </div>
+                                        </div>
+                                        <div className='col'>
+                                            Lower Carb
+                                            <div className='macrobox'>
+                                                <div>ok</div>
+                                                <hr/>
+                                                <div>ko</div>
+                                                <hr/>
+                                                <div>ko</div>
+                                            </div>
+                                        </div>
+                                        <div className='col'>
+                                            Higher Carb
+                                            <div className='macrobox'>
+                                                <div>ok</div>
+                                                <hr/>
+                                                <div>ko</div>
+                                                <hr/>
+                                                <div>ko</div>
+                                            </div>
+                                        </div>
+                                    </div>
+                               </div> 
+                               ) : ''
+                            }
                         </div>
                     </form>
                 </div>

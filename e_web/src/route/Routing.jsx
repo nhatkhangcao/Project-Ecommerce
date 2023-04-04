@@ -1,4 +1,5 @@
 import React from 'react';
+import axios from 'axios';
 import { Navigate, Outlet, Route, Routes } from 'react-router-dom';
 import PageNotMatch from '../component/layout/PageNotMatch';
 import AdminContainer from '../component/page/admin/AdminContainer';
@@ -9,7 +10,6 @@ import CustomerContainer from '../component/page/customer/CustomerContainer';
 import Home from '../component/page/customer/index/Home';
 import MealContainer from '../component/page/customer/meals/MealContainer';
 import Calculator from '../component/page/customer/tdee/Calculator';
-import axios from 'axios';
 
 function Routing(props) {
     const PrivateRoute = () => {
@@ -29,7 +29,6 @@ function Routing(props) {
                         <Route exact path='user-management' element={<UserManagementContainer />} />
                     </Route>
                 </Route>
-
                 //CUSTOMER ROUTING
                 <Route element={<CustomerContainer />}>
                     <Route path='/' element={<Home />} />

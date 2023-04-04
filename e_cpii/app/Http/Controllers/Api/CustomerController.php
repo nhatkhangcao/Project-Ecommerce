@@ -16,9 +16,7 @@ class CustomerController extends Controller
     }
     public function caloriesCalculate(Request $request)
     {
-        $response = $this->repo->caloriesCalculate($request->all());
-        return response($response)
-            ->header('Access-Control-Allow-Origin', '*')
-            ->header('Access-Control-Allow-Methods', 'POST');
+        $goal = $this->repo->caloriesCalculate($request->all());
+        return $goal;
     }
 }
