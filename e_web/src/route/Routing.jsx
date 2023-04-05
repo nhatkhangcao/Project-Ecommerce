@@ -8,14 +8,15 @@ import Login from '../component/page/admin/login/Login';
 import UserManagementContainer from '../component/page/admin/user-management/UserManagementContainer';
 import CustomerContainer from '../component/page/customer/CustomerContainer';
 import Home from '../component/page/customer/index/Home';
-import MealContainer from '../component/page/customer/meals/MealContainer';
 import Calculator from '../component/page/customer/tdee/Calculator';
+import MealManagementContainer from '../component/page/admin/meals-management/MealManagementContainer';
+import MealContainer from '../component/page/customer/meals/MealContainer';
 
 function Routing(props) {
     const PrivateRoute = () => {
         const isAuthorize = localStorage.getItem('account');
         axios.defaults.headers.common['Authorization'] = `Bearer ${JSON.parse(localStorage.getItem('account'))?.token}`;
-        return isAuthorize ? <Outlet /> : <Navigate to="/error" />;
+        return isAuthorize ? <Outlet /> : <Navigate to="/page-not-match" />;
     }
     return (
         <>
@@ -25,7 +26,7 @@ function Routing(props) {
                 <Route exact path='admin/' element={<PrivateRoute />}>
                     <Route element={<AdminContainer />}>
                         <Route exact path='dashboard' element={<Dashboard />} />
-                        <Route exact path='meals' element={<Dashboard />} />
+                        <Route exact path='meals' element={<MealManagementContainer />} />
                         <Route exact path='user-management' element={<UserManagementContainer />} />
                     </Route>
                 </Route>

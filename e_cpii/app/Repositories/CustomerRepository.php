@@ -28,8 +28,16 @@ class CustomerRepository
             'carb'    => round(($goal * 35 / 100) / 4),
             'fat'     => round(($goal * 35 / 100) / 9),
         ];
-        $lowCarb = 1;
-        $higherCarb = 0;
+        $lowCarb = [
+            'protein' => round(($goal * 40 / 100) / 4),
+            'carb'    => round(($goal * 30 / 100) / 4),
+            'fat'     => round(($goal * 30 / 100) / 9),
+        ];
+        $higherCarb = [
+            'protein' => round(($goal * 30 / 100) / 4),
+            'carb'    => round(($goal * 50 / 100) / 4),
+            'fat'     => round(($goal * 20 / 100) / 9),
+        ];
         $marco = [
             'moderateCarb' => $moderateCarb,
             'lowerCarb' => $lowCarb,

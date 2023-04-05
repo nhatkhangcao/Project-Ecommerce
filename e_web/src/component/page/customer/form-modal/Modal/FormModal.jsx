@@ -34,4 +34,4 @@ const FormModal = () => {
     );
 }
 
-export default Modal;
+export default FormModal;

@@ -26,10 +26,11 @@ function Calculator(props) {
     const handleCalculate = (data) => {
         axios.post('http://127.0.0.1:8000/api/customer/calories-calculate', data)
             .then((response) => {
-                console.log(response.data)
                 setCalories({
                     goal: response.data.goal,
                     moderateCarb: response.data.marco.moderateCarb,
+                    lowerCarb: response.data.marco.lowerCarb,
+                    higherCarb: response.data.marco.higherCarb,
                 })
             })
     }
@@ -83,7 +84,7 @@ function Calculator(props) {
                             </div>
                             <div className="col-md-6">
                                 <div className="form-group row">
-                                    <label className="col-sm-4">Weight</label>
+                                    <label className="col-sm-4">Height</label>
                                     <div className="col-sm-8">
                                         <input
                                             name="height"
@@ -144,29 +145,61 @@ function Calculator(props) {
                                                     <span>Protein</span>
                                                 </div>
                                                 <hr />
-                                                <div>ko</div>
+                                                <div>
+                                                    <span>{calories.moderateCarb.fat}</span>
+                                                    <br />
+                                                    <span>Fat</span>
+                                                </div>
                                                 <hr />
-                                                <div>ko</div>
+                                                <div>
+                                                    <span>{calories.moderateCarb.carb}</span>
+                                                    <br />
+                                                    <span>Carb</span>
+                                                </div>
                                             </div>
                                         </div>
                                         <div className='col-sm-4'>
                                             <span style={{ fontSize: '15px' }}>Lower Carb</span>
                                             <div className='macrobox'>
-                                                <div>ok</div>
+                                                <div>
+                                                    <span>{calories.lowerCarb.protein}</span>
+                                                    <br />
+                                                    <span>Protein</span>
+                                                </div>
+                                                <hr/>
+                                                <div>
+                                                    <span>{calories.lowerCarb.fat}</span>
+                                                    <br />
+                                                    <span>Fat</span>
+                                                </div>
                                                 <hr />
-                                                <div>ko</div>
-                                                <hr />
-                                                <div>ko</div>
+                                                <div>
+                                                    <span>{calories.lowerCarb.carb}</span>
+                                                    <br />
+                                                    <span>Carb</span>
+                                                </div>
                                             </div>
                                         </div>
                                         <div className='col-sm-4'>
                                             <span style={{ fontSize: '15px' }}>Higher Carb</span>
                                             <div className='macrobox'>
-                                                <div>ok</div>
+                                                <div>
+                                                    <span>{calories.higherCarb.protein}</span>
+                                                    <br />
+                                                    <span>Protein</span>
+                                                </div>
+                                                <hr/>
+                                                <div>
+                                                    <span>{calories.higherCarb.fat}</span>
+                                                    <br />
+                                                    <span>Fat</span>
+                                                </div>
                                                 <hr />
-                                                <div>ko</div>
-                                                <hr />
-                                                <div>ko</div>
+                                                <div>
+                                                    <span>{calories.higherCarb.carb}</span>
+                                                    <br />
+                                                    <span>Carb</span>
+                                                </div>
                                             </div>
                                         </div>
                                     </div>

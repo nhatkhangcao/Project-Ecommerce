@@ -16,15 +16,13 @@ function UserManagementComponent(props) {
         register,
         handleSubmit,
         reset,
-        formState: { errors },
     } = useForm();
-
 
     useEffect(() => {
         getUserData()
     }, []);
     return (
-        <div>
+        <div className='container'>
             <div className="card shadow-style">
                 <div className="card-header bg-white">
                     <form onSubmit={handleSubmit(searchUser)}>

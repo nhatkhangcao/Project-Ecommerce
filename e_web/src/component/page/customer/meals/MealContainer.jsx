@@ -2,8 +2,18 @@ import React from 'react';
 
 function MealContainer(props) {
     return (
-        <div>
-            ok nhe
+        <div class="container">
+            <div class="row">
+                <div class="col">
+                    Column
+                </div>
+                <div class="col">
+                    Column
+                </div>
+                <div class="col">
+                    Column
+                </div>
+            </div>
         </div>
     );
 }
