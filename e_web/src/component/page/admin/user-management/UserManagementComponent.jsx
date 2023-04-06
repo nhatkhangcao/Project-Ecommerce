@@ -56,8 +56,6 @@ function UserManagementComponent(props) {
                                     <i className="px-3 fas fa-eraser"></i>
                                 </button>
                             </div>
-
-
                         </div>
                     </form>
                 </div>

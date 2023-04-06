@@ -13,15 +13,15 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('products', function (Blueprint $table) {
+        Schema::create('meals', function (Blueprint $table) {
             $table->id();
-            $table->string('product_name');
-            $table->string('product_image');
-            $table->integer('product_price');
-            $table->string('product_detail');
-            $table->tinyInteger('product_deleted')->default(0)->comment('0=active, 1=deleted');
+            $table->string('meal_name');
+            $table->string('meal_image');
+            $table->integer('meal_price');
+            $table->string('meal_detail');
+            $table->tinyInteger('deleted')->default(0)->comment('0=active, 1=deleted');
             $table->tinyInteger('status')->default('0')->comment('0=on-sale, 1=stop-selling, 2=sold-out');
-            
+
             $table->timestamps();
         });
     }
