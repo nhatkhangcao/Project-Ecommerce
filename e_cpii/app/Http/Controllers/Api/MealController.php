@@ -15,5 +15,6 @@ class MealController extends Controller
     }
     public function index()
     {
+        return $this->repo->index();
     }
 }

@@ -3,6 +3,7 @@
 use App\Http\Controllers\Api\Customer\CustomerLoginController;
 use App\Http\Controllers\Api\CustomerController;
 use App\Http\Controllers\Api\LoginController;
+use App\Http\Controllers\Api\MealController;
 use App\Http\Controllers\Api\UserManagementController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
@@ -29,6 +30,7 @@ Route::middleware('auth:sanctum')->group(function () {
         Route::post('/user-added', [UserManagementController::class, 'add']);
         Route::post('/search-user', [UserManagementController::class, 'search']);
         Route::get('/get-email', [UserManagementController::class, 'getEmailByMember']);
+        Route::get('/meals-list', [MealController::class, 'index']);
     });
 });
 

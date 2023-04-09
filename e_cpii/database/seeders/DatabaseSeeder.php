@@ -6,6 +6,7 @@ namespace Database\Seeders;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Storage;
 
 class DatabaseSeeder extends Seeder
 {
@@ -22,13 +23,12 @@ class DatabaseSeeder extends Seeder
         //     'name' => 'Test User',
         //     'email' => 'test@example.com',
         // ]);
-        DB::table('mst_users')->insert([
-            'name' => 'admin',
-            'email' => 'admin@gmail.com',
-            'password' => bcrypt('123456'),
-            'phone' => '0889066088',
-            'role' => '0',
-            'remember_token' => '1'
+        $imagePath = Storage::putFile('public/images', public_path('images/structure.png'));
+        DB::table('meals')->insert([
+            'meal_name' => 'Chicken',
+            'meal_price' => '100',
+            'meal_detail' => 'perfect',
+            'meal_image' => $imagePath,
         ]);
     }
 }

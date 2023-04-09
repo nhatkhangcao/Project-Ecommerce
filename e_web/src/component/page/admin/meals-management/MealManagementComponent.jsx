@@ -1,12 +1,27 @@
 import React from 'react';
 import AddMealModal from './Modal/AddMealModal';
+import { useForm } from 'react-hook-form';
+import { useEffect } from 'react';
 
 function MealManagementComponent(props) {
+    const getMealData = props.getMealData
+    const dataList = props.dataList
+    const {
+        register,
+        handleSubmit,
+        reset,
+    } = useForm();
+    const searchUser = () => {
+        console.log(123)
+    }
+    useEffect(() => {
+        getMealData()
+    }, []);
     return (
-        <div class="container">
-            <div class="card shadow-style">
-                <div class="card-header bg-white">
-                    <form>
+        <div className="container">
+            <div className="card shadow-style">
+                <div className="card-header bg-white">
+                    <form onSubmit={handleSubmit(searchUser)}>
                         <div className="row row-cols-auto">
                             <div className="col-3">
                                 <span className='fw-bold'>Name</span>
@@ -32,73 +47,26 @@ function MealManagementComponent(props) {
                         </div>
                     </form>
                 </div>
-                <div class="card-body">
-                    <div class="row row-cols-2 row-cols-lg-5 g-2 g-lg-3">
-                        <div class="col">
-                            <div class="card">
-                                <img src={"/images/fruit.png"} class="card-img-top " alt="..." />
-                                <div class="card-body">
-                                    <h5 class="card-title">Card title</h5>
-                                    <p class="card-text">1$</p>
+                <div className="card-body">
+                    <div className="row row-cols-2 row-cols-lg-5 g-2 g-lg-3">
+                        {
+                            dataList && dataList.data && dataList.data.length > 0 ? dataList.data.map((item, index) =>
+                                <div className="col">
+                                    <div className="card">
+                                        <img src={item.meal_image} className="card-img-top " alt="..." />
+                                        <div className="card-body">
+                                            <h5 className="card-title">{item.meal_name}</h5>
+                                            <p className="card-text">{item.meal_price} $</p>
+                                        </div>
+                                        <div className="card-body d-flex justify-content-center">
+                                            <a href="#" className="btn bg-light border text-primary me-2"><i className="fas fa-pen">&nbsp;<span>Edit</span></i></a>
+                                            <a href="#" className="btn bg-light border text-danger"><i className="fas fa-trash-alt">&nbsp;<span>Delete</span></i></a>
+                                        </div>
+                                    </div>
                                 </div>
-                                <div class="card-body d-flex justify-content-center">
-                                    <a href="#" class="btn bg-light border text-primary me-2"><i class="fas fa-pen">&nbsp;<span>Edit</span></i></a>
-                                    <a href="#" class="btn bg-light border text-danger"><i class="fas fa-trash-alt">&nbsp;<span>Delete</span></i></a>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col">
-                            <div class="card">
-                                <img src={"/images/fruit.png"} class="card-img-top " alt="..." />
-                                <div class="card-body">
-                                    <h5 class="card-title">Card title</h5>
-                                    <p class="card-text">1$</p>
-                                </div>
-                                <div class="card-body d-flex justify-content-center">
-                                    <a href="#" class="btn bg-light border text-primary me-2"><i class="fas fa-pen">&nbsp;<span>Edit</span></i></a>
-                                    <a href="#" class="btn bg-light border text-danger"><i class="fas fa-trash-alt">&nbsp;<span>Delete</span></i></a>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col">
-                            <div class="card">
-                                <img src={"/images/fruit.png"} class="card-img-top " alt="..." />
-                                <div class="card-body">
-                                    <h5 class="card-title">Card title</h5>
-                                    <p class="card-text">1$</p>
-                                </div>
-                                <div class="card-body d-flex justify-content-center">
-                                    <a href="#" class="btn bg-light border text-primary me-2"><i class="fas fa-pen">&nbsp;<span>Edit</span></i></a>
-                                    <a href="#" class="btn bg-light border text-danger"><i class="fas fa-trash-alt">&nbsp;<span>Delete</span></i></a>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col">
-                            <div class="card">
-                                <img src={"/images/fruit.png"} class="card-img-top " alt="..." />
-                                <div class="card-body">
-                                    <h5 class="card-title">Card title</h5>
-                                    <p class="card-text">1$</p>
-                                </div>
-                                <div class="card-body d-flex justify-content-center">
-                                    <a href="#" class="btn bg-light border text-primary me-2"><i class="fas fa-pen">&nbsp;<span>Edit</span></i></a>
-                                    <a href="#" class="btn bg-light border text-danger"><i class="fas fa-trash-alt">&nbsp;<span>Delete</span></i></a>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col">
-                            <div class="card">
-                                <img src={"/images/fruit.png"} class="card-img-top " alt="..." />
-                                <div class="card-body">
-                                    <h5 class="card-title">Card title</h5>
-                                    <p class="card-text">1$</p>
-                                </div>
-                                <div class="card-body d-flex justify-content-center">
-                                    <a href="#" class="btn bg-light border text-primary me-2"><i class="fas fa-pen">&nbsp;<span>Edit</span></i></a>
-                                    <a href="#" class="btn bg-light border text-danger"><i class="fas fa-trash-alt">&nbsp;<span>Delete</span></i></a>
-                                </div>
-                            </div>
-                        </div>
+                            ) :
+                                <tr><td className='text-danger text-center'>NO DATA!</td></tr>
+                        }
                     </div>
                 </div>
             </div>
