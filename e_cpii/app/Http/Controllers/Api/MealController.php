@@ -21,4 +21,11 @@ class MealController extends Controller
     {
         return $this->repo->add($request);
     }
+    public function delete($id)
+    {
+        $dataDelete = $this->repo->delete($id);
+        return response()->json(
+            ['message' => 'Meal is deleted']
+        );
+    }
 }

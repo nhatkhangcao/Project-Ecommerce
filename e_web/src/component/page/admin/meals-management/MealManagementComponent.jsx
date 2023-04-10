@@ -5,17 +5,21 @@ import { useEffect } from 'react';
 
 function MealManagementComponent(props) {
     const getMealData = props.getMealData
+    const handleDeleteMeal = props.handleDeleteMeal
+    const paginate = props.paginate
     const dataList = props.dataList
+
     const {
-        register,
         handleSubmit,
-        reset,
     } = useForm();
+
     const searchUser = () => {
     }
+
     useEffect(() => {
         getMealData()
     }, []);
+
     return (
         <div className="container">
             <div className="card shadow-style">
@@ -50,24 +54,38 @@ function MealManagementComponent(props) {
                     <div className="row row-cols-2 row-cols-lg-5 g-2 g-lg-3">
                         {
                             dataList && dataList.data && dataList.data.length > 0 ? dataList.data.map((item, index) =>
-                                <div className="col">
-                                    <div className="card">
-                                        <img style={{maxHeight:'250px', minHeight:'220px', height: '220px'}} src={`http://localhost:8000/${item.meal_image}`} className="card-img-top " alt="..." />
+                                <div className="col" key={item.id}>
+                                    <div className="card border-1">
+                                        <img style={{ maxHeight: '200px', minHeight: '180px', height: '180px' }} src={`http://localhost:8000/${item.meal_image}`} className="card-img-top" alt="..." />
                                         <div className="card-body">
                                             <h5 className="card-title">{item.meal_name}</h5>
                                             <p className="card-text">{item.meal_price} $</p>
                                         </div>
                                         <div className="card-body d-flex justify-content-center">
-                                            <a href="#" className="btn bg-light border text-primary me-2"><i className="fas fa-pen">&nbsp;<span>Edit</span></i></a>
-                                            <a href="#" className="btn bg-light border text-danger"><i className="fas fa-trash-alt">&nbsp;<span>Delete</span></i></a>
+                                            <a className="btn bg-light border text-primary me-2"><i className="fas fa-pen">&nbsp;<span>Edit</span></i></a>
+                                            <a onClick={(e) => handleDeleteMeal(item, e)} className="btn bg-light border text-danger"><i className="fas fa-trash-alt">&nbsp;<span>Delete</span></i></a>
                                         </div>
                                     </div>
                                 </div>
                             ) :
-                                <div className='text-danger d-flex justify-content-center'>NO DATA!</div>
+                                <div className="text-danger text-center col col-lg-12">NO DATA!</div>
                         }
                     </div>
                 </div>
+                <nav aria-label="Page navigation example" className=''>
+                    <ul className="pagination d-flex justify-content-center">
+                        {paginate && paginate.last_page >= 2 && paginate.links && paginate.links.map((link) => {
+                            let url = link.url == null ? paginate.links[1].url : link.url;
+                            let className = link.active == true ? "page-item active" : "page-item"
+                            return (
+                                <li className={className} key={link.label}>
+                                    <button className="page-link" onClick={e => getMealData(url)}>{link.label}</button>
+                                </li>
+                            )
+                        })
+                        }
+                    </ul>
+                </nav>
             </div>
         </div>
     );

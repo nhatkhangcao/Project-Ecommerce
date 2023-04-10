@@ -8,9 +8,14 @@ import Swal from 'sweetalert2';
 function AddMealModal(props) {
     const getMealData = props.getMealData
     const [show, setShow] = useState(false);
-    const handleClose = () => setShow(false);
+    const handleClose = () => {
+        deleteImage()
+        setShow(false);
+    }
     const handleShow = () => setShow(true);
     const [image, setImage] = useState();
+    const aRef = useRef(null);
+
     const {
         register,
         handleSubmit,
@@ -23,11 +28,11 @@ function AddMealModal(props) {
     const handleImage = (file) => {
         setImage(file[0]);
     }
-    function deleteImage() {
+    const deleteImage = () => {
         setImage('')
         aRef.current.value = null;
     }
-    const aRef = useRef(null);
+
     const addMeal = (data) => {
         const formData = new FormData();
         formData.append('meal_name', data.meal_name);
@@ -35,23 +40,23 @@ function AddMealModal(props) {
         formData.append('meal_detail', data.meal_detail);
         formData.append('status', data.status);
         formData.append('image', image);
-        
         axios.post('http://127.0.0.1:8000/api/admin/add-meal', formData)
-        .then((response) => {
-            Swal.fire('Good job!', 'Expense Added Successfully', 'success');
-        });
+            .then((response) => {
+                Swal.fire('Good job!', 'Expense Added Successfully', 'success');
+            });
         reset();
         getMealData();
         setShow(false);
         setImage(null);
     }
+
     return (
         <>
             <i onClick={handleShow} className="fas fa-plus px-3 text-white fw-bold" role="button" title="edit" />
             <Modal
                 backdrop='static'
                 show={show}
-                onHide={() => setShow(false)}
+                onHide={() => reset(handleClose)}
                 dialogClassName="modal-dialog modal-lg"
             >
                 <form onSubmit={handleSubmit(addMeal)}>
@@ -111,7 +116,7 @@ function AddMealModal(props) {
                                 </div>
                                 <div className="col-md-5 ms-auto">
                                     <label className='col-sm-2 col-form-label pe-4'>Image</label>
-                                    <img className='img-fluid' style={{maxWidth:'250px', maxHeight:'250px'}} src={image ? URL.createObjectURL(image) : ''} />
+                                    <img className='img-fluid' style={{ maxWidth: '250px', maxHeight: '250px' }} src={image ? URL.createObjectURL(image) : ''} />
                                     <div className="input-group mb-3 pt-3">
                                         <button className="btn btn-danger" onClick={deleteImage} type="button">Delete</button>
                                         <input ref={aRef} className="form-control" type="file" name='image' onChange={e => handleImage(e.target.files)} />
