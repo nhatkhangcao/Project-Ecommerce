@@ -31,6 +31,7 @@ Route::middleware('auth:sanctum')->group(function () {
         Route::post('/search-user', [UserManagementController::class, 'search']);
         Route::get('/get-email', [UserManagementController::class, 'getEmailByMember']);
         Route::get('/meals-list', [MealController::class, 'index']);
+        Route::post('/add-meal', [MealController::class, 'add']);
     });
 });
 

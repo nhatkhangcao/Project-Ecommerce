@@ -17,4 +17,8 @@ class MealController extends Controller
     {
         return $this->repo->index();
     }
+    public function add(Request $request)
+    {
+        return $this->repo->add($request);
+    }
 }

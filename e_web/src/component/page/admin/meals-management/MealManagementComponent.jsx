@@ -12,7 +12,6 @@ function MealManagementComponent(props) {
         reset,
     } = useForm();
     const searchUser = () => {
-        console.log(123)
     }
     useEffect(() => {
         getMealData()
@@ -33,7 +32,7 @@ function MealManagementComponent(props) {
                         <div className="row row-cols-auto d-flex justify-content-between pt-3">
                             <div className="col">
                                 <button className='btn bg-primary text-white'>
-                                    <AddMealModal />
+                                    <AddMealModal getMealData={getMealData} />
                                 </button>
                             </div>
                             <div className="col">
@@ -53,7 +52,7 @@ function MealManagementComponent(props) {
                             dataList && dataList.data && dataList.data.length > 0 ? dataList.data.map((item, index) =>
                                 <div className="col">
                                     <div className="card">
-                                        <img src={item.meal_image} className="card-img-top " alt="..." />
+                                        <img style={{maxHeight:'250px', minHeight:'220px', height: '220px'}} src={`http://localhost:8000/${item.meal_image}`} className="card-img-top " alt="..." />
                                         <div className="card-body">
                                             <h5 className="card-title">{item.meal_name}</h5>
                                             <p className="card-text">{item.meal_price} $</p>
@@ -65,7 +64,7 @@ function MealManagementComponent(props) {
                                     </div>
                                 </div>
                             ) :
-                                <tr><td className='text-danger text-center'>NO DATA!</td></tr>
+                                <div className='text-danger d-flex justify-content-center'>NO DATA!</div>
                         }
                     </div>
                 </div>

@@ -23,12 +23,10 @@ class DatabaseSeeder extends Seeder
         //     'name' => 'Test User',
         //     'email' => 'test@example.com',
         // ]);
-        $imagePath = Storage::putFile('public/images', public_path('images/structure.png'));
-        DB::table('meals')->insert([
-            'meal_name' => 'Chicken',
-            'meal_price' => '100',
-            'meal_detail' => 'perfect',
-            'meal_image' => $imagePath,
+        DB::table('mst_users')->insert([
+            'name' => 'admin',
+            'email' => 'admin@gmail.com',
+            'password' => Hash::make('123456'),
         ]);
     }
 }

@@ -1,9 +1,12 @@
+import axios from 'axios';
 import React from 'react';
 import { useState, useRef } from 'react';
-import { Button, Form, Modal } from 'react-bootstrap';
+import { Button, Modal } from 'react-bootstrap';
 import { useForm } from 'react-hook-form';
+import Swal from 'sweetalert2';
 
 function AddMealModal(props) {
+    const getMealData = props.getMealData
     const [show, setShow] = useState(false);
     const handleClose = () => setShow(false);
     const handleShow = () => setShow(true);
@@ -26,7 +29,21 @@ function AddMealModal(props) {
     }
     const aRef = useRef(null);
     const addMeal = (data) => {
-        console.log(data)
+        const formData = new FormData();
+        formData.append('meal_name', data.meal_name);
+        formData.append('meal_price', data.meal_price);
+        formData.append('meal_detail', data.meal_detail);
+        formData.append('status', data.status);
+        formData.append('image', image);
+        
+        axios.post('http://127.0.0.1:8000/api/admin/add-meal', formData)
+        .then((response) => {
+            Swal.fire('Good job!', 'Expense Added Successfully', 'success');
+        });
+        reset();
+        getMealData();
+        setShow(false);
+        setImage(null);
     }
     return (
         <>
@@ -74,7 +91,7 @@ function AddMealModal(props) {
                                         </div>
                                     </div>
                                     <div className="input-group pt-2">
-                                        <label className='col-sm-2 col-form-label '>Detail</label>
+                                        <label className='col-sm-2 col-form-label'>Detail</label>
                                         <textarea
                                             className="form-control"
                                             rows="6"
@@ -94,8 +111,7 @@ function AddMealModal(props) {
                                 </div>
                                 <div className="col-md-5 ms-auto">
                                     <label className='col-sm-2 col-form-label pe-4'>Image</label>
-                                    <img className='img-fluid' src={image ? URL.createObjectURL(image) : ''} />
-                                    <img className='img-fluid' />
+                                    <img className='img-fluid' style={{maxWidth:'250px', maxHeight:'250px'}} src={image ? URL.createObjectURL(image) : ''} />
                                     <div className="input-group mb-3 pt-3">
                                         <button className="btn btn-danger" onClick={deleteImage} type="button">Delete</button>
                                         <input ref={aRef} className="form-control" type="file" name='image' onChange={e => handleImage(e.target.files)} />
