@@ -2,6 +2,7 @@ import React from 'react';
 import AddMealModal from './Modal/AddMealModal';
 import { useForm } from 'react-hook-form';
 import { useEffect } from 'react';
+import EditMealModal from './Modal/EditMealModal';
 
 function MealManagementComponent(props) {
     const getMealData = props.getMealData
@@ -27,7 +28,7 @@ function MealManagementComponent(props) {
                     <form onSubmit={handleSubmit(searchUser)}>
                         <div className="row row-cols-auto">
                             <div className="col-3">
-                                <span className='fw-bold'>Name</span>
+                                <span className='fw-bold'>Meal</span>
                                 <input
                                     className="form-control"
                                 />
@@ -62,8 +63,13 @@ function MealManagementComponent(props) {
                                             <p className="card-text">{item.meal_price} $</p>
                                         </div>
                                         <div className="card-body d-flex justify-content-center">
-                                            <a className="btn bg-light border text-primary me-2"><i className="fas fa-pen">&nbsp;<span>Edit</span></i></a>
-                                            <a onClick={(e) => handleDeleteMeal(item, e)} className="btn bg-light border text-danger"><i className="fas fa-trash-alt">&nbsp;<span>Delete</span></i></a>
+                                            <div className="btn bg-light border text-primary me-2">
+                                                <EditMealModal 
+                                                    getMealData={getMealData}
+                                                    mealList={item}
+                                                />
+                                            </div>
+                                            <div onClick={(e) => handleDeleteMeal(item, e)} className="btn bg-light border text-danger"><i className="fas fa-trash-alt">&nbsp;<span>Delete</span></i></div>
                                         </div>
                                     </div>
                                 </div>
@@ -75,8 +81,8 @@ function MealManagementComponent(props) {
                 <nav aria-label="Page navigation example" className=''>
                     <ul className="pagination d-flex justify-content-center">
                         {paginate && paginate.last_page >= 2 && paginate.links && paginate.links.map((link) => {
-                            let url = link.url == null ? paginate.links[1].url : link.url;
-                            let className = link.active == true ? "page-item active" : "page-item"
+                            let url = link.url === null ? paginate.links[1].url : link.url;
+                            let className = link.active === true ? "page-item active" : "page-item"
                             return (
                                 <li className={className} key={link.label}>
                                     <button className="page-link" onClick={e => getMealData(url)}>{link.label}</button>

@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect } from 'react';
 import { useForm } from 'react-hook-form';
 import AddUserModal from './modal/AddUserModal';
 import EditUserModal from './modal/EditUserModal';
@@ -12,7 +12,7 @@ function UserManagementComponent(props) {
     const clearSearch = props.clearSearch
     const setRole = props.setRole
 
-    const {
+const {
         register,
         handleSubmit,
         reset,
@@ -100,8 +100,8 @@ function UserManagementComponent(props) {
                     <nav aria-label="Page navigation example" className=''>
                         <ul className="pagination d-flex justify-content-center">
                             {paginate && paginate.last_page >= 2 && paginate.links && paginate.links.map((link) => {
-                                let url = link.url == null ? paginate.links[1].url : link.url;
-                                let className = link.active == true ? "page-item active" : "page-item"
+                                let url = link.url === null ? paginate.links[1].url : link.url;
+                                let className = link.active === true ? "page-item active" : "page-item"
                                 return (
                                     <li className={className} key={link.label}>
                                         <button className="page-link" onClick={e => getUserData(url)}>{link.label}</button>

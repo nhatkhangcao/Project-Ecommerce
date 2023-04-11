@@ -1,12 +1,14 @@
 import axios from 'axios';
 import React from 'react';
-import { useState, useRef } from 'react';
+import { useRef } from 'react';
+import { useState } from 'react';
 import { Button, Modal } from 'react-bootstrap';
 import { useForm } from 'react-hook-form';
 import Swal from 'sweetalert2';
 
-function AddMealModal(props) {
+function EditMealModal(props) {
     const getMealData = props.getMealData
+    const mealList = props.mealList
     const [show, setShow] = useState(false);
     const handleClose = () => {
         deleteImage()
@@ -22,8 +24,26 @@ function AddMealModal(props) {
         formState: { errors },
         reset,
     } = useForm({
-        mode: 'onChange'
+        mode: 'onChange',
+        defaultValues: {
+            meal_name: mealList.meal_name,
+            meal_price: mealList.meal_price,
+            meal_detail: mealList.meal_detail,
+            meal_image: mealList.meal_image,
+        }
+       
     });
+
+    const checkImage = () => {
+        let temp = ''
+        if (mealList.meal_image) {
+            temp = `http://localhost:8000/${mealList.meal_image}`
+        }
+        else {
+            temp = image ? URL.createObjectURL(image) : ''
+        }
+        return temp;
+    }
 
     const handleImage = (file) => {
         setImage(file[0]);
@@ -33,35 +53,22 @@ function AddMealModal(props) {
         aRef.current.value = null;
     }
 
-    const addMeal = (data) => {
-        const formData = new FormData();
-        formData.append('meal_name', data.meal_name);
-        formData.append('meal_price', data.meal_price);
-        formData.append('meal_detail', data.meal_detail);
-        formData.append('status', data.status);
-        formData.append('image', image);
-        axios.post('http://127.0.0.1:8000/api/admin/add-meal', formData)
-            .then((response) => {
-                Swal.fire('Good job!', 'Expense Added Successfully', 'success');
-            });
-        reset();
-        getMealData();
-        setShow(false);
-        setImage(null);
+    const editMeal = (data) => {
+        console.log(data)
     }
 
     return (
         <>
-            <i onClick={handleShow} className="fas fa-plus px-3 text-white fw-bold" role="button" title="edit" />
+            <i onClick={handleShow} className="fas fa-pen">&nbsp;<span>Edit</span></i>
             <Modal
                 backdrop='static'
                 show={show}
                 onHide={() => reset(handleClose)}
                 dialogClassName="modal-dialog modal-lg"
             >
-                <form onSubmit={handleSubmit(addMeal)}>
+                <form onSubmit={handleSubmit(editMeal)}>
                     <Modal.Header closeButton>
-                        <Modal.Title id="example-custom-modal-styling-title">Add Meals</Modal.Title>
+                        <Modal.Title id="example-custom-modal-styling-title">Edit Meals</Modal.Title>
                     </Modal.Header>
                     <Modal.Body>
                         <div className="container-fluid">
@@ -116,7 +123,7 @@ function AddMealModal(props) {
                                 </div>
                                 <div className="col-md-5 ms-auto">
                                     <label className='col-sm-2 col-form-label pe-4'>Image</label>
-                                    <img alt='' className='img-fluid' style={{ maxWidth: '250px', maxHeight: '250px' }} src={image ? URL.createObjectURL(image) : ''} />
+                                    <img alt='' className='img-fluid' style={{ maxWidth: '250px', maxHeight: '250px' }} src={checkImage()} />
                                     <div className="input-group mb-3 pt-3">
                                         <button className="btn btn-danger" onClick={deleteImage} type="button">Delete</button>
                                         <input ref={aRef} className="form-control" type="file" name='image' onChange={e => handleImage(e.target.files)} />
@@ -139,4 +146,4 @@ function AddMealModal(props) {
     );
 }
 
-export default AddMealModal;
+export default EditMealModal;

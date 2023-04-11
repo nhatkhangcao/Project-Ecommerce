@@ -24,7 +24,7 @@ function MealManagementContainer(props) {
     const handleDeleteMeal = (item, e) => {
         Swal.fire({
             title: 'Are you sure?',
-            text: "You want to deleted",
+            text: "You want to delete?",
             icon: 'info',
             showCancelButton: true,
             confirmButtonColor: '#3085d6',
