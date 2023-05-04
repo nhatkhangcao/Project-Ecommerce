@@ -1,22 +1,44 @@
+import axios from 'axios';
 import React from 'react';
+import { useState } from 'react';
 import { Button, Form } from 'react-bootstrap';
-import { useForm } from 'react-hook-form';
+import { set, useForm } from 'react-hook-form';
+import Swal from "sweetalert2";
 
 function RegisterForm(props) {
-    const handleSwitchForm  = props.handleSwitchForm 
+    const handleSwitchForm = props.handleSwitchForm
+    const [notice, setNotice] = useState()
     const {
         register,
         handleSubmit,
         formState: { errors },
     } = useForm();
 
-    const handleRegister = () => {
+    const handleRegister = (data) => {
+        axios.get('http://127.0.0.1:8000/api/customer/register', {
+            params: {
+                email: data.email,
+                name: data.name,
+                password: data.password,
+            }
+        })
+            .then((response) => {
+                if (response.data.status === false) {
+                    setNotice(response.data.message)
+                } else {
+                    Swal.fire(
+                        'Deleted!',
+                        'Your data has been deleted.',
+                        'success'
+                    )
+                }
+            })
 
     }
     return (
         <Form onSubmit={handleSubmit(handleRegister)}>
             <Form.Group className="text-center mb-2">
-                {/* {loginNotice && (<span className="text-danger">{loginNotice}</span>)} */}
+                {notice && (<span className="text-danger">{notice}</span>)}
             </Form.Group>
             <Form.Group className="mb-4">
                 <Form.Control
@@ -70,7 +92,7 @@ function RegisterForm(props) {
                 </Button>
             </Form.Group>
             <Form.Group className='d-flex justify-content-center pt-1'>
-                Already have an account?<span className='ps-2 text-success fw-bold' style={{cursor: 'pointer'}} onClick={handleSwitchForm}>Login</span>
+                Already have an account?<span className='ps-2 text-success fw-bold' style={{ cursor: 'pointer' }} onClick={handleSwitchForm}>Login</span>
             </Form.Group>
         </Form>
     );

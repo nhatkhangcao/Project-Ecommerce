@@ -166,7 +166,7 @@ function Calculator(props) {
                                                     <br />
                                                     <span>Protein</span>
                                                 </div>
-                                                <hr/>
+                                                <hr />
                                                 <div>
                                                     <span>{calories.lowerCarb.fat}</span>
                                                     <br />
@@ -188,7 +188,7 @@ function Calculator(props) {
                                                     <br />
                                                     <span>Protein</span>
                                                 </div>
-                                                <hr/>
+                                                <hr />
                                                 <div>
                                                     <span>{calories.higherCarb.fat}</span>
                                                     <br />
