@@ -2,15 +2,15 @@ import React from 'react';
 
 function MealContainer(props) {
     return (
-        <div class="container">
-            <div class="row">
-                <div class="col">
+        <div className="container">
+            <div className="row">
+                <div className="col">
                     Column
                 </div>
-                <div class="col">
+                <div className="col">
                     Column
                 </div>
-                <div class="col">
+                <div className="col">
                     Column
                 </div>
             </div>

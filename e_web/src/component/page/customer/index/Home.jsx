@@ -1,7 +1,23 @@
 import React from 'react';
 import SlideShow from '../../../layout/customer/SlideShow';
+import axios from 'axios';
+import { useState } from 'react';
+import { useEffect } from 'react';
 
 function Home(props) {
+    const [dataList, setDataList] = useState();
+    const getMealData = () => {
+        axios.get('http://127.0.0.1:8000/api/customer/list').then((response) => {
+            setDataList(response.data)
+        });
+    }
+    const textData = () => {
+        console.log(dataList)
+    }
+
+    useEffect(() => {
+        getMealData()
+    }, []);
     return (
         <div>
             <SlideShow />
@@ -12,22 +28,55 @@ function Home(props) {
                 <div className="guide__container d-flex justify-content-center">
                     <article className="guide__container--card">
                         <figure>
-                            <img src={"images/fruit.png"} />
+                            <img alt='' src={"images/fruit.png"} />
                         </figure>
                         <p className="card-excerpt">Choose your meals</p>
                     </article>
                     <article className="guide__container--card">
                         <figure>
-                            <img src={"images/fruit.png"} />
+                            <img alt='' src={"images/fruit.png"} />
                         </figure>
                         <p className="card-excerpt">We cook</p>
                     </article>
                     <article className="guide__container--card">
                         <figure>
-                            <img src={"images/fruit.png"} />
+                            <img alt='' src={"images/fruit.png"} />
                         </figure>
                         <p className="card-excerpt">Delivery</p>
                     </article>
+                </div>
+            </div>
+            <div className='container mt-3' style={{ paddingRight: '30px', paddingLeft: '30px' }} >
+                <h1 className='text-center py-3'>
+                    MENU
+                </h1>
+                <h4 onClick={textData} className='text-center pb-5'>
+                    All of our products are so fresh...
+                </h4>
+                    <div className="row row-cols-2 row-cols-lg-4 g-2 g-lg-3">
+                        {
+                            dataList && dataList.length > 0 ? dataList.map((item, index) =>
+                                <div className="col px-3" key={item.id}>
+                                    <div className="card border-1">
+                                        <img style={{ maxHeight: '230px', minHeight: '200px', height: '230px' }} src={`http://localhost:8000/${item.meal_image}`} className="card-img-top" alt="..." />
+                                        <div className="card-body">
+                                            <h5 className="card-title">{item.meal_name}</h5>
+                                            <p className="card-text">{item.meal_price} $</p>
+                                        </div>
+                                        <div className="card-body d-flex justify-content-center">
+                                            {/* <div className="btn bg-light border text-primary me-2">
+                                            <EditMealModal
+                                                getMealData={getMealData}
+                                                mealList={item}
+                                            />
+                                        </div> */}
+                                            {/* <div onClick={(e) => handleDeleteMeal(item, e)} className="btn bg-light border text-danger"><i className="fas fa-trash-alt">&nbsp;<span>Delete</span></i></div> */}
+                                        </div>
+                                    </div>
+                                </div>
+                            ) :
+                                <div className="text-danger text-center col col-lg-12">NO DATA!</div>
+                        }
                 </div>
             </div>
             <div>
@@ -38,25 +87,25 @@ function Home(props) {
                     <div className="diet__container d-flex justify-content-center">
                         <article className="diet__container--card">
                             <figure>
-                                <img src={"images/fruit.png"} />
+                                <img alt='' src={"images/fruit.png"} />
                             </figure>
                             <p className="card-excerpt">Gain</p>
                         </article>
                         <article className="diet__container--card">
                             <figure>
-                                <img src={"images/fruit.png"} />
+                                <img alt='' src={"images/fruit.png"} />
                             </figure>
                             <p className="card-excerpt">Gain</p>
                         </article>
                         <article className="diet__container--card">
                             <figure>
-                                <img src={"images/fruit.png"} />
+                                <img alt='' src={"images/fruit.png"} />
                             </figure>
                             <p className="card-excerpt">Gain</p>
                         </article>
                         <article className="diet__container--card">
                             <figure>
-                                <img src={"images/fruit.png"} />
+                                <img alt='' src={"images/fruit.png"} />
                             </figure>
                             <p className="card-excerpt">Gain</p>
                         </article>
@@ -67,7 +116,7 @@ function Home(props) {
                 <h1 className='text-center'>Latest News</h1>
                 <div className="latest-news">
                     <div className="latest-news__card">
-                        <div className="latest-news__card-img"><img src={"images/fruit.png"} /></div>
+                        <div className="latest-news__card-img"><img alt='' src={"images/fruit.png"} /></div>
                         <div className="latest-news__card-text">
                             <span className="date">1 hours ago</span>
                             <h2>Why breakfast is so important?</h2>
@@ -76,7 +125,7 @@ function Home(props) {
                         </div>
                     </div>
                     <div className="latest-news__card">
-                        <div className="latest-news__card-img"><img src={"images/fruit.png"} /></div>
+                        <div className="latest-news__card-img"><img alt='' src={"images/fruit.png"} /></div>
                         <div className="latest-news__card-text">
                             <span className="date">4 days ago</span>
                             <h2>What is the eat clean diet?</h2>
@@ -85,7 +134,7 @@ function Home(props) {
                         </div>
                     </div>
                     <div className="latest-news__card">
-                        <div className="latest-news__card-img"><img src={"images/fruit.png"} /></div>
+                        <div className="latest-news__card-img"><img alt='' src={"images/fruit.png"} /></div>
                         <div className="latest-news__card-text">
                             <span className="date">Apr 21, 2022</span>
                             <h2>How Do The Top Milks Stack Up?</h2>

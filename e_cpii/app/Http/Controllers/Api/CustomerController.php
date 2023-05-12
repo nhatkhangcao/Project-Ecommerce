@@ -14,6 +14,12 @@ class CustomerController extends Controller
     {
         $this->repo = $customerRepository;
     }
+    public function index()
+    {
+        $data = $this->repo->index();
+        return $data;
+    }
+
     public function caloriesCalculate(Request $request)
     {
         $goal = $this->repo->caloriesCalculate($request->all());

@@ -2,10 +2,15 @@
 
 namespace App\Repositories;
 
+use App\Models\Meal;
 use Illuminate\Http\Response;
 
 class CustomerRepository
 {
+    public function index()
+    {
+        return Meal::where('deleted', 0)->get();
+    }
     public function caloriesCalculate($request)
     {
         $goal = '';
