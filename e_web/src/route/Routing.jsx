@@ -11,6 +11,7 @@ import Home from '../component/page/customer/index/Home';
 import Calculator from '../component/page/customer/tdee/Calculator';
 import MealManagementContainer from '../component/page/admin/meals-management/MealManagementContainer';
 import MealContainer from '../component/page/customer/meals/MealContainer';
+import MealDetailContainer from '../component/page/customer/meals-detail/MealDetailContainer';
 
 function Routing(props) {
     const PrivateRoute = () => {
@@ -33,6 +34,7 @@ function Routing(props) {
                 //CUSTOMER ROUTING
                 <Route element={<CustomerContainer />}>
                     <Route path='/' element={<Home />} />
+                    <Route path='/detail' element={<MealDetailContainer />} />
                     <Route exact path='calculator' element={<Calculator />} />
                     <Route exact path='meals' element={<MealContainer />} />
                 </Route>

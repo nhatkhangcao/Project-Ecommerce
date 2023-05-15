@@ -551,3 +551,27 @@
     padding-top: 20px;
     padding-bottom: 20px;
 }
+
+.product-details {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 20px;
+    margin-top: 30px;
+}
+
+.product-image {
+    flex: 1 1 300px;
+}
+
+.product-image img {
+    width: 60%;
+    max-height: 400px;
+    object-fit: cover;
+    border-radius: 5px;
+}
+
+.product-description {
+    flex: 1 1 300px;
+}
