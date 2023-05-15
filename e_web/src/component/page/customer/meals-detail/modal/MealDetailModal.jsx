@@ -13,9 +13,11 @@ function MealDetailModal(props) {
             <span onClick={handleShow} role="button" title="login">COMBO TUẦN</span>
             <Modal dialogClassName="modal-width" backdrop="static" show={show} onHide={handleClose}>
                 <Modal.Header className="text-center" closeButton>
-                    {/* <Modal.Title className='text-title w-100 fw-bold text-success' >{showLogin ? "Login" : "Register"}</Modal.Title> */}
+                    <Modal.Title className='text-title w-100 fw-bold text-success' >HULK</Modal.Title>
                 </Modal.Header>
                 <Modal.Body>
+                    1. Số ngày trong tuần
+                    2. Số buổi ăn trong ngày
                 </Modal.Body>
             </Modal >
         </>
