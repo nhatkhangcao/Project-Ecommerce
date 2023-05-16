@@ -8,7 +8,7 @@ function MealDetailContainer(props) {
                 <section class="container mt-3">
                     <div class="row">
                         <div class="col-md-6">
-                            <img src="images/fruit.png" alt="Eat Clean Product Image" class="img-fluid w-75" />
+                            <img src="images/fruit.png" alt="Eat Clean Product Image" class="img-fluid" />
                         </div>
                         <div class="col-md-6">
                             <h2 class="mb-3">Sản phẩm Eat Clean</h2>
