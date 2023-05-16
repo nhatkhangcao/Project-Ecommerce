@@ -8,7 +8,7 @@ function MealDetailContainer(props) {
                 <section class="container mt-3">
                     <div class="row">
                         <div class="col-md-6">
-                            <img src="images/fruit.png" alt="Eat Clean Product Image" class="img-fluid" />
+                            <img src="images/fruit.png" alt="Eat Clean Product Image" class="img-fluid w-75" />
                         </div>
                         <div class="col-md-6">
                             <h2 class="mb-3">Sản phẩm Eat Clean</h2>
@@ -22,7 +22,7 @@ function MealDetailContainer(props) {
                                 <li>Cung cấp nhiều chất dinh dưỡng và vitamin.</li>
                                 <li>Giúp tạo cảm giác no lâu và hỗ trợ quá trình giảm cân.</li>
                             </ul>
-                            <button className='btn btn-danger'><MealDetailModal>COMBO TUẦN</MealDetailModal></button>
+                            <button className='btn btn-danger'><MealDetailModal></MealDetailModal></button>
                         </div>
                     </div>
                 </section>
