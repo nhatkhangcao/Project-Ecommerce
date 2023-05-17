@@ -54,23 +54,34 @@ function Home(props) {
                 <h4 onClick={textData} className='text-center pb-5'>
                     All of our products are so fresh...
                 </h4>
-                <Link to="detail" className="row row-cols-2 row-cols-lg-4 g-2 g-lg-3 text-decoration-none text-dark">
+                <div className="row row-cols-2 row-cols-lg-4 g-2 g-lg-3 text-decoration-none text-dark">
                     {
                         dataList && dataList.length > 0 ? dataList.map((item, index) =>
-                            <div className="col px-3" key={item.id}>
-                                <div className="card border-1">
-                                    <img style={{ maxHeight: '230px', minHeight: '200px', height: '230px' }} src={`http://localhost:8000/${item.meal_image}`} className="card-img-top" alt="..." />
-                                    <div className="card-body">
-                                        <h5 className="card-title text-success">{item.meal_name}</h5>
-                                        <h6>{item.meal_detail}</h6>
-                                        <p className="card-text">{item.meal_price} $</p>
+                            <div style={{ cursor: 'pointer' }} className="col px-3" key={item.id}>
+                                <Link to={{ pathname: `/detail/${item.meal_name}` }} state={{ item }} className="nav-link">
+                                    <div className="card border-1">
+                                        <img
+                                            style={{
+                                                maxHeight: '230px',
+                                                minHeight: '200px',
+                                                height: '230px',
+                                            }}
+                                            src={`http://localhost:8000/${item.meal_image}`}
+                                            className="card-img-top"
+                                            alt="..."
+                                        />
+                                        <div className="card-body">
+                                            <h5 className="card-title text-success">{item.meal_name}</h5>
+                                            <h6>{item.meal_detail}</h6>
+                                            <p className="card-text">{item.meal_price} VNĐ</p>
+                                        </div>
                                     </div>
-                                </div>
+                                </Link>
                             </div>
                         ) :
                             <div className="text-danger text-center col col-lg-12">NO DATA!</div>
                     }
-                </Link>
+                </div>
             </div>
             <div>
                 <div className="diet">

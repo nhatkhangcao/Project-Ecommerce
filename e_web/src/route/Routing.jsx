@@ -34,7 +34,7 @@ function Routing(props) {
                 //CUSTOMER ROUTING
                 <Route element={<CustomerContainer />}>
                     <Route path='/' element={<Home />} />
-                    <Route path='/detail' element={<MealDetailContainer />} />
+                    <Route path='/detail/:meal_name' element={<MealDetailContainer />} />
                     <Route exact path='calculator' element={<Calculator />} />
                     <Route exact path='meals' element={<MealContainer />} />
                 </Route>
