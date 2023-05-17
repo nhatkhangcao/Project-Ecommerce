@@ -1,60 +1,94 @@
-import React from 'react';
+import React, { useState } from 'react';
 
 function StepTwo(props) {
+    const [quantity, setQuantity] = useState(1);
+
+    const incrementQuantity = () => {
+        setQuantity(quantity + 1);
+    };
+
+    const decrementQuantity = () => {
+        if (quantity > 1) {
+            setQuantity(quantity - 1);
+        }
+    };
     return (
         <div>
-            <div class="sp-card">
-                <div class="row">
-                    <div class="col-md cart">
-                        <div class="title">
-                            <div class="row">
-                                <div class="col"><h4><b>Shopping Cart</b></h4></div>
-                                <div class="col align-self-center text-right text-muted">3 items</div>
+            <div className="sp-card">
+                <div className="row">
+                    <div className="col-md cart">
+                        <div className='title h5 text-center text-danger fw-bold'>Chọn Món</div>
+                        <div className='text-success'>
+                            <div className="title">
+                                <div className="row">
+                                    <div className="col"><h4><b>Thứ 2</b></h4></div>
+                                    <div className="col align-self-center text-right text-muted">3 item</div>
+                                </div>
+                            </div>
+                            <div className="row align-items-center">
+                                <div className="col-2"><img className="img-fluid" src="images/fruit.png" /></div>
+                                <div className="col-5">
+                                    <div className="row text-muted">Hulk</div>
+                                    <div className="row">JD</div>
+                                </div>
+                                <div className="col ms-3 d-flex align-items-center">
+                                    <button className="btn btn-outline-secondary me-2" onClick={decrementQuantity}>-</button>
+                                    <span>{quantity}</span>
+                                    <button className="btn btn-outline-secondary ms-2" onClick={incrementQuantity}>+</button>
+                                </div>
+                            </div>
+                            <div className="row align-items-center">
+                                <div className="col-2"><img className="img-fluid" src="images/fruit.png" /></div>
+                                <div className="col-5">
+                                    <div className="row text-muted">Hulk</div>
+                                    <div className="row">JD</div>
+                                </div>
+                                <div className="col ms-3 d-flex align-items-center">
+                                    <button className="btn btn-outline-secondary me-2" onClick={decrementQuantity}>-</button>
+                                    <span>{quantity}</span>
+                                    <button className="btn btn-outline-secondary ms-2" onClick={incrementQuantity}>+</button>
+                                </div>
                             </div>
                         </div>
-                        <div class="row border-top border-bottom">
-                            <div class="row main align-items-center">
-                                <div class="col-2"><img class="img-fluid" src="https://i.imgur.com/1GrakTl.jpg" /></div>
-                                <div class="col">
-                                    <div class="row text-muted">Shirt</div>
-                                    <div class="row">Cotton T-shirt</div>
+                        <hr className="border-2 border-top border-bottom border-secondary" />
+
+                        <div className='text-info'>
+                            <div className="title">
+                                <div className="row">
+                                    <div className="col"><h4><b>Thứ 3</b></h4></div>
+                                    <div className="col align-self-center text-right text-muted">3 item</div>
                                 </div>
-                                <div class="col">
-                                    <a href="#">-</a><a href="#" class="border">1</a><a href="#">+</a>
+                            </div>
+                            <div className="row align-items-center">
+                                <div className="col-2"><img className="img-fluid" src="images/fruit.png" /></div>
+                                <div className="col-5">
+                                    <div className="row text-muted">Hulk</div>
+                                    <div className="row">JD</div>
                                 </div>
-                                <div class="col">&euro; 44.00 <span class="close">&#10005;</span></div>
+                                <div className="col ms-3 d-flex align-items-center">
+                                    <button className="btn btn-outline-secondary me-2" onClick={decrementQuantity}>-</button>
+                                    <span>{quantity}</span>
+                                    <button className="btn btn-outline-secondary ms-2" onClick={incrementQuantity}>+</button>
+                                </div>
+                            </div>
+                            <div className="row align-items-center">
+                                <div className="col-2"><img className="img-fluid" src="images/fruit.png" /></div>
+                                <div className="col-5">
+                                    <div className="row text-muted">Hulk</div>
+                                    <div className="row">JD</div>
+                                </div>
+                                <div className="col ms-3 d-flex align-items-center">
+                                    <button className="btn btn-outline-secondary me-2" onClick={decrementQuantity}>-</button>
+                                    <span>{quantity}</span>
+                                    <button className="btn btn-outline-secondary ms-2" onClick={incrementQuantity}>+</button>
+                                </div>
                             </div>
                         </div>
-                        <div class="row">
-                            <div class="row main align-items-center">
-                                <div class="col-2"><img class="img-fluid" src="https://i.imgur.com/ba3tvGm.jpg" /></div>
-                                <div class="col">
-                                    <div class="row text-muted">Shirt</div>
-                                    <div class="row">Cotton T-shirt</div>
-                                </div>
-                                <div class="col">
-                                    <a href="#">-</a><a href="#" class="border">1</a><a href="#">+</a>
-                                </div>
-                                <div class="col">&euro; 44.00 <span class="close">&#10005;</span></div>
-                            </div>
-                        </div>
-                        <div class="row border-top border-bottom">
-                            <div class="row main align-items-center">
-                                <div class="col-2"><img class="img-fluid" src="https://i.imgur.com/pHQ3xT3.jpg" /></div>
-                                <div class="col">
-                                    <div class="row text-muted">Shirt</div>
-                                    <div class="row">Cotton T-shirt</div>
-                                </div>
-                                <div class="col">
-                                    <a href="#">-</a><a href="#" class="border">1</a><a href="#">+</a>
-                                </div>
-                                <div class="col">&euro; 44.00 <span class="close">&#10005;</span></div>
-                            </div>
-                        </div>
+                        <hr className="border-2 border-top border-bottom border-secondary" />
                     </div>
                 </div>
             </div>
-        </div >
+        </div>
     );
 }
 

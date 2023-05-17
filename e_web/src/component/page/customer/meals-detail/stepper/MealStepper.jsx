@@ -4,6 +4,7 @@ import { CDBStepper, CDBStep, CDBInput, CDBBtn, CDBContainer } from "cdbreact";
 import StepOne from "./StepOne";
 import StepTwo from "./StepTwo";
 import StepThree from "./StepThree";
+import StepFour from "./StepFour";
 
 const Stepper = () => {
     const [active, setActive] = useState(1);
@@ -34,6 +35,13 @@ const Stepper = () => {
                     handleClick={() => handleNextPrevClick(3)}
                     active={active}
                     component={<StepThree handleNextPrevClick={handleNextPrevClick} />}
+                />
+                <CDBStep
+                    id={4}
+                    name="Finish"
+                    handleClick={() => handleNextPrevClick(4)}
+                    active={active}
+                    component={<StepFour handleNextPrevClick={handleNextPrevClick} />}
                 />
             </CDBStepper>
         </CDBContainer>
