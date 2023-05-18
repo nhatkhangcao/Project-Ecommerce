@@ -18,6 +18,7 @@ function StepTwo(props) {
                 <div className="row">
                     <div className="col-md cart">
                         <div className='title h5 text-center text-danger fw-bold'>Chọn Món</div>
+
                         <div className='text-success'>
                             <div className="title">
                                 <div className="row">
@@ -26,30 +27,32 @@ function StepTwo(props) {
                                 </div>
                             </div>
                             <div className="row align-items-center">
-                                <div className="col-2"><img className="img-fluid" src="images/fruit.png" /></div>
-                                <div className="col-5">
+                                <div className="col-4 col-md-2"><img className="img-fluid" src="images/fruit.png" /></div>
+                                <div className="col-8 col-md-5">
                                     <div className="row text-muted">Hulk</div>
                                     <div className="row">JD</div>
                                 </div>
-                                <div className="col ms-3 d-flex align-items-center">
+                                <div className="col col-md-5 ms-3 d-flex align-items-center justify-content-center justify-content-md-end">
                                     <button className="btn btn-outline-secondary me-2" onClick={decrementQuantity}>-</button>
                                     <span>{quantity}</span>
                                     <button className="btn btn-outline-secondary ms-2" onClick={incrementQuantity}>+</button>
                                 </div>
                             </div>
+
                             <div className="row align-items-center">
-                                <div className="col-2"><img className="img-fluid" src="images/fruit.png" /></div>
-                                <div className="col-5">
+                                <div className="col-4 col-md-2"><img className="img-fluid" src="images/fruit.png" /></div>
+                                <div className="col-8 col-md-5">
                                     <div className="row text-muted">Hulk</div>
                                     <div className="row">JD</div>
                                 </div>
-                                <div className="col ms-3 d-flex align-items-center">
+                                <div className="col col-md-5 ms-3 d-flex align-items-center justify-content-center justify-content-md-end">
                                     <button className="btn btn-outline-secondary me-2" onClick={decrementQuantity}>-</button>
                                     <span>{quantity}</span>
                                     <button className="btn btn-outline-secondary ms-2" onClick={incrementQuantity}>+</button>
                                 </div>
                             </div>
                         </div>
+
                         <hr className="border-2 border-top border-bottom border-secondary" />
 
                         <div className='text-info'>
@@ -60,35 +63,38 @@ function StepTwo(props) {
                                 </div>
                             </div>
                             <div className="row align-items-center">
-                                <div className="col-2"><img className="img-fluid" src="images/fruit.png" /></div>
-                                <div className="col-5">
+                                <div className="col-4 col-md-2"><img className="img-fluid" src="images/fruit.png" /></div>
+                                <div className="col-8 col-md-5">
                                     <div className="row text-muted">Hulk</div>
                                     <div className="row">JD</div>
                                 </div>
-                                <div className="col ms-3 d-flex align-items-center">
+                                <div className="col col-md-5 ms-3 d-flex align-items-center justify-content-center justify-content-md-end">
                                     <button className="btn btn-outline-secondary me-2" onClick={decrementQuantity}>-</button>
                                     <span>{quantity}</span>
                                     <button className="btn btn-outline-secondary ms-2" onClick={incrementQuantity}>+</button>
                                 </div>
                             </div>
+
                             <div className="row align-items-center">
-                                <div className="col-2"><img className="img-fluid" src="images/fruit.png" /></div>
-                                <div className="col-5">
+                                <div className="col-4 col-md-2"><img className="img-fluid" src="images/fruit.png" /></div>
+                                <div className="col-8 col-md-5">
                                     <div className="row text-muted">Hulk</div>
                                     <div className="row">JD</div>
                                 </div>
-                                <div className="col ms-3 d-flex align-items-center">
+                                <div className="col col-md-5 ms-3 d-flex align-items-center justify-content-center justify-content-md-end">
                                     <button className="btn btn-outline-secondary me-2" onClick={decrementQuantity}>-</button>
                                     <span>{quantity}</span>
                                     <button className="btn btn-outline-secondary ms-2" onClick={incrementQuantity}>+</button>
                                 </div>
                             </div>
                         </div>
+
                         <hr className="border-2 border-top border-bottom border-secondary" />
                     </div>
                 </div>
             </div>
         </div>
+
     );
 }
 

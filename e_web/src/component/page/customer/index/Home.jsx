@@ -47,17 +47,13 @@ function Home(props) {
                     </article>
                 </div>
             </div>
-            <div className='container mt-3' style={{ paddingRight: '30px', paddingLeft: '30px' }} >
-                <h1 className='text-center py-3'>
-                    MENU
-                </h1>
-                <h4 onClick={textData} className='text-center pb-5'>
-                    All of our products are so fresh...
-                </h4>
-                <div className="row row-cols-2 row-cols-lg-4 g-2 g-lg-3 text-decoration-none text-dark">
-                    {
-                        dataList && dataList.length > 0 ? dataList.map((item, index) =>
-                            <div style={{ cursor: 'pointer' }} className="col px-3" key={item.id}>
+            <div className="container mt-3" style={{ paddingRight: '15px', paddingLeft: '15px' }}>
+                <h1 className="text-center py-3">MENU</h1>
+                <h4 onClick={textData} className="text-center pb-4">All of our products are so fresh...</h4>
+                <div className="row row-cols-1 row-cols-sm-2 row-cols-md-3 row-cols-lg-4 g-2 g-md-3 text-decoration-none text-dark">
+                    {dataList && dataList.length > 0 ? (
+                        dataList.map((item, index) => (
+                            <div style={{ cursor: 'pointer' }} className="col px-2 mb-4" key={item.id}>
                                 <Link to={{ pathname: `/detail/${item.meal_name}` }} state={{ item }} className="nav-link">
                                     <div className="card border-1">
                                         <img
@@ -78,9 +74,10 @@ function Home(props) {
                                     </div>
                                 </Link>
                             </div>
-                        ) :
-                            <div className="text-danger text-center col col-lg-12">NO DATA!</div>
-                    }
+                        ))
+                    ) : (
+                        <div className="text-danger text-center col-12">NO DATA!</div>
+                    )}
                 </div>
             </div>
             <div>
