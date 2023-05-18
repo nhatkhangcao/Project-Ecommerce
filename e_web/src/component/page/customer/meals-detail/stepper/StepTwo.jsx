@@ -76,7 +76,7 @@ function StepTwo(props) {
                             </div>
 
                             <div className="row align-items-center">
-                                <div className="col-4 col-md-2"><img className="img-fluid" src="images/fruit.png" /></div>
+                                <div className="col-4 col-md-2"><img className="img-fluid" src={`http://localhost:8000/${item.meal_image}`} /></div>
                                 <div className="col-8 col-md-5">
                                     <div className="row text-muted">Hulk</div>
                                     <div className="row">JD</div>
