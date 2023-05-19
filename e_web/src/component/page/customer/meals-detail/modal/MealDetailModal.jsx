@@ -21,7 +21,7 @@ function MealDetailModal(props) {
                     <Modal.Title className='text-title w-100 fw-bold text-success' >{item.meal_name}</Modal.Title>
                 </Modal.Header>
                 <Modal.Body>
-                    <MealStepper />
+                    <MealStepper item = {item} />
                     {/* <Form>
                         <Form.Group className="mb-3">
                             <Form.Label>1. Chọn ngày trong tuần</Form.Label>

@@ -2,6 +2,7 @@
 
 namespace App\Repositories;
 
+use App\Models\Combo;
 use App\Models\Meal;
 use Illuminate\Http\Response;
 
@@ -52,5 +53,9 @@ class CustomerRepository
             'goal' => round($goal),
             'marco' => $marco
         ];
+    }
+    public function comboList()
+    {
+        return Combo::where('deleted', 0)->get();
     }
 }

@@ -3,8 +3,8 @@ import { Button, Form } from 'react-bootstrap';
 
 function StepFour(props) {
     return (
-        <div>
-            <div className="sp-card">
+        <div className='pt-3'>
+            <div className="bill-card">
                 <div className="row">
                     <div className="col-md cart">
                         <div className='title h5 text-center text-danger fw-bold'>Thanh Toán</div>

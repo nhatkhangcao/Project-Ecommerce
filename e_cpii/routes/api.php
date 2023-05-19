@@ -39,6 +39,7 @@ Route::middleware('auth:sanctum')->group(function () {
 
 Route::prefix('customer')->group(function () {
     Route::get('/list', [CustomerController::class, 'index']);
+    Route::get('/combo-list', [CustomerController::class, 'comboList']);
     Route::get('/register', [RegisterController::class, 'register']);
     Route::post('/calories-calculate', [CustomerController::class, 'caloriesCalculate']);
 });

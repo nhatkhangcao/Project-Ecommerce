@@ -32,13 +32,10 @@ function MealDetailContainer(props) {
                             <h2 className="mb-3">{item.meal_name}</h2>
                             <p>{item.meal_detail}</p>
                             <p className="font-weight-bold">Giá:</p>
-                            <p>Một số điểm đặc biệt của sản phẩm Eat Clean:</p>
+                            <p>Một số điểm đặc biệt của sản phẩm EatClean:</p>
                             <ul className="list-unstyled">
                                 <li>Thực đơn lành mạnh và giàu dinh dưỡng.</li>
                                 <li>Sử dụng các nguyên liệu hữu cơ tươi ngon.</li>
-                                <li>Thích hợp cho người muốn duy trì một lối sống lành mạnh.</li>
-                                <li>Cung cấp nhiều chất dinh dưỡng và vitamin.</li>
-                                <li>Giúp tạo cảm giác no lâu và hỗ trợ quá trình giảm cân.</li>
                             </ul>
                             <div className='btn-order'>
                                 <button className="btn btn-success btn-full">
@@ -50,7 +47,6 @@ function MealDetailContainer(props) {
                 </section>
             </main>
         </div>
-
     );
 }
 

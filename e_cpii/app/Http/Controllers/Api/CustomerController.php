@@ -25,4 +25,10 @@ class CustomerController extends Controller
         $goal = $this->repo->caloriesCalculate($request->all());
         return $goal;
     }
+
+    public function comboList()
+    {
+        $data = $this->repo->comboList();
+        return $data;
+    }
 }

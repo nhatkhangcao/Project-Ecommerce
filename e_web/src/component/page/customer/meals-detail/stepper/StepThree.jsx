@@ -2,7 +2,7 @@ import React from 'react';
 
 function StepThree(props) {
     return (
-        <div>
+        <div className='pt-3'>
             <div className="sp-card">
                 <div className="row">
                     <div className="col-md cart">
@@ -10,10 +10,10 @@ function StepThree(props) {
                         <div className=''>
                             <div className="title">
                                 <div className="row">
-                                    <div className="col"><b className='h5 fw-bolder'>Sản phẩm</b></div>
+                                    <div className="col text-start"><b className='h5 fw-bolder'>Sản phẩm</b></div>
                                 </div>
                             </div>
-                            <div className='ms-5'>
+                            <div className='ms-4'>
                                 <div className="row align-items-center">
                                     <div className="col">
                                         <div className="h5 row fw-bold">Combo </div>
@@ -27,7 +27,7 @@ function StepThree(props) {
                                         <div className="h5 row fw-bold">Số ngày</div>
                                     </div>
                                     <div className="col">
-                                        <div className="h5 row">3 ngày / 1 tuần</div>
+                                        <div className="h5 row">3 ngày/1 tuần</div>
                                     </div>
                                 </div>
                                 <div className="row align-items-center">
@@ -35,7 +35,7 @@ function StepThree(props) {
                                         <div className="h5 row fw-bold">Số bữa</div>
                                     </div>
                                     <div className="col">
-                                        <div className="h5 row">3 bữa / 1 ngày</div>
+                                        <div className="h5 row">3 bữa/1 ngày</div>
                                     </div>
                                 </div>
                             </div>
@@ -44,10 +44,10 @@ function StepThree(props) {
                         <div className=''>
                             <div className="title">
                                 <div className="row">
-                                    <div className="col"><b className='h5 fw-bolder'>Thông tin giao hàng:</b></div>
+                                    <div className="col text-start"><b className='h5 fw-bolder'>Thông tin giao hàng:</b></div>
                                 </div>
                             </div>
-                            <div className='ms-5'>
+                            <div className='ms-4'>
                                 <div className="row align-items-center">
                                     <div className="col">
                                         <div className="h5 row fw-bold">Địa chỉ </div>
@@ -73,7 +73,7 @@ function StepThree(props) {
                                         <div className="h5 row fw-bold">Giá Gói</div>
                                     </div>
                                     <div className="col">
-                                        <div>450.000 VND</div>
+                                        <div>450.000VND</div>
                                     </div>
                                 </div>
                                 <div className="row py-1">
@@ -81,7 +81,7 @@ function StepThree(props) {
                                         <div className="h5 row fw-bold">Phí Ship</div>
                                     </div>
                                     <div className="col">
-                                        <div>50.000 VND</div>
+                                        <div>50.000VND</div>
                                     </div>
                                 </div>
                             </div>

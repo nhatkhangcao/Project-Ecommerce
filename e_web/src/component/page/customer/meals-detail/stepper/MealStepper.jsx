@@ -1,53 +1,81 @@
 import React, { useState } from "react";
 import styled from '@emotion/styled'
-import { CDBStepper, CDBStep, CDBInput, CDBBtn, CDBContainer } from "cdbreact";
+import { CDBBtn, CDBContainer } from "cdbreact";
 import StepOne from "./StepOne";
 import StepTwo from "./StepTwo";
 import StepThree from "./StepThree";
 import StepFour from "./StepFour";
 
-const Stepper = () => {
-    const [active, setActive] = useState(1);
+function Stepper(props) {
+    const item = props.item
+    const [activeStep, setActiveStep] = useState(1);
 
-    const handleNextPrevClick = a => {
-        setActive(a);
+    const handleNextPrevClick = (step) => {
+        setActiveStep(step);
+    };
+
+    const handleNext = () => {
+        if (activeStep < 4) {
+            setActiveStep(activeStep + 1);
+        }
+    };
+
+    const handlePrev = () => {
+        if (activeStep > 1) {
+            setActiveStep(activeStep - 1);
+        }
     };
     return (
         <CDBContainer className="text-center">
-            <div className="d-flex justify-content-center">
-                <CDBStepper direction="horizontal" activeColor="#666666" completeColor="#505050" incompleteColor="#666666">
-                    <CDBStep
-                        id={1}
-                        name="Basic Information"
-                        handleClick={() => handleNextPrevClick(1)}
-                        active={active}
-                        component={<StepOne handleNextPrevClick={handleNextPrevClick} />}
-                    />
-                    <CDBStep
-                        id={2}
-                        name="Personal Data"
-                        handleClick={() => handleNextPrevClick(2)}
-                        active={active}
-                        component={<StepTwo handleNextPrevClick={handleNextPrevClick} />}
-                    />
-                    <CDBStep
-                        id={3}
-                        name="Terms and Conditions"
-                        handleClick={() => handleNextPrevClick(3)}
-                        active={active}
-                        component={<StepThree handleNextPrevClick={handleNextPrevClick} />}
-                    />
-                    <CDBStep
-                        id={4}
-                        name="Finish"
-                        handleClick={() => handleNextPrevClick(4)}
-                        active={active}
-                        component={<StepFour handleNextPrevClick={handleNextPrevClick} />}
-                    />
-                </CDBStepper>
+            <div className="d-flex justify-content-center mt-3">
+                <CDBBtn
+                    color={activeStep === 1 ? "primary" : "secondary"}
+                    onClick={() => handleNextPrevClick(1)}
+                    className="me-3"
+                >
+                    Chọn bữa
+                </CDBBtn>
+                <CDBBtn
+                    color={activeStep === 2 ? "primary" : "secondary"}
+                    onClick={() => handleNextPrevClick(2)}
+                    className="me-3"
+                >
+                    Chọn ngày
+                </CDBBtn>
+                <CDBBtn
+                    color={activeStep === 3 ? "primary" : "secondary"}
+                    onClick={() => handleNextPrevClick(3)}
+                    className="me-3"
+                >
+                    Hóa Đơn
+                </CDBBtn>
+                <CDBBtn
+                    color={activeStep === 4 ? "primary" : "secondary"}
+                    onClick={() => handleNextPrevClick(4)}
+                >
+                    Thanh Toán
+                </CDBBtn>
+            </div>
+
+            {activeStep === 1 && <StepOne handleNextPrevClick={handleNextPrevClick} />}
+            {activeStep === 2 && (
+                <StepTwo item={item} handleNextPrevClick={handleNextPrevClick} />
+            )}
+            {activeStep === 3 && <StepThree handleNextPrevClick={handleNextPrevClick} />}
+            {activeStep === 4 && <StepFour handleNextPrevClick={handleNextPrevClick} />}
+            <div className="d-flex justify-content-end">
+                {activeStep > 1 && (
+                    <CDBBtn color="secondary" onClick={handlePrev} className="me-3">
+                        Previous
+                    </CDBBtn>
+                )}
+                {activeStep < 4 && (
+                    <CDBBtn color="secondary" onClick={handleNext} className="me-3">
+                        Next
+                    </CDBBtn>
+                )}
             </div>
         </CDBContainer>
-
     );
 };
 
