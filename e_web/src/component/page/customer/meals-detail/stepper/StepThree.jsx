@@ -1,8 +1,16 @@
 import React from 'react';
+import { useState } from 'react';
 
 function StepThree(props) {
+    const item = props.item
+    const fee = props.fee
+    const feeTotal = props.feeTotal
+    const radioValue = props.radioValue
+    const cartPrice = props.cartPrice
+    const handleChangeFee = props.handleChangeFee
+    const shipFee = props.shipFee
     return (
-        <div className='pt-3'>
+        <div className='container'>
             <div className="sp-card">
                 <div className="row">
                     <div className="col-md cart">
@@ -16,10 +24,10 @@ function StepThree(props) {
                             <div className='ms-4'>
                                 <div className="row align-items-center">
                                     <div className="col">
-                                        <div className="h5 row fw-bold">Combo </div>
+                                        <div className="h5 row fw-bold">Combo</div>
                                     </div>
                                     <div className="col">
-                                        <div className="h5 row">Hulk</div>
+                                        <div className="h5 row">{item.combo_name}</div>
                                     </div>
                                 </div>
                                 <div className="row align-items-center">
@@ -27,7 +35,7 @@ function StepThree(props) {
                                         <div className="h5 row fw-bold">Số ngày</div>
                                     </div>
                                     <div className="col">
-                                        <div className="h5 row">3 ngày/1 tuần</div>
+                                        <div className="h5 row">{radioValue.day} ngày/1 tuần</div>
                                     </div>
                                 </div>
                                 <div className="row align-items-center">
@@ -35,7 +43,7 @@ function StepThree(props) {
                                         <div className="h5 row fw-bold">Số bữa</div>
                                     </div>
                                     <div className="col">
-                                        <div className="h5 row">3 bữa/1 ngày</div>
+                                        <div className="h5 row">{radioValue.meal} bữa/1 ngày</div>
                                     </div>
                                 </div>
                             </div>
@@ -53,27 +61,27 @@ function StepThree(props) {
                                         <div className="h5 row fw-bold">Địa chỉ </div>
                                     </div>
                                     <div className="col">
-                                        <select className="form-select">
-                                            <option value="1.2">Q1</option>
-                                            <option value="1.375">Q2</option>
-                                            <option value="1.55">Q3</option>
+                                        <select defaultValue={fee ?? 10} onChange={(e) => handleChangeFee(e)} className="form-select">
+                                            <option value="10">Quận 1</option>
+                                            <option value="20">Quận 2</option>
+                                            <option value="30">Quận 3</option>
                                         </select>
                                     </div>
                                 </div>
-                                <div className="row py-1">
+                                {/* <div className="row py-1">
                                     <div className="col">
                                         <div className="h5 row fw-bold">Ghi Chú</div>
                                     </div>
                                     <div className="col">
                                         <textarea class="form-control" id="exampleFormControlTextarea1" rows="3"></textarea>
                                     </div>
-                                </div>
+                                </div> */}
                                 <div className="row">
                                     <div className="col">
                                         <div className="h5 row fw-bold">Giá Gói</div>
                                     </div>
                                     <div className="col">
-                                        <div>450.000VND</div>
+                                        <div>{cartPrice()}VND</div>
                                     </div>
                                 </div>
                                 <div className="row py-1">
@@ -81,14 +89,14 @@ function StepThree(props) {
                                         <div className="h5 row fw-bold">Phí Ship</div>
                                     </div>
                                     <div className="col">
-                                        <div>50.000VND</div>
+                                        <div>{shipFee()}VND</div>
                                     </div>
                                 </div>
                             </div>
                         </div>
                         <hr className="border-2 border-top border-bottom border-secondary" />
                         <div className='d-flex h5 justify-content-end fw-bold'>
-                            <span >TỔNG TIỀN: <span className='text-danger'>500.000 VND</span></span>
+                            <span >TỔNG TIỀN: <span className='text-danger'>{feeTotal()} VND</span></span>
                         </div>
                     </div>
                 </div >

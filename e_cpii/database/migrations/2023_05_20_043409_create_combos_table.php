@@ -13,13 +13,14 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('meals', function (Blueprint $table) {
+        Schema::create('combos', function (Blueprint $table) {
             $table->id();
-            $table->string('meal_name');
-            $table->string('meal_image');
-            $table->integer('meal_price');
-            $table->integer('combo_type');
-            $table->string('meal_detail');
+            $table->string('combo_name');
+            $table->string('combo_image');
+            $table->integer('combo_price');
+            $table->integer('type');
+            $table->string('detail');
+            $table->string('description');
             $table->tinyInteger('deleted')->default(0)->comment('0=active, 1=deleted');
             $table->tinyInteger('status')->default('0')->comment('0=on-sale, 1=stop-selling, 2=sold-out');
             $table->timestamps();
@@ -33,6 +34,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('products');
+        Schema::dropIfExists('combos');
     }
 };

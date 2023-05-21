@@ -28,5 +28,21 @@ class DatabaseSeeder extends Seeder
             'email' => 'admin@gmail.com',
             'password' => Hash::make('123456'),
         ]);
+        // DB::table('combos')->insert([
+        //     'combo_name'    => 'Monster',
+        //     'combo_image'   => 'uploads/monster.jpg',
+        //     'combo_price'   => 200000,
+        //     'type'          => 1,
+        //     'description'   => 'Description',
+        //     'detail'        => 'High Protein and Calories - 2000',
+        //     'deleted'       => 0,
+        // ]);
+        // DB::table('meals')->insert([
+        //     'meal_name'    => 'Chicken',
+        //     'meal_image'   => 'uploads/monster.jpg',
+        //     'combo_type'   => 1,
+        //     'meal_detail'  => 'Good for health',
+        //     'deleted'       => 0,
+        // ]);
     }
 }

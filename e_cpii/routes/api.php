@@ -42,4 +42,6 @@ Route::prefix('customer')->group(function () {
     Route::get('/combo-list', [CustomerController::class, 'comboList']);
     Route::get('/register', [RegisterController::class, 'register']);
     Route::post('/calories-calculate', [CustomerController::class, 'caloriesCalculate']);
+    Route::post('/get-data-by-combo', [CustomerController::class, 'getDataByCombo']);
+    Route::post('/payment', [CustomerController::class, 'payment']);
 });

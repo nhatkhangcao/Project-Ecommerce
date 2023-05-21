@@ -18,10 +18,10 @@ function MealDetailModal(props) {
             <span onClick={handleShow} role="button" title="login">COMBO TUẦN</span>
             <Modal backdrop="static" show={show} size='lg' onHide={handleClose} dialogClassName="modal-dialog-scrollable">
                 <Modal.Header className="text-center" closeButton>
-                    <Modal.Title className='text-title w-100 fw-bold text-success' >{item.meal_name}</Modal.Title>
+                    <Modal.Title className='text-title w-100 fw-bold text-success' >{item.combo_name}</Modal.Title>
                 </Modal.Header>
                 <Modal.Body>
-                    <MealStepper item = {item} />
+                    <MealStepper item={item} />
                     {/* <Form>
                         <Form.Group className="mb-3">
                             <Form.Label>1. Chọn ngày trong tuần</Form.Label>

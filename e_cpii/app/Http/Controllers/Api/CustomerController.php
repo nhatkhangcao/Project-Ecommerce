@@ -31,4 +31,14 @@ class CustomerController extends Controller
         $data = $this->repo->comboList();
         return $data;
     }
+
+    public function getDataByCombo(Request $request)
+    {
+        return $data = $this->repo->getDataByCombo($request);
+    }
+
+    public function payment(Request $request)
+    {
+        return $data = $this->repo->payment($request->all());
+    }
 }

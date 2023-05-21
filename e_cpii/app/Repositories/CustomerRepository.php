@@ -58,4 +58,41 @@ class CustomerRepository
     {
         return Combo::where('deleted', 0)->get();
     }
+
+    public function getDataByCombo($request)
+    {
+        $data = Meal::where('combo_type', $request->input('type'))
+            ->whereIn('day', [1, 2, 3, 4, 5, 6])
+            ->orderBy('day')
+            ->get()
+            ->groupBy('day')
+            ->map(function ($items) {
+                return $items;
+            });
+        if ($data->isNotEmpty()) {
+            return response()->json(
+                [
+                    'status'    => true,
+                    'message'   => 'Get Data Successfully',
+                    'data'      => $data
+                ]
+            );
+        } else {
+            return response()->json(
+                [
+                    'status'    => false,
+                    'message' => 'Get Data Fail',
+                ]
+            );
+        }
+    }
+
+    public function payment($request)
+    {
+        if ($request['paymentMethod'] === 'cod') {
+            return 123;
+        } else {
+            return 234;
+        }
+    }
 }

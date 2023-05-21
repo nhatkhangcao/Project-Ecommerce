@@ -4,26 +4,30 @@ import ButtonGroup from 'react-bootstrap/ButtonGroup';
 import ToggleButton from 'react-bootstrap/ToggleButton';
 
 function StepOne(props) {
-    const [checked, setChecked] = useState(false);
-    const [radioValue, setRadioValue] = useState('1');
+    const radioValue = props.radioValue
+    const handleChangeMeal = props.handleChangeMeal
+    const handleChangeDay = props.handleChangeDay
+    const cartPrice = props.cartPrice
     const radios = [
         { name: '6 ngày', value: '6' },
         { name: '5 ngày', value: '5' },
         { name: '4 ngày', value: '4' },
     ];
-
     const days = [
         { name: '3 bữa', value: '3' },
         { name: '2 bữa', value: '2' },
         { name: '1 bữa', value: '1' },
     ];
+    const test = () => {
+        console.log(radioValue)
+    }
     return (
-        <div class="container">
+        <div className="container text-start">
             <div>
-                <div class="row">
+                <div onClick={test} className="row">
                     <span>1. Chọn số ngày trong tuần</span>
                 </div>
-                <div class="row py-2">
+                <div className="row py-2">
                     <ButtonGroup>
                         {radios.map((radio, idx) => (
                             <ToggleButton
@@ -31,10 +35,10 @@ function StepOne(props) {
                                 id={`radio-${idx}`}
                                 type="radio"
                                 variant={idx % 2 ? 'outline-success' : 'outline-danger'}
-                                name="radio"
+                                name="radio-day"
                                 value={radio.value}
-                                checked={radioValue === radio.value}
-                                onChange={(e) => setRadioValue(e.currentTarget.value)}
+                                checked={radioValue.day === radio.value}
+                                onChange={(e) => handleChangeDay(e.currentTarget.value)}
                             >
                                 {radio.name}
                             </ToggleButton>
@@ -43,27 +47,30 @@ function StepOne(props) {
                 </div>
             </div>
             <div>
-                <div class="row">
+                <div className="row">
                     <span>2. Chọn số bữa trong ngày</span>
                 </div>
-                <div class="row pt-3">
+                <div className="row pt-3">
                     <ButtonGroup>
                         {days.map((radio, idx) => (
                             <ToggleButton
                                 key={idx}
-                                id={`radio-${idx}`}
+                                id={`meal-radio-${idx}`}
                                 type="radio"
                                 variant={idx % 2 ? 'outline-success' : 'outline-danger'}
-                                name="radio"
+                                name="radio-meal"
                                 value={radio.value}
-                                checked={radioValue === radio.value}
-                                onChange={(e) => setRadioValue(e.currentTarget.value)}
+                                checked={radioValue.meal === radio.value}
+                                onChange={(e) => handleChangeMeal(e.currentTarget.value)}
                             >
                                 {radio.name}
                             </ToggleButton>
                         ))}
                     </ButtonGroup>
                 </div>
+            </div>
+            <div className='row text-end mt-2'>
+                <span className='text-danger'><i className="fas fa-shopping-basket"></i> {cartPrice()}VNĐ</span>
             </div>
         </div>
     );

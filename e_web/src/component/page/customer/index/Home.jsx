@@ -8,14 +8,17 @@ import { Link, NavLink } from 'react-router-dom';
 function Home(props) {
     const [dataList, setDataList] = useState();
     const getMealData = () => {
-        axios.get('http://127.0.0.1:8000/api/customer/list').then((response) => {
+        axios.get('http://127.0.0.1:8000/api/customer/combo-list').then((response) => {
             setDataList(response.data)
         });
     }
     const textData = () => {
         console.log(dataList)
     }
-
+    const formatVND = (money) => {
+        const formatter = new Intl.NumberFormat("vi-VN");
+        return formatter.format(money);
+    }
     useEffect(() => {
         getMealData()
     }, []);
@@ -54,7 +57,7 @@ function Home(props) {
                     {dataList && dataList.length > 0 ? (
                         dataList.map((item, index) => (
                             <div style={{ cursor: 'pointer' }} className="col px-2 mb-4" key={item.id}>
-                                <Link to={{ pathname: `/detail/${item.meal_name}` }} state={{ item }} className="nav-link">
+                                <Link to={{ pathname: `/detail/${item.combo_name}` }} state={{ item }} className="nav-link">
                                     <div className="card border-1">
                                         <img
                                             style={{
@@ -62,14 +65,14 @@ function Home(props) {
                                                 minHeight: '200px',
                                                 height: '230px',
                                             }}
-                                            src={`http://localhost:8000/${item.meal_image}`}
+                                            src={`http://localhost:8000/${item.combo_image}`}
                                             className="card-img-top"
                                             alt="..."
                                         />
                                         <div className="card-body">
-                                            <h5 className="card-title text-success">{item.meal_name}</h5>
-                                            <h6>{item.meal_detail}</h6>
-                                            <p className="card-text">{item.meal_price} VNĐ</p>
+                                            <h5 className="card-title text-success">{item.combo_name}</h5>
+                                            <h6>{item.detail}</h6>
+                                            <p className="card-text text-danger">{formatVND(item.combo_price)} VNĐ</p>
                                         </div>
                                     </div>
                                 </Link>
