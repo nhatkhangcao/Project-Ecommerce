@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, } from "react";
 import { CDBBtn, CDBContainer } from "cdbreact";
 import StepOne from "./StepOne";
 import StepTwo from "./StepTwo";
@@ -7,9 +7,12 @@ import StepFour from "./StepFour";
 import axios from "axios";
 import { useEffect } from "react";
 import { useForm } from "react-hook-form";
+import Swal from "sweetalert2";
+import { useNavigate } from "react-router-dom";
 
 function Stepper(props) {
     // Initialize
+    const navigate = useNavigate();
     const [data, setData] = useState({})
     const [total, setTotal] = useState(0)
     const item = props.item;
@@ -109,7 +112,7 @@ function Stepper(props) {
     const {
         register,
         handleSubmit,
-        formState: { errors },
+        // formState: { errors },
         setValue
     } = useForm({
         defaultValues: {
@@ -119,16 +122,31 @@ function Stepper(props) {
             address: '',
             email: '',
             paymentMethod: 'cod',
-            totalFee: feeTotal()
+            totalFee: feeTotal(),
+            order_name: item.combo_name,
         }
     });
     useEffect(() => {
         setValue('totalFee', feeTotal());
     }, [feeTotal, setValue]);
 
+    // Payment
     const payment = (data) => {
         axios.post("http://127.0.0.1:8000/api/customer/payment", data).then((response) => {
-            console.log(response)
+            if (response.data.status) {
+                Swal.fire({
+                    icon: 'success',
+                    title: 'Thanh toán thành công!',
+                    text: 'Cảm ơn quý khách đã tin tưởng chúng tôi',
+                    showConfirmButton: false,
+                    timer: 2000,
+                    didOpen: () => {
+                        setTimeout(() => {
+                            navigate('/')
+                        }, 2000);
+                    }
+                });
+            }
         })
     }
     useEffect(() => {

@@ -1,6 +1,5 @@
 import React from 'react';
 import { Button, Form } from 'react-bootstrap';
-import { useForm } from 'react-hook-form';
 
 function StepFour(props) {
     const feeTotal = props.feeTotal
@@ -9,7 +8,7 @@ function StepFour(props) {
     const handleSubmit = props.handleSubmit
 
     return (
-        <div className='pt-3'>
+        <div className='container'>
             <div className="bill-card">
                 <div className="row">
                     <div className="col-md cart">

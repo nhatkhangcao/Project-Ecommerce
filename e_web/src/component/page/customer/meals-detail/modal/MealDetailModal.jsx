@@ -1,9 +1,6 @@
 import React from 'react';
 import { useState } from 'react';
-import { Button, Form, Modal } from 'react-bootstrap';
-import ButtonGroup from 'react-bootstrap/ButtonGroup';
-import ToggleButton from 'react-bootstrap/ToggleButton';
-import { CDBStepper, CDBStep } from "cdbreact";
+import { Modal } from 'react-bootstrap';
 import MealStepper from '../stepper/MealStepper';
 
 function MealDetailModal(props) {

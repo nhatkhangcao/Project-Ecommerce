@@ -1,6 +1,4 @@
-import React, { useState } from 'react';
-import { useEffect } from 'react';
-import { set } from 'react-hook-form';
+import React, { useEffect } from 'react';
 
 function StepTwo(props) {
   const data = props.data
@@ -9,7 +7,6 @@ function StepTwo(props) {
   const decrementQuantity = props.decrementQuantity
   const totalMealOrder = props.totalMealOrder
   const totalMeal = props.totalMeal
-  // const [quantity, setQuantity] = useState({});
 
   const calculateTotal = () => {
     let total = 0;
@@ -39,8 +36,8 @@ function StepTwo(props) {
             </div>
             {
               Object.values(data).map((comboItem, dayIndex) => (
-                <div className="text-success">
-                  <div key={dayIndex} className="row">
+                <div key={dayIndex} className="text-success">
+                  <div className="row">
                     <h4 className='text-start'><b>Thứ {dayIndex + 2}</b></h4>
                   </div>
                   {
