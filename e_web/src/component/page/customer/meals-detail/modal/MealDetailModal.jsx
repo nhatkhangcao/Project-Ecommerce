@@ -4,12 +4,12 @@ import { Modal } from 'react-bootstrap';
 import MealStepper from '../stepper/MealStepper';
 
 function MealDetailModal(props) {
+    const item = props.item
     const [show, setShow] = useState(false);
     const handleShow = () => setShow(true);
     const handleClose = () => {
         setShow(false);
     }
-    const item = props.item
     return (
         <>
             <span onClick={handleShow} role="button" title="login">COMBO TUẦN</span>
@@ -19,12 +19,6 @@ function MealDetailModal(props) {
                 </Modal.Header>
                 <Modal.Body>
                     <MealStepper item={item} />
-                    {/* <Form>
-                        <Form.Group className="mb-3">
-                            <Form.Label>1. Chọn ngày trong tuần</Form.Label>
-
-                        </Form.Group>
-                    </Form> */}
                 </Modal.Body>
             </Modal >
         </>

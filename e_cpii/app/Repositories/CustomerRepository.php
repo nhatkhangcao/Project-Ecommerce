@@ -91,26 +91,28 @@ class CustomerRepository
 
     public function payment($request)
     {
-        if ($request['paymentMethod'] === 'cod') {
-            $order = Order::create([
-                'order_code' => 123,
-                'order_name' => $request['order_name'],
-                'order_price' => $request['totalFee'],
-                'payment_method' => $request['paymentMethod'],
-                'address' => $request['address'],
-                'email' => $request['email'],
-                'customer_name' => $request['name'],
-                'note' => $request['note'],
-                'phone' => $request['phone'],
-            ]);
-        } else {
-            $data = $this->vnPay($request);
-        }        
+        $url = '';
+        if ($request['paymentMethod'] === "vnPay") {
+           $url = $this->vnPay($request);
+        }
+        $order = Order::create([
+            'order_code'        => 123,
+            'order_name'        => $request['order_name'],
+            'order_price'       => $request['totalFee'],
+            'payment_method'    => $request['paymentMethod'],
+            'address'           => $request['address'],
+            'email'             => $request['email'],
+            'customer_name'     => $request['name'],
+            'note'              => $request['note'],
+            'phone'             => $request['phone']
+        ]);
         //Send Mail 
-        // $this->sendMail($order);
+        $this->sendMail($order);
+        
         return response()->json(
-            [
-                'status'    => $data,
+            [                
+                'status'    => true,
+                'url'       => $url,
             ]
         );
 
@@ -127,28 +129,27 @@ class CustomerRepository
         $vnp_TmnCode = "7UQF7KY0";
         $vnp_HashSecret = "MZTMGCIIEQKHEMGJPOHAKIUTMIYPKUQM";
 
-        $vnp_TxnRef = "MB10010";  // Product code
+        $vnp_TxnRef = "MB100101";  // Product code
         $vnp_OrderInfo = 'Checkout';
         $vnp_OrderType = 'billpayment';
-        $vnp_Amount = 100 * 100;
+        $vnp_Amount = $request['totalFee'] * 100;
         $vnp_Locale = 'vn';
         $vnp_BankCode = 'NCB';
         
         //Billing
         $inputData = array(
-            "vnp_Version" => "2.1.0",
-            "vnp_TmnCode" => $vnp_TmnCode,
-            "vnp_Amount" => $vnp_Amount,
-            "vnp_Command" => "pay",
-            "vnp_CreateDate" => date('YmdHis'),
-            "vnp_CurrCode" => "VND",
-            "vnp_Locale" => $vnp_Locale,
-            "vnp_OrderInfo" => $vnp_OrderInfo,
-            "vnp_OrderType" => $vnp_OrderType,
-            "vnp_ReturnUrl" => $vnp_Returnurl,
-            "vnp_TxnRef" => $vnp_TxnRef,
+            "vnp_Version"       => "2.1.0",
+            "vnp_TmnCode"       => $vnp_TmnCode,
+            "vnp_Amount"        => $vnp_Amount,
+            "vnp_Command"       => "pay",
+            "vnp_CreateDate"    => date('YmdHis'),
+            "vnp_CurrCode"      => "VND",
+            "vnp_Locale"        => $vnp_Locale,
+            "vnp_OrderInfo"     => $vnp_OrderInfo,
+            "vnp_OrderType"     => $vnp_OrderType,
+            "vnp_ReturnUrl"     => $vnp_Returnurl,
+            "vnp_TxnRef"        => $vnp_TxnRef,
         );
-
         if (isset($vnp_BankCode) && $vnp_BankCode != "") {
             $inputData['vnp_BankCode'] = $vnp_BankCode;
         }

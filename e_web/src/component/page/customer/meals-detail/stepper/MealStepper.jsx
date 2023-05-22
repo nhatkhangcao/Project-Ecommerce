@@ -1,14 +1,13 @@
-import React, { useState, } from "react";
+import React, { useState, useEffect } from "react";
+import { useForm } from "react-hook-form";
+import Swal from "sweetalert2";
+import { useNavigate } from "react-router-dom";
 import { CDBBtn, CDBContainer } from "cdbreact";
 import StepOne from "./StepOne";
 import StepTwo from "./StepTwo";
 import StepThree from "./StepThree";
 import StepFour from "./StepFour";
 import axios from "axios";
-import { useEffect } from "react";
-import { useForm } from "react-hook-form";
-import Swal from "sweetalert2";
-import { useNavigate } from "react-router-dom";
 
 function Stepper(props) {
     // Initialize
@@ -17,6 +16,7 @@ function Stepper(props) {
     const [total, setTotal] = useState(0)
     const item = props.item;
     const [activeStep, setActiveStep] = useState(1);
+
     // Handle Move Step
     const handleNextPrevClick = (step) => {
         setActiveStep(step);
@@ -31,10 +31,7 @@ function Stepper(props) {
             setActiveStep(activeStep - 1);
         }
     };
-    // Test Data
-    const test = () => {
-        console.log(123)
-    }
+
     // Get Data By Combo
     const getDataByCombo = () => {
         axios.post("http://127.0.0.1:8000/api/customer/get-data-by-combo",
@@ -43,7 +40,12 @@ function Stepper(props) {
             setData(response.data.data)
         })
     }
+
     // ----------Step One Logic----------
+    const formatVND = (money) => {
+        const formatter = new Intl.NumberFormat("vi-VN");
+        return formatter.format(money);
+    }
     const [radioValue, setRadioValue] = useState({
         day: '4',
         meal: '1'
@@ -63,13 +65,10 @@ function Stepper(props) {
     const calculateCartPrice = () => {
         return (item.combo_price / 4) * totalOrder
     }
-    const formatVND = (money) => {
-        const formatter = new Intl.NumberFormat("vi-VN");
-        return formatter.format(money);
-    }
     const cartPrice = () => {
         return formatVND(calculateCartPrice())
     }
+
     //  ------------Step Two Logic------------- //
     const [quantity, setQuantity] = useState({});
     const incrementQuantity = (dayIndex, itemIndex) => {
@@ -97,6 +96,7 @@ function Stepper(props) {
         setTotal(total);
     };
     const totalOrder = totalMealOrder();
+
     //  ------------Step Three Logic------------- //
     const [fee, setFee] = useState(10)
     const shipFee = () => {
@@ -108,6 +108,7 @@ function Stepper(props) {
     const feeTotal = () => {
         return formatVND(calculateCartPrice() + fee * 1000)
     }
+
     //  -----------Step Four Logic------------- //
     const {
         register,
@@ -122,18 +123,15 @@ function Stepper(props) {
             address: '',
             email: '',
             paymentMethod: 'cod',
-            totalFee: feeTotal(),
+            totalFee: calculateCartPrice() + fee * 1000,
             order_name: item.combo_name,
         }
     });
-    useEffect(() => {
-        setValue('totalFee', feeTotal());
-    }, [feeTotal, setValue]);
 
     // Payment
     const payment = (data) => {
         axios.post("http://127.0.0.1:8000/api/customer/payment", data).then((response) => {
-            if (response.data.status) {
+            if (data.paymentMethod === 'cod') {
                 Swal.fire({
                     icon: 'success',
                     title: 'Thanh toán thành công!',
@@ -146,16 +144,23 @@ function Stepper(props) {
                         }, 2000);
                     }
                 });
+            } else {
+                setTimeout(() => {
+                    window.location.href = response.data.url;
+                }, 2000);
             }
         })
     }
+
+    // Render data change
     useEffect(() => {
-        feeTotal()
+        setValue('totalFee', calculateCartPrice() + fee * 1000);
+    }, [calculateCartPrice() + fee * 1000, setValue]);
+    useEffect(() => {
         getDataByCombo()
     }, []);
     return (
         <CDBContainer className="text-center">
-            <span onClick={test}>Test:</span>
             <div className="d-flex justify-content-center mt-3">
                 <CDBBtn
                     color={activeStep === 1 ? "danger" : "dark"}

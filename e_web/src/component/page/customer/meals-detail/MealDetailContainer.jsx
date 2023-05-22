@@ -6,16 +6,13 @@ function MealDetailContainer(props) {
     const location = useLocation();
     const { item } = location.state || {};
     if (!item) {
-        // Handle the case when the item is not available
         return <div>Loading...</div>;
     }
     const formatVND = (money) => {
         const formatter = new Intl.NumberFormat("vi-VN");
         return formatter.format(money);
     }
-    const test = () => {
-        console.log(item)
-    }
+
     return (
         <div>
             <main>
@@ -24,7 +21,6 @@ function MealDetailContainer(props) {
                         <div className="col-md-6" >
                             <div className="d-flex justify-content-center">
                                 <img
-                                    onClick={test}
                                     src={`http://localhost:8000/${item.combo_image}`}
                                     alt="Eat Clean Product Image"
                                     className="img-fluid rounded"
