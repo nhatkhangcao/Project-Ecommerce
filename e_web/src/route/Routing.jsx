@@ -12,6 +12,7 @@ import Calculator from '../component/page/customer/tdee/Calculator';
 import MealManagementContainer from '../component/page/admin/meals-management/MealManagementContainer';
 import MealContainer from '../component/page/customer/meals/MealContainer';
 import MealDetailContainer from '../component/page/customer/meals-detail/MealDetailContainer';
+import OrderHistoryContainer from '../component/page/customer/order-history/OrderHistoryContainer';
 
 function Routing(props) {
     const PrivateRoute = () => {
@@ -37,6 +38,7 @@ function Routing(props) {
                     <Route path='/detail/:meal_name' element={<MealDetailContainer />} />
                     <Route exact path='calculator' element={<Calculator />} />
                     <Route exact path='meals' element={<MealContainer />} />
+                    <Route exact path='history' element={<OrderHistoryContainer />} />
                 </Route>
                 //PAGE NOT MATCH
                 <Route exact path='*' element={<PageNotMatch />} />

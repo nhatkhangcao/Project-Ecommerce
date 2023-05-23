@@ -24,8 +24,8 @@ class DatabaseSeeder extends Seeder
         //     'email' => 'test@example.com',
         // ]);
         DB::table('mst_users')->insert([
-            'name' => 'admin',
-            'email' => 'admin@gmail.com',
+            'name' => 'Kay C',
+            'email' => 'kayc@gmail.com',
             'password' => Hash::make('123456'),
         ]);
         // DB::table('combos')->insert([

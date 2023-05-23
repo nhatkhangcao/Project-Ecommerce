@@ -1,15 +1,19 @@
 import axios from 'axios';
 import React from 'react';
-import { Link, NavLink } from 'react-router-dom';
+import { Link, NavLink, useNavigate } from 'react-router-dom';
 import FormModal from '../../page/customer/form-modal/Modal/FormModal';
 
 const NavBarComponent = () => {
+    const navigate = useNavigate();
     const account = JSON.parse(localStorage.getItem('account_user'));
     const handleLogout = () => {
         axios.post("http://127.0.0.1:8000/api/logout").then(() => {
             localStorage.removeItem('account_user')
             window.location.reload(true)
         })
+    }
+    const handleHistory = () => {
+        navigate('/history')
     }
     return (
         <nav className="navbar nav-bar-customer navbar-expand-lg navbar-light p-3">
@@ -30,13 +34,13 @@ const NavBarComponent = () => {
                             <NavLink to="calculator" className={({ isActive }) => isActive ? 'active nav-item nav-link text-success' : 'text-dark nav-item nav-link'}>TDEE</NavLink>
                         </li>
                         <li className="nav-item dropdown">
-                            <a className="text-dark nav-link mx-2" href="#" id="navbarDropdownMenuLink" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                            <a className="text-dark nav-link mx-2" id="navbarDropdownMenuLink" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                                 Company
                             </a>
                             <ul className="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-                                <li><a className="dropdown-item" href="#">Blog</a></li>
-                                <li><a className="dropdown-item" href="#">About Us</a></li>
-                                <li><a className="dropdown-item" href="#">Contact us</a></li>
+                                <li><a className="dropdown-item">Blog</a></li>
+                                <li><a className="dropdown-item">About Us</a></li>
+                                <li><a className="dropdown-item">Contact us</a></li>
                             </ul>
                         </li>
                     </ul>
@@ -47,7 +51,8 @@ const NavBarComponent = () => {
                             </a>
                             {account?.user.name && (
                                 <ul className="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdownMenuLink1">
-                                    <li><a onClick={handleLogout} className="dropdown-item">Logout</a></li>
+                                    <li><a onClick={handleHistory} className="dropdown-item">Lịch sử mua hàng</a></li>
+                                    <li><a onClick={handleLogout} className="dropdown-item">Đăng xuất</a></li>
                                 </ul>
                             )}
                         </li>
