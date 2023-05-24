@@ -15,6 +15,7 @@ return new class extends Migration
     {
         Schema::create('mst_users', function (Blueprint $table) {
             $table->id();
+            $table->string('account', 255);
             $table->string('email', 255);
             $table->string('password', 255);
             $table->tinyInteger('role')->default(0)->comment('0=customer, 1=user, 2=admin');

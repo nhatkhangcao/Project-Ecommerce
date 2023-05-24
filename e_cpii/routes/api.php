@@ -40,6 +40,7 @@ Route::middleware('auth:sanctum')->group(function () {
 Route::prefix('customer')->group(function () {
     Route::get('/list', [CustomerController::class, 'index']);
     Route::get('/combo-list', [CustomerController::class, 'comboList']);
+    Route::get('/order-history', [CustomerController::class, 'getOrderHistory']);
     Route::get('/register', [RegisterController::class, 'register']);
     Route::post('/calories-calculate', [CustomerController::class, 'caloriesCalculate']);
     Route::post('/get-data-by-combo', [CustomerController::class, 'getDataByCombo']);

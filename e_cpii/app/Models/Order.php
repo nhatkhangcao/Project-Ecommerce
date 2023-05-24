@@ -20,6 +20,7 @@ class Order extends Model
         "note",
         "phone",
         "deleted",
-        "status"
+        "status",
+        "created_at"
     ];
 }

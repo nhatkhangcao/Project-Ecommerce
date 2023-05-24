@@ -93,7 +93,7 @@ class CustomerRepository
     {
         $url = '';
         if ($request['paymentMethod'] === "vnPay") {
-           $url = $this->vnPay($request);
+            $url = $this->vnPay($request);
         }
         $order = Order::create([
             'order_code'        => 123,
@@ -107,18 +107,18 @@ class CustomerRepository
             'phone'             => $request['phone']
         ]);
         //Send Mail 
-        $this->sendMail($order);
-        
+        // $this->sendMail($order);
+
         return response()->json(
-            [                
+            [
                 'status'    => true,
                 'url'       => $url,
             ]
         );
-
     }
-    
-    public function sendMail($order) {
+
+    public function sendMail($order)
+    {
         Mail::to('caonhatkhang2001@gmail.com')->send(new SendMail($order));
     }
 
@@ -129,13 +129,13 @@ class CustomerRepository
         $vnp_TmnCode = "7UQF7KY0";
         $vnp_HashSecret = "MZTMGCIIEQKHEMGJPOHAKIUTMIYPKUQM";
 
-        $vnp_TxnRef = "MB100101";  // Product code
+        $vnp_TxnRef = "MB100101111";  // Product code
         $vnp_OrderInfo = 'Checkout';
         $vnp_OrderType = 'billpayment';
         $vnp_Amount = $request['totalFee'] * 100;
         $vnp_Locale = 'vn';
         $vnp_BankCode = 'NCB';
-        
+
         //Billing
         $inputData = array(
             "vnp_Version"       => "2.1.0",
@@ -153,7 +153,7 @@ class CustomerRepository
         if (isset($vnp_BankCode) && $vnp_BankCode != "") {
             $inputData['vnp_BankCode'] = $vnp_BankCode;
         }
-        
+
         ksort($inputData);
         $query = "";
         $i = 0;
@@ -167,13 +167,25 @@ class CustomerRepository
             }
             $query .= urlencode($key) . "=" . urlencode($value) . '&';
         }
-        
+
         $vnp_Url = $vnp_Url . "?" . $query;
         if (isset($vnp_HashSecret)) {
             $vnpSecureHash =   hash_hmac('sha512', $hashdata, $vnp_HashSecret); //  
             $vnp_Url .= 'vnp_SecureHash=' . $vnpSecureHash;
         }
-        
+
         return $vnp_Url;
+    }
+    public function getOrderHistoryByAccount($request)
+    {
+        $orderHistory = Order::where('account', $request['account'])
+            ->where('deleted', 0)
+            ->orderByDesc('created_at')
+            ->get();
+        return response()->json(
+            [
+                'data'      => $orderHistory
+            ]
+        );
     }
 }

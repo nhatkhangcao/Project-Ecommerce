@@ -41,4 +41,8 @@ class CustomerController extends Controller
     {
         return $data = $this->repo->payment($request->all());
     }
+    public function getOrderHistory(Request $request)
+    {
+        return $this->repo->getOrderHistoryByAccount($request->all());
+    }
 }

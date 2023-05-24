@@ -134,7 +134,7 @@ function Stepper(props) {
             if (data.paymentMethod === 'cod') {
                 Swal.fire({
                     icon: 'success',
-                    title: 'Thanh toán thành công!',
+                    title: 'Đặt hàng thành công!',
                     text: 'Cảm ơn quý khách đã tin tưởng chúng tôi',
                     showConfirmButton: false,
                     timer: 2000,
@@ -145,9 +145,7 @@ function Stepper(props) {
                     }
                 });
             } else {
-                setTimeout(() => {
-                    window.location.href = response.data.url;
-                }, 2000);
+                window.location.href = response.data.url;
             }
         })
     }

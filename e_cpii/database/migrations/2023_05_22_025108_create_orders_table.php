@@ -18,6 +18,7 @@ return new class extends Migration
             $table->string('order_code');
             $table->string('order_name');
             $table->integer('order_price');
+            $table->integer('account');
             $table->string('payment_method');
             $table->string('address');
             $table->string('email');
