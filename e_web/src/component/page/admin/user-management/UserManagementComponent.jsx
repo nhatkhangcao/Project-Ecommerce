@@ -12,7 +12,7 @@ function UserManagementComponent(props) {
     const clearSearch = props.clearSearch
     const setRole = props.setRole
 
-const {
+    const {
         register,
         handleSubmit,
         reset,
@@ -22,7 +22,7 @@ const {
         getUserData()
     }, []);
     return (
-        <div className='container'>
+        <div className='container-fluid'>
             <div className="card shadow-style">
                 <div className="card-header bg-white">
                     <form onSubmit={handleSubmit(searchUser)}>
@@ -114,6 +114,7 @@ const {
                 </div>
             </div>
         </div>
+
     );
 }
 

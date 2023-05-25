@@ -21,6 +21,13 @@ class MealController extends Controller
     {
         return $this->repo->add($request);
     }
+    public function edit($id, Request $request)
+    {
+        $dataUpdate = $this->repo->edit($id, $request);
+        return response()->json(
+            $dataUpdate
+        );
+    }
     public function delete($id)
     {
         $dataDelete = $this->repo->delete($id);

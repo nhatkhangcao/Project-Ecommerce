@@ -14,6 +14,7 @@ class Order extends Model
         "order_name",
         "order_price",
         "payment_method",
+        "account",
         "address",
         "email",
         "customer_name",

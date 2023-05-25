@@ -11,6 +11,8 @@ import axios from "axios";
 
 function Stepper(props) {
     // Initialize
+    const loginResponse = JSON.parse(localStorage.getItem('account_user'));
+    const account = loginResponse?.user?.account;
     const navigate = useNavigate();
     const [data, setData] = useState({})
     const [total, setTotal] = useState(0)
@@ -125,6 +127,7 @@ function Stepper(props) {
             paymentMethod: 'cod',
             totalFee: calculateCartPrice() + fee * 1000,
             order_name: item.combo_name,
+            account: account ?? ''
         }
     });
 

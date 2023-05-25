@@ -1,11 +1,8 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
-import { useNavigate } from "react-router-dom";
 import moment from 'moment';
 
 const OrderHistoryContainer = () => {
-
-    const navigate = useNavigate();
     const [orderHistory, setOrderHistory] = useState();
     const loginResponse = JSON.parse(localStorage.getItem('account_user'));
     const account = loginResponse?.user?.account;
@@ -24,7 +21,7 @@ const OrderHistoryContainer = () => {
         })
     }
     const checkStatus = (status) => {
-        if (status == 1) {
+        if (status === 1) {
             return 'completed'
         } else {
             return 'cancelled'
@@ -37,8 +34,8 @@ const OrderHistoryContainer = () => {
         <div className="container order-history">
             <h2 className="mb-3">Order History</h2>
             <div className="row">
-                {orderHistory && orderHistory.map((order) => (
-                    <div className="col-md-6" key={order.id}>
+                {orderHistory && orderHistory.length > 0 ? orderHistory.map((order) => (
+                    <div className="col-md-12" key={order.id}>
                         <div className="order-card">
                             <div className="order-info">
                                 <span>Sản phẩm: </span>
@@ -57,7 +54,9 @@ const OrderHistoryContainer = () => {
                             </div>
                         </div>
                     </div>
-                ))}
+                )) : (
+                    <div className="h4 text-danger text-center col-12">Hiện tại bạn chưa có đơn hàng nào!!!</div>
+                )}
             </div>
         </div>
     );

@@ -33,6 +33,7 @@ Route::middleware('auth:sanctum')->group(function () {
         Route::get('/get-email', [UserManagementController::class, 'getEmailByMember']);
         Route::get('/meals-list', [MealController::class, 'index']);
         Route::post('/add-meal', [MealController::class, 'add']);
+        Route::post('/edit-meal/{id}', [MealController::class, 'edit']);
         Route::post('/delete-meal/{id}', [MealController::class, 'delete']);
     });
 });

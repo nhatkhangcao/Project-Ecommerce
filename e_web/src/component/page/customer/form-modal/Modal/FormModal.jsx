@@ -14,7 +14,7 @@ const FormModal = () => {
     const handleSwitchForm = () => {
         setShowLogin(!showLogin);
     };
-    
+
     return (
         <>
             <i onClick={handleShow} className="fas fa-user" role="button" title="login"></i>

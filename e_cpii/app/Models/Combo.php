@@ -13,9 +13,11 @@ class Combo extends Model
         "id",
         "combo_name",
         "combo_image",
+        "combo_price",
         "type",
         "detail",
         "description",
-        "deleted"
+        "deleted",
+        "status"
     ];
 }

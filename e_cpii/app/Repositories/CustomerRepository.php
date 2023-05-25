@@ -104,7 +104,8 @@ class CustomerRepository
             'email'             => $request['email'],
             'customer_name'     => $request['name'],
             'note'              => $request['note'],
-            'phone'             => $request['phone']
+            'phone'             => $request['phone'],
+            'account'           => $request['account']
         ]);
         //Send Mail 
         // $this->sendMail($order);

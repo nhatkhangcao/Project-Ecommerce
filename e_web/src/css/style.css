@@ -670,3 +670,8 @@
     background-color: #dc3545;
     color: #fff;
 }
+
+.image-container {
+    height: 180px;
+    overflow: hidden;
+}

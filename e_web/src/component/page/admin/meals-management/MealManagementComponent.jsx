@@ -9,7 +9,10 @@ function MealManagementComponent(props) {
     const handleDeleteMeal = props.handleDeleteMeal
     const paginate = props.paginate
     const dataList = props.dataList
-
+    const formatVND = (money) => {
+        const formatter = new Intl.NumberFormat("vi-VN");
+        return formatter.format(money);
+    }
     const {
         handleSubmit,
     } = useForm();
@@ -22,7 +25,7 @@ function MealManagementComponent(props) {
     }, []);
 
     return (
-        <div className="container">
+        <div className='container-fluid'>
             <div className="card shadow-style">
                 <div className="card-header bg-white">
                     <form onSubmit={handleSubmit(searchUser)}>
@@ -53,29 +56,41 @@ function MealManagementComponent(props) {
                 </div>
                 <div className="card-body">
                     <div className="row row-cols-2 row-cols-lg-5 g-2 g-lg-3">
-                        {
-                            dataList && dataList.data && dataList.data.length > 0 ? dataList.data.map((item, index) =>
+                        {dataList && dataList.data && dataList.data.length > 0 ? (
+                            dataList.data.map((item, index) => (
                                 <div className="col" key={item.id}>
                                     <div className="card border-1">
-                                        <img style={{ maxHeight: '200px', minHeight: '180px', height: '180px' }} src={`http://localhost:8000/${item.meal_image}`} className="card-img-top" alt="..." />
+                                        <div className="image-container">
+                                            <img
+                                                src={`http://localhost:8000/${item.combo_image}`}
+                                                className="card-img-top img-fluid"
+                                                alt="..."
+                                            />
+                                        </div>
                                         <div className="card-body">
-                                            <h5 className="card-title">{item.meal_name}</h5>
-                                            <p className="card-text">{item.meal_price} $</p>
+                                            <div className='d-flex justify-content-between'>
+                                                <h5 className="card-title">{item.combo_name}</h5>
+                                                <span className="card-title text-success">{item.detail}</span>
+                                            </div>
+                                            <p className="card-text">{formatVND(item.combo_price)} VNĐ</p>
                                         </div>
                                         <div className="card-body d-flex justify-content-center">
                                             <div className="btn bg-light border text-primary me-2">
-                                                <EditMealModal 
-                                                    getMealData={getMealData}
-                                                    mealList={item}
-                                                />
+                                                <EditMealModal getMealData={getMealData} mealList={item} />
                                             </div>
-                                            <div onClick={(e) => handleDeleteMeal(item, e)} className="btn bg-light border text-danger"><i className="fas fa-trash-alt">&nbsp;<span>Delete</span></i></div>
+                                            <div
+                                                onClick={(e) => handleDeleteMeal(item, e)}
+                                                className="btn bg-light border text-danger"
+                                            >
+                                                <i className="fas fa-trash-alt">&nbsp;<span>Delete</span></i>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
-                            ) :
-                                <div className="text-danger text-center col col-lg-12">NO DATA!</div>
-                        }
+                            ))
+                        ) : (
+                            <div className="text-danger text-center col col-lg-12">NO DATA!</div>
+                        )}
                     </div>
                 </div>
                 <nav aria-label="Page navigation example" className=''>

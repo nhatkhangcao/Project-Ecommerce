@@ -13,9 +13,13 @@ function SideBarComponent(props) {
                         <i className="fa fa-tachometer-alt me-2"></i>
                         Dashboard
                     </NavLink>
-                    <NavLink to="meals" className={({ isActive }) => isActive ? 'active nav-item nav-link' : 'text-dark nav-item nav-link'}>
+                    <NavLink to="meal-management" className={({ isActive }) => isActive ? 'active nav-item nav-link' : 'text-dark nav-item nav-link'}>
                         <i className="fas fa-utensils me-2" />
-                        Meals
+                        Combo
+                    </NavLink>
+                    <NavLink to="meal-detail-management" className={({ isActive }) => isActive ? 'active nav-item nav-link' : 'text-dark nav-item nav-link'}>
+                        <i class="fas fa-drumstick-bite me-2"></i>
+                        Meal Detail
                     </NavLink>
                     {/* <div className="nav-item dropdown">
                         <Link to="ecommerce" className="nav-link dropdown-toggle" data-bs-toggle="dropdown"><i className="fas fa-utensils me-2"></i>Meals</Link>

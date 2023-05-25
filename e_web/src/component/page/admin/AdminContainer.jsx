@@ -6,11 +6,11 @@ import SideBarComponent from '../../layout/admin/SideBarComponent';
 
 function AdminContainer(props) {
     return (
-        <div className="container-xxl position-relative bg-white d-flex p-0" style={{ maxWidth: "1500px" }}>
+        <div className="position-relative bg-white d-flex p-0">
             <SideBarComponent />
             <div className='content bg-content'>
                 <NavBarComponent />
-                <div className="container-fluid pt-4 px-4">
+                <div className="pt-3">
                     <Outlet />
                 </div>
             </div>
