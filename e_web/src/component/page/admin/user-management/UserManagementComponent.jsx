@@ -114,7 +114,6 @@ function UserManagementComponent(props) {
                 </div>
             </div>
         </div>
-
     );
 }
 

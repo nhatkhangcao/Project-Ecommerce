@@ -13,7 +13,8 @@ import MealManagementContainer from '../component/page/admin/meals-management/Me
 import MealContainer from '../component/page/customer/meals/MealContainer';
 import MealDetailContainer from '../component/page/customer/meals-detail/MealDetailContainer';
 import OrderHistoryContainer from '../component/page/customer/order-history/OrderHistoryContainer';
-import DetailMealManagement from '../component/page/admin/detail-meal-management/DetailMealManagement';
+import DetailMealManagementContainer from '../component/page/admin/detail-meal-management/DetailMealManagementContainer';
+import OrderManagementContainer from '../component/page/admin/order-management/OrderManagementContainer';
 
 function Routing(props) {
     const PrivateRoute = () => {
@@ -30,8 +31,9 @@ function Routing(props) {
                     <Route element={<AdminContainer />}>
                         <Route exact path='dashboard' element={<Dashboard />} />
                         <Route exact path='meal-management' element={<MealManagementContainer />} />
-                        <Route exact path='meal-detail-management' element={<DetailMealManagement />} />
+                        <Route exact path='meal-detail-management' element={<DetailMealManagementContainer />} />
                         <Route exact path='user-management' element={<UserManagementContainer />} />
+                        <Route exact path='order-management' element={<OrderManagementContainer />} />
                     </Route>
                 </Route>
                 //CUSTOMER ROUTING

@@ -45,7 +45,7 @@ const NavBarComponent = () => {
                                 Home
                             </NavLink>
                         </li>
-                        <li className="nav-item">
+                        {/* <li className="nav-item">
                             <NavLink
                                 to="meals"
                                 className={({ isActive }) =>
@@ -54,7 +54,7 @@ const NavBarComponent = () => {
                             >
                                 Meals
                             </NavLink>
-                        </li>
+                        </li> */}
                         <li className="nav-item">
                             <NavLink
                                 to="calculator"
@@ -64,22 +64,6 @@ const NavBarComponent = () => {
                             >
                                 TDEE
                             </NavLink>
-                        </li>
-                        <li className="nav-item dropdown">
-                            <a
-                                className="text-dark nav-link dropdown-toggle"
-                                id="navbarDropdownMenuLink"
-                                role="button"
-                                data-bs-toggle="dropdown"
-                                aria-expanded="false"
-                            >
-                                Company
-                            </a>
-                            <ul className="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-                                <li><a className="dropdown-item" href="#">Blog</a></li>
-                                <li><a className="dropdown-item" href="#">About Us</a></li>
-                                <li><a className="dropdown-item" href="#">Contact Us</a></li>
-                            </ul>
                         </li>
                     </ul>
                     <ul className="navbar-nav ms-auto">

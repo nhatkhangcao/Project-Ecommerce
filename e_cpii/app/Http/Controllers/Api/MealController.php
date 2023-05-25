@@ -19,7 +19,23 @@ class MealController extends Controller
     }
     public function add(Request $request)
     {
-        return $this->repo->add($request);
+        $checkExist = $this->repo->checkExistCombo($request->combo_name);
+        if ($checkExist) {
+            return response()->json(
+                [
+                    'message' => 'Combo already exist',
+                    'status'  => false
+                ]
+            );
+        } else {
+            $this->repo->add($request);
+            return response()->json(
+                [
+                    'message' => 'Combo added successfully',
+                    'status'  => true
+                ]
+            );
+        }
     }
     public function edit($id, Request $request)
     {
@@ -34,5 +50,9 @@ class MealController extends Controller
         return response()->json(
             ['message' => 'Meal is deleted']
         );
+    }
+    public function searchCombo(Request $request)
+    {
+        return $dataSearch = $this->repo->searchCombo($request);
     }
 }

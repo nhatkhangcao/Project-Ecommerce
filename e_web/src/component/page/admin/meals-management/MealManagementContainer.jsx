@@ -47,6 +47,7 @@ function MealManagementContainer(props) {
 
     return (
         <MealManagementComponent
+            setDataList={setDataList}
             getMealData={getMealData}
             dataList={dataList}
             paginate={paginate}

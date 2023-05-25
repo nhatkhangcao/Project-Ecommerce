@@ -37,9 +37,11 @@ function Stepper(props) {
     // Get Data By Combo
     const getDataByCombo = () => {
         axios.post("http://127.0.0.1:8000/api/customer/get-data-by-combo",
-            { type: item.type }
+            { combo_name: item.combo_name }
         ).then((response) => {
-            setData(response.data.data)
+            if (response.data.status) {
+                setData(response.data.data)
+            }
         })
     }
 
@@ -152,7 +154,6 @@ function Stepper(props) {
             }
         })
     }
-
     // Render data change
     useEffect(() => {
         setValue('totalFee', calculateCartPrice() + fee * 1000);

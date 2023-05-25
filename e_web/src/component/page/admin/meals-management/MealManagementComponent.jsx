@@ -3,9 +3,11 @@ import AddMealModal from './Modal/AddMealModal';
 import { useForm } from 'react-hook-form';
 import { useEffect } from 'react';
 import EditMealModal from './Modal/EditMealModal';
+import axios from 'axios';
 
 function MealManagementComponent(props) {
     const getMealData = props.getMealData
+    const setDataList = props.setDataList
     const handleDeleteMeal = props.handleDeleteMeal
     const paginate = props.paginate
     const dataList = props.dataList
@@ -13,13 +15,24 @@ function MealManagementComponent(props) {
         const formatter = new Intl.NumberFormat("vi-VN");
         return formatter.format(money);
     }
+
     const {
+        register,
+        reset,
         handleSubmit,
     } = useForm();
 
-    const searchUser = () => {
+    const searchCombo = (data) => {
+        if (data.combo_name) {
+            axios.post('http://127.0.0.1:8000/api/admin/search-combo', data).then((response) => {
+                setDataList(response.data)
+                paginate(response)
+            });
+        }
     }
-
+    const clearSearch = (data) => {
+        getMealData();
+    }
     useEffect(() => {
         getMealData()
     }, []);
@@ -28,11 +41,12 @@ function MealManagementComponent(props) {
         <div className='container-fluid'>
             <div className="card shadow-style">
                 <div className="card-header bg-white">
-                    <form onSubmit={handleSubmit(searchUser)}>
+                    <form onSubmit={handleSubmit(searchCombo)}>
                         <div className="row row-cols-auto">
                             <div className="col-3">
-                                <span className='fw-bold'>Meal</span>
+                                <span className='fw-bold'>Combo</span>
                                 <input
+                                    {...register("combo_name")}
                                     className="form-control"
                                 />
                             </div>
@@ -47,7 +61,7 @@ function MealManagementComponent(props) {
                                 <button type='submit' className="btn bg-dark text-white me-4">
                                     <i className="px-3 fas fa-search"></i>
                                 </button>
-                                <button type='button' className="btn bg-secondary text-white">
+                                <button type='button' onClick={() => reset(clearSearch)} className="btn bg-secondary text-white">
                                     <i className="px-3 fas fa-eraser"></i>
                                 </button>
                             </div>
@@ -68,10 +82,7 @@ function MealManagementComponent(props) {
                                             />
                                         </div>
                                         <div className="card-body">
-                                            <div className='d-flex justify-content-between'>
-                                                <h5 className="card-title">{item.combo_name}</h5>
-                                                <span className="card-title text-success">{item.detail}</span>
-                                            </div>
+                                            <h5 className="card-title">{item.combo_name}</h5>
                                             <p className="card-text">{formatVND(item.combo_price)} VNĐ</p>
                                         </div>
                                         <div className="card-body d-flex justify-content-center">

@@ -23,7 +23,7 @@ function StepOne(props) {
     return (
         <div className="container text-start">
             <div>
-                <div onClick={test} className="row">
+                <div onClick={(e) => test} className="row">
                     <span>1. Chọn số ngày trong tuần</span>
                 </div>
                 <div className="row py-2">

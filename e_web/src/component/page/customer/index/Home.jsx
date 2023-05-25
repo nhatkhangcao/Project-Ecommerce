@@ -27,32 +27,32 @@ function Home(props) {
             <SlideShow />
             <div className="guide">
                 <h1 className="guide__text">
-                    How it works?
+                    Eatclean hoạt động như thế nào?
                 </h1>
                 <div className="guide__container d-flex justify-content-center">
                     <article className="guide__container--card">
                         <figure>
-                            <img alt='' src={"images/fruit.png"} />
+                            <img alt='' src={"images/diet.png"} />
                         </figure>
-                        <p className="card-excerpt">Choose your meals</p>
+                        <p className="card-excerpt">Bạn Hãy Chọn Gói Phù Hợp</p>
                     </article>
                     <article className="guide__container--card">
                         <figure>
-                            <img alt='' src={"images/fruit.png"} />
+                            <img alt='' src={"images/cooking.png"} />
                         </figure>
-                        <p className="card-excerpt">We cook</p>
+                        <p className="card-excerpt">Eatclean Chuẩn Bị</p>
                     </article>
                     <article className="guide__container--card">
                         <figure>
-                            <img alt='' src={"images/fruit.png"} />
+                            <img alt='' src={"images/food-delivery.png"} />
                         </figure>
-                        <p className="card-excerpt">Delivery</p>
+                        <p className="card-excerpt">Món ăn đến với bạn</p>
                     </article>
                 </div>
             </div>
             <div className="container mt-3" style={{ paddingRight: '15px', paddingLeft: '15px' }}>
-                <h1 className="text-center py-3">MENU</h1>
-                <h4 onClick={textData} className="text-center pb-4">All of our products are so fresh...</h4>
+                <h1 className="text-center py-3">COMBO</h1>
+                <h4 onClick={textData} className="text-center pb-4">Tôi tin rằng các combo dưới đây sẽ phù hợp với bạn...</h4>
                 <div className="row row-cols-1 row-cols-sm-2 row-cols-md-3 row-cols-lg-4 g-2 g-md-3 text-decoration-none text-dark">
                     {dataList && dataList.length > 0 ? (
                         dataList.map((item, index) => (
@@ -86,65 +86,61 @@ function Home(props) {
             <div>
                 <div className="diet">
                     <h1 className="diet__text">
-                        DIET
+                        Những chế độ diet các bạn nên thử!!!
                     </h1>
                     <div className="diet__container d-flex justify-content-center">
                         <article className="diet__container--card">
                             <figure>
-                                <img alt='' src={"images/fruit.png"} />
+                                <img alt='' src={"images/weight-scale.png"} />
                             </figure>
-                            <p className="card-excerpt">Gain</p>
+                            <p className="card-excerpt">Tăng cân</p>
                         </article>
                         <article className="diet__container--card">
                             <figure>
-                                <img alt='' src={"images/fruit.png"} />
+                                <img alt='' src={"images/weight-loss.png"} />
                             </figure>
-                            <p className="card-excerpt">Gain</p>
+                            <p className="card-excerpt">Giảm cân</p>
                         </article>
                         <article className="diet__container--card">
                             <figure>
-                                <img alt='' src={"images/fruit.png"} />
+                                <img alt='' src={"images/weight.png"} />
                             </figure>
-                            <p className="card-excerpt">Gain</p>
+                            <p className="card-excerpt">Giữ cân</p>
                         </article>
                         <article className="diet__container--card">
                             <figure>
-                                <img alt='' src={"images/fruit.png"} />
+                                <img alt='' src={"images/vegan.png"} />
                             </figure>
-                            <p className="card-excerpt">Gain</p>
+                            <p className="card-excerpt">Chế độ ăn chay</p>
                         </article>
                     </div>
                 </div>
             </div>
             <div className='container'>
-                <h1 className='text-center'>Latest News</h1>
+                <h1 className='text-center'>Tin tức HOT</h1>
                 <div className="latest-news">
                     <div className="latest-news__card">
                         <div className="latest-news__card-img"><img alt='' src={"images/fruit.png"} /></div>
                         <div className="latest-news__card-text">
-                            <span className="date">1 hours ago</span>
-                            <h2>Why breakfast is so important?</h2>
-                            <p>When you wake up from your overnight sleep, you may not have eaten for up to 10 hours. Breakfast
-                                replenishes the stores of energy and nutrients in your body.</p>
+                            <span className="date">1 giờ trước</span>
+                            <h2>Tại sao bữa sáng quan trọng đến vậy?</h2>
+                            <p>Khi bạn thức dậy sau giấc ngủ qua đêm, bạn có thể đã không ăn gì trong khoảng thời gian lên đến 10 giờ. Bữa sáng sẽ bổ sung năng lượng và dưỡng chất cho cơ thể.</p>
                         </div>
                     </div>
                     <div className="latest-news__card">
                         <div className="latest-news__card-img"><img alt='' src={"images/fruit.png"} /></div>
                         <div className="latest-news__card-text">
-                            <span className="date">4 days ago</span>
-                            <h2>What is the eat clean diet?</h2>
-                            <p>The basic principles of eat clean will encourage you to consume more whole foods such as: fruits,
-                                vegetables, lean protein, whole grains and healthy fats and at the same time.</p>
+                            <span className="date">4 ngày trước</span>
+                            <h2>Ăn sạch là gì?</h2>
+                            <p>Các nguyên tắc cơ bản của chế độ ăn sạch sẽ khuyến khích bạn tiêu thụ nhiều thực phẩm tự nhiên hơn như: trái cây, rau củ, protein gắn liền, các loại ngũ cốc nguyên hạt và chất béo lành mạnh cùng một lúc.</p>
                         </div>
                     </div>
                     <div className="latest-news__card">
                         <div className="latest-news__card-img"><img alt='' src={"images/fruit.png"} /></div>
                         <div className="latest-news__card-text">
-                            <span className="date">Apr 21, 2022</span>
-                            <h2>How Do The Top Milks Stack Up?</h2>
-                            <p>We took a closer look at the non-dairy shelves to see how they stack up nutritionally and in uses
-                                in the kitchen so you can make an informed decision before your next
-                                milk run.</p>
+                            <span className="date">15 tháng 5, 2023</span>
+                            <h2>Sữa hạng nhất so với sữa thông thường như thế nào?</h2>
+                            <p>Chúng tôi đã xem xét kỹ hơn các loại sữa không chứa đạm để xem chúng có giá trị dinh dưỡng và cách sử dụng như thế nào trong nhà bếp để bạn có thể đưa ra quyết định thông minh trước khi đi mua sữa lần tới.</p>
                         </div>
                     </div>
                 </div>

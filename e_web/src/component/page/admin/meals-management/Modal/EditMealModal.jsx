@@ -4,6 +4,7 @@ import { useRef } from 'react';
 import { useState } from 'react';
 import { Button, Modal } from 'react-bootstrap';
 import { useForm } from 'react-hook-form';
+import Swal from 'sweetalert2';
 
 function EditMealModal(props) {
     const getMealData = props.getMealData;
@@ -13,6 +14,7 @@ function EditMealModal(props) {
         setShow(false);
         setImage(null);
         reset({
+            id: mealList.id,
             combo_name: mealList.combo_name,
             combo_price: mealList.combo_price,
             detail: mealList.detail,
@@ -61,7 +63,15 @@ function EditMealModal(props) {
         formData.append('description', data.description);
         formData.append('combo_image', data.combo_image);
         axios.post('http://127.0.0.1:8000/api/admin/edit-meal/' + data.id, formData).then((response) => {
+            Swal.fire(
+                'Good job!',
+                'Updated Successfully',
+                'success');
+            getMealData()
         })
+        console.log(data)
+        setShow(false)
+
     };
     return (
         <>
@@ -73,7 +83,7 @@ function EditMealModal(props) {
                 dialogClassName="modal-dialog modal-lg"
             >
                 <form onSubmit={handleSubmit(editMeal)}>
-                    <Modal.Header closeButton>
+                    <Modal.Header>
                         <Modal.Title id="example-custom-modal-styling-title">Edit Meals</Modal.Title>
                     </Modal.Header>
                     <Modal.Body>
@@ -81,7 +91,7 @@ function EditMealModal(props) {
                             <div className="row">
                                 <div className="col-6">
                                     <div className="input-group form-group">
-                                        <label className='col-sm-2 col-form-label '>Meal</label>
+                                        <label className='col-sm-2 col-form-label'>Combo</label>
                                         <div className='col-sm-10'>
                                             <input
                                                 type="text"
@@ -94,7 +104,7 @@ function EditMealModal(props) {
                                         </div>
                                     </div>
                                     <div className="input-group form-group pt-2">
-                                        <label className='col-sm-2 col-form-label '>Price</label>
+                                        <label className='col-sm-2 col-form-label'>Price</label>
                                         <div className='col-sm-10'>
                                             <input
                                                 type="text"
@@ -107,7 +117,7 @@ function EditMealModal(props) {
                                         </div>
                                     </div>
                                     <div className="input-group form-group pt-2">
-                                        <label className='col-sm-2 col-form-label '>Detail</label>
+                                        <label className='col-sm-2 col-form-label'>Detail</label>
                                         <div className='col-sm-10'>
                                             <input
                                                 type="text"
@@ -125,7 +135,7 @@ function EditMealModal(props) {
                                         />
                                     </div>
                                     <div className="input-group py-4">
-                                        <label className='col-sm-2 col-form-label '>Status</label>
+                                        <label className='col-sm-2 col-form-label'>Status</label>
                                         <div className='col-sm-10'>
                                             <select {...register("status")} className="form-select">
                                                 <option value="0">On Sale</option>
@@ -155,7 +165,7 @@ function EditMealModal(props) {
                         </Button>
                     </Modal.Footer>
                 </form>
-            </Modal >
+            </Modal>
         </>
     );
 }

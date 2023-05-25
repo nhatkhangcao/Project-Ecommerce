@@ -8,9 +8,22 @@ import Swal from 'sweetalert2';
 function AddMealModal(props) {
     const getMealData = props.getMealData
     const [show, setShow] = useState(false);
+    const [notice, setNotice] = useState({
+        combo_exist: ""
+    });
     const handleClose = () => {
+        setNotice({})
         deleteImage()
         setShow(false);
+        reset({
+            id: '',
+            combo_name: '',
+            combo_price: '',
+            meal_image: '',
+            detail: '',
+            description: '',
+            status: 1
+        });
     }
     const handleShow = () => setShow(true);
     const [image, setImage] = useState();
@@ -35,19 +48,25 @@ function AddMealModal(props) {
 
     const addMeal = (data) => {
         const formData = new FormData();
-        formData.append('meal_name', data.meal_name);
-        formData.append('meal_price', data.meal_price);
-        formData.append('meal_detail', data.meal_detail);
+        formData.append('combo_name', data.combo_name);
+        formData.append('combo_price', data.combo_price);
+        formData.append('detail', data.detail);
         formData.append('status', data.status);
-        formData.append('image', image);
+        formData.append('description', data.description);
+        formData.append('combo_image', image);
+
         axios.post('http://127.0.0.1:8000/api/admin/add-meal', formData)
             .then((response) => {
-                Swal.fire('Good job!', 'Expense Added Successfully', 'success');
+                if (!response.data.status) {
+                    setNotice({ combo_exist: 'Combo Exist!' })
+                } else {
+                    setShow(false);
+                    Swal.fire('Good job!', 'Combo Added Successfully', 'success');
+                    reset();
+                    getMealData();
+                    setImage(null);
+                }
             });
-        reset();
-        getMealData();
-        setShow(false);
-        setImage(null);
     }
 
     return (
@@ -73,12 +92,12 @@ function AddMealModal(props) {
                                             <input
                                                 type="text"
                                                 className="form-control"
-                                                placeholder="Enter meal name"
-                                                {...register("meal_name", {
-                                                    required: "Meal name is required",
+                                                {...register("combo_name", {
+                                                    required: "Combo name is required",
                                                 })}
                                             />
-                                            {errors.meal_name && (<span className="text-danger">{errors.meal_name.message}</span>)}
+                                            {errors.combo_name && (<span className="text-danger">{errors.combo_name.message}</span>)
+                                                || (notice && <span className="text-danger">{notice.combo_exist}</span>)}
                                         </div>
                                     </div>
                                     <div className="input-group form-group pt-2">
@@ -87,20 +106,29 @@ function AddMealModal(props) {
                                             <input
                                                 type="text"
                                                 className="form-control"
-                                                placeholder="Enter price"
-                                                {...register("meal_price", {
-                                                    required: "Meal price is required",
+                                                {...register("combo_price", {
+                                                    required: "Combo price is required",
                                                 })}
                                             />
-                                            {errors.meal_price && (<span className="text-danger">{errors.meal_price.message}</span>)}
+                                            {errors.combo_price && (<span className="text-danger">{errors.combo_price.message}</span>)}
+                                        </div>
+                                    </div>
+                                    <div className="input-group form-group pt-2">
+                                        <label className='col-sm-2 col-form-label '>Detail</label>
+                                        <div className='col-sm-10'>
+                                            <input
+                                                type="text"
+                                                className="form-control"
+                                                {...register("detail")}
+                                            />
                                         </div>
                                     </div>
                                     <div className="input-group pt-2">
-                                        <label className='col-sm-2 col-form-label'>Detail</label>
+                                        <label className='col-sm-2 col-form-label'>Desc</label>
                                         <textarea
                                             className="form-control"
                                             rows="6"
-                                            {...register("meal_detail")}
+                                            {...register("description")}
                                         />
                                     </div>
                                     <div className="input-group py-4">

@@ -8,13 +8,8 @@ function FooterComponent(props) {
                     <h1 className="footer--social__text">
                         Contact US
                     </h1>
-                    <ul className="footer--social__icons">
-                        <li className="social-list"><i className="fa fa-facebook"></i></li>
-                        <li className="social-list"><i className="fa fa-envelope-o"></i></li>
-                        <li className="social-list"><i className="fa fa-instagram"></i></li>
-                    </ul>
                 </div>
-                <small className="footer--cr">©2023 by me </small>
+                <small className="footer--cr">©2023 by Cao Nhat Khang </small>
             </div>
         </footer>
     );

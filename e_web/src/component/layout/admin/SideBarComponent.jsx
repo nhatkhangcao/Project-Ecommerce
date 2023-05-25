@@ -29,7 +29,7 @@ function SideBarComponent(props) {
                             <a href="element.html" className="dropdown-item">Other Elements</a>
                         </div>
                     </div> */}
-                    <Link to="order" className="nav-item nav-link"><i className="fas fa-cart-plus me-2"></i>Order</Link>
+                    <Link to="order-management" className="nav-item nav-link"><i className="fas fa-cart-plus me-2"></i>Order</Link>
                     <Link to="customer-management" className="nav-item nav-link"><i className="fas fa-users me-2"></i>Customer</Link>
                     <NavLink to="user-management" className={({ isActive }) => isActive ? 'active nav-item nav-link' : 'text-dark nav-item nav-link'}>
                         <i className="fas fa-user-cog me-2"></i>

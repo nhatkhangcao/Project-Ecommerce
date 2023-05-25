@@ -14,6 +14,8 @@ class Meal extends Model
         "meal_image",
         "meal_price",
         "meal_detail",
+        "combo_type",
+        "day",
         "status",
         "role",
         "deleted"

@@ -63,7 +63,7 @@ class CustomerRepository
 
     public function getDataByCombo($request)
     {
-        $data = Meal::where('combo_type', $request->input('type'))
+        $data = Meal::where('combo_type', $request->input('combo_name'))
             ->whereIn('day', [1, 2, 3, 4, 5, 6])
             ->orderBy('day')
             ->get()
@@ -95,6 +95,7 @@ class CustomerRepository
         if ($request['paymentMethod'] === "vnPay") {
             $url = $this->vnPay($request);
         }
+
         $order = Order::create([
             'order_code'        => 123,
             'order_name'        => $request['order_name'],
@@ -105,7 +106,9 @@ class CustomerRepository
             'customer_name'     => $request['name'],
             'note'              => $request['note'],
             'phone'             => $request['phone'],
-            'account'           => $request['account']
+            'deleted'           => 0,
+            'status'            => 0,
+            'account'           => $request['account'] ?? 'Not Member'
         ]);
         //Send Mail 
         // $this->sendMail($order);

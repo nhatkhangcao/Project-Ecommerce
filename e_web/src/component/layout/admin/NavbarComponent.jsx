@@ -12,7 +12,6 @@ function NavBarComponent(props) {
             navigate('login')
         })
     }
-
     useEffect(() => {
         $('#toggler').click(function () {
             $('.sidebar, .content').toggleClass("open");
@@ -27,7 +26,6 @@ function NavBarComponent(props) {
             <a id='toggler' className="sidebar-toggler flex-shrink-0 text-decoration-none" style={{ cursor: 'pointer' }}>
                 <i className="fa fa-bars text-success"></i>
             </a>
-            <span>Meal List</span>
             <div className="navbar-nav align-items-center ms-auto me-3">
                 <div className="nav-item dropdown">
                     <a href="#" className="nav-link dropdown-toggle" data-bs-toggle="dropdown">

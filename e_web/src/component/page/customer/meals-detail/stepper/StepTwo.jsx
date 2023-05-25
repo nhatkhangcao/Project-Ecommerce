@@ -18,9 +18,6 @@ function StepTwo(props) {
     return total
   };
   totalMeal(calculateTotal());
-  const test = () => {
-    // console.log(total)
-  }
 
   useEffect(() => {
     totalMeal(calculateTotal());
@@ -30,7 +27,7 @@ function StepTwo(props) {
       <div className="sp-card">
         <div className="row">
           <div className="col-md cart">
-            <div onClick={test} className="title h5 text-center text-danger fw-bold">Chọn Món</div>
+            <div className="title h5 text-center text-danger fw-bold">Chọn Món</div>
             <div className='text-center'>
               <span className='text-danger'>*Vui lòng chọn đủ {totalMealOrder()} món</span>
             </div>

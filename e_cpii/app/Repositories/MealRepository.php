@@ -10,29 +10,39 @@ class MealRepository
 {
     public function index()
     {
-        return Combo ::where('deleted', 0)->paginate(10);
+        return Combo::where('deleted', 0)->paginate(10);
     }
     public function add($request)
     {
         $dataCreate = [
-            'meal_name' => $request->meal_name,
-            'meal_price' => $request->meal_price,
-            'meal_detail' => $request->meal_detail,
+            'combo_name' => $request->combo_name,
+            'combo_price' => $request->combo_price,
+            'description' => $request->description,
+            'detail' => $request->detail,
             'status' => $request->status,
         ];
-        if ($request->file('image')) {
-            $file = $request->file('image');
+        if ($request->file('combo_image')) {
+            $file = $request->file('combo_image');
             $filename = 'uploads/' . date('YmdHi') . $file->getClientOriginalName();
             $file->move(('uploads/'), $filename);
-            $dataCreate['meal_image']  =  $filename;
+            $dataCreate['combo_image']  =  $filename;
         }
-        return Meal::create($dataCreate);
+        return Combo::create($dataCreate);
+    }
+    public function checkExistCombo($comboName)
+    {
+        $existCombo = Combo::where('combo_name', $comboName)->exists();
+        if ($existCombo) {
+            return true;
+        } else {
+            return false;
+        }
     }
     public function edit($id, $request)
     {
         $dataUpdate = [
             'combo_name' => $request->combo_name,
-            'combo_price' =>$request->combo_price,
+            'combo_price' => $request->combo_price,
             'description' => $request->description,
             'detail' => $request->detail,
             'status' => $request->status
@@ -46,10 +56,18 @@ class MealRepository
         $combo = Combo::find($id)->update($dataUpdate);
         return $combo;
     }
-
     public function delete($id)
     {
-        $dataDelete = Meal::find($id)->update(['deleted' => 1]);
+        $dataDelete = Combo::find($id)->update(['deleted' => 1]);
         return $dataDelete;
+    }
+
+    public function searchCombo($request)
+    {
+        $dataSearch = Combo::where('deleted', 0);
+        if (isset($request['combo_name'])) {
+            $dataSearch->where('combo_name', 'LIKE', '%' . $request['combo_name'] . '%');
+        }
+        return $dataSearch->orderBy('id', 'DESC')->paginate(10);
     }
 }
