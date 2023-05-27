@@ -20,7 +20,7 @@ const FormModal = () => {
             <i onClick={handleShow} className="fas fa-user" role="button" title="login"></i>
             <Modal dialogClassName="modal-width" backdrop="static" show={show} onHide={handleClose}>
                 <Modal.Header className="text-center" closeButton>
-                    <Modal.Title className='text-title w-100 fw-bold text-success' >{showLogin ? "Login" : "Register"}</Modal.Title>
+                    <Modal.Title className='text-title w-100 fw-bold text-success' >{showLogin ? "Đăng nhập" : "Đăng ký tài khoản"}</Modal.Title>
                 </Modal.Header>
                 <Modal.Body>
                     {showLogin ? (

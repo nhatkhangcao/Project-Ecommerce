@@ -4,18 +4,25 @@ namespace App\Repositories;
 
 use App\Models\MstUser;
 use Illuminate\Http\Response;
+use Illuminate\Support\Facades\Hash;
 
 class UserManagementRepository
 {
 
     public function index()
     {
-        $data = MstUser::where('deleted', 0)->select('id', 'name', 'email', 'role', 'deleted', 'phone')->orderBy('id', 'DESC')->paginate(10);
+        $data = MstUser::where('deleted', 0)->whereBetween('role', [0, 1])->select('id', 'name', 'email', 'role', 'deleted', 'phone', 'account')->orderBy('id', 'DESC')->paginate(10);
         return $data;
     }
     public function getEmailByMember($request)
     {
         $data = MstUser::where('email', $request)->first();
+        return $data;
+    }
+
+    public function getAccountByMember($request)
+    {
+        $data = MstUser::where('account', $request)->first();
         return $data;
     }
     public function edit($id, $request)
@@ -30,7 +37,7 @@ class UserManagementRepository
     }
     public function search($request)
     {
-        $data = MstUser::where('deleted', 0);
+        $data = MstUser::where('deleted', 0)->whereBetween('role', [0, 1]);
         if (isset($request['name'])) {
             $data->where('name', 'LIKE', '%' . $request['name'] . '%');
         }
@@ -41,7 +48,12 @@ class UserManagementRepository
     }
     public function add($request)
     {
-        $dataAdd = MstUser::create($request);
+        $dataAdd = MstUser::create([
+            'name'      => $request['name'],
+            'email'     => $request['email'],
+            'account'   => $request['account'],
+            'password'  => Hash::make($request['password']),
+        ]);
         return $dataAdd;
     }
 }

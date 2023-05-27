@@ -36,7 +36,6 @@ function MealManagementComponent(props) {
     useEffect(() => {
         getMealData()
     }, []);
-
     return (
         <div className='container-fluid'>
             <div className="card shadow-style">
@@ -100,7 +99,7 @@ function MealManagementComponent(props) {
                                 </div>
                             ))
                         ) : (
-                            <div className="text-danger text-center col col-lg-12">NO DATA!</div>
+                            <div className="text-danger text-center col col-lg-12">Không có dữ liệu!</div>
                         )}
                     </div>
                 </div>

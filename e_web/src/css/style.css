@@ -438,6 +438,10 @@
     }
 }
 
+.nav-bar-container {
+    background-color: rgb(233, 237, 231);
+}
+
 .footer-container {
 
     background-color: rgb(233, 237, 231);
@@ -656,22 +660,12 @@
     border-radius: 20px;
 }
 
-.order-card .order-status .completed {
-    background-color: #28a745;
-    color: #fff;
-}
-
-.order-card .order-status .in-progress {
-    background-color: #ffc107;
-    color: #000;
-}
-
-.order-card .order-status .cancelled {
-    background-color: #dc3545;
-    color: #fff;
-}
-
 .image-container {
     height: 150px;
     overflow: hidden;
+}
+
+.combo-style {
+    border-radius: 5px;
+    text-align: center;
 }

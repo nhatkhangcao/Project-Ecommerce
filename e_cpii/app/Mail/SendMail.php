@@ -31,7 +31,7 @@ class SendMail extends Mailable
      */
     public function build()
     {
-        return $this->subject('Order Confirmation - EATCLEAN')
+        return $this->subject('Xác nhận đơn hàng - EATCLEAN')
             ->view('sendMail.order_confirm');
     }
 }

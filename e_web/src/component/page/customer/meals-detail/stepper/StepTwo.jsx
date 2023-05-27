@@ -33,7 +33,7 @@ function StepTwo(props) {
             </div>
             {
               Object.values(data).map((comboItem, dayIndex) => (
-                <div key={dayIndex} className="text-success">
+                <div key={dayIndex}>
                   <div className="row">
                     <h4 className='text-start'><b>Thứ {dayIndex + 2}</b></h4>
                   </div>
@@ -53,7 +53,7 @@ function StepTwo(props) {
                           <button className="btn btn-outline-secondary ms-2" onClick={() => incrementQuantity(dayIndex, index)}>+</button>
                         </div>
                       </div>
-                    ) : <span className='text-danger'>No Data!</span>}
+                    ) : <span className='text-danger'>Không có dữ liệu!</span>}
                   <hr className="border-2 border-top border-bottom border-secondary" />
                 </div>
               ))

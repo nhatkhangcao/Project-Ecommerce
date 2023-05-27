@@ -13,18 +13,19 @@ function DetailMealManagementContainer(props) {
         }
         axios.get(url).then((response) => {
             setDataList(response.data)
-            pagination(response)
+            pagination(response.data.paginateLink)
         });
     }
     const handleDeleteMeal = (item, e) => {
         Swal.fire({
-            title: 'Are you sure?',
-            text: "You want to delete?",
-            icon: 'info',
+            title: 'Bạn chắc chắn chứ?',
+            text: "Bạn muốn xóa meal này?",
+            icon: 'warning',
             showCancelButton: true,
             confirmButtonColor: '#3085d6',
             cancelButtonColor: '#d33',
-            confirmButtonText: 'Yes, delete it!'
+            cancelButtonText: 'Hủy bỏ',
+            confirmButtonText: 'Chắc chắn'
         }).then((result) => {
             if (result.isConfirmed) {
                 axios.post('http://127.0.0.1:8000/api/admin/delete-meal-detail/' + item.id)
@@ -32,20 +33,21 @@ function DetailMealManagementContainer(props) {
                         getMealDetail()
                     })
                 Swal.fire(
-                    'Deleted!',
-                    'Your data has been deleted.',
+                    'Bạn chắc chắn chứ!',
+                    'B.',
                     'success'
                 )
             }
         })
     }
     const pagination = (response) => {
-        setPaginate(response.data)
+        setPaginate(response)
     }
     return (
         <DetailMealManagementComponent
             getMealDetail={getMealDetail}
             dataList={dataList}
+            paginate={paginate}
             setDataList={setDataList}
             handleDeleteMeal={handleDeleteMeal}
         />

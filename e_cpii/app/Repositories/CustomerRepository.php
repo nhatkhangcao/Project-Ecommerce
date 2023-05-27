@@ -6,6 +6,7 @@ use App\Mail\SendMail;
 use App\Models\Combo;
 use App\Models\Meal;
 use App\Models\Order;
+use Carbon\Carbon;
 use Illuminate\Support\Facades\Mail;
 
 class CustomerRepository
@@ -51,10 +52,24 @@ class CustomerRepository
             'lowerCarb' => $lowCarb,
             'higherCarb' => $higherCarb,
         ];
+        $recommend =  $this->comboRecommend(round($goal));
         return [
-            'goal' => round($goal),
-            'marco' => $marco
+            'goal'         => round($goal),
+            'marco'        => $marco,
+            'recommend'    => $recommend
         ];
+    }
+    public function comboRecommend($calories = 0)
+    {
+        $range = 250;
+
+        $minValue = $calories - $range;
+        $maxValue = $calories + $range;
+
+        $recommend = Combo::where('deleted', 0)
+            ->whereBetween('calories', [$minValue, $maxValue])
+            ->get();
+        return $recommend;
     }
     public function comboList()
     {
@@ -91,13 +106,13 @@ class CustomerRepository
 
     public function payment($request)
     {
+        $orderCode = $this->generateOrderCode();
         $url = '';
-        if ($request['paymentMethod'] === "vnPay") {
-            $url = $this->vnPay($request);
+        if ($request['paymentMethod'] === "VNPAY") {
+            $url = $this->vnPay($request, $orderCode);
         }
-
         $order = Order::create([
-            'order_code'        => 123,
+            'order_code'        => $orderCode,
             'order_name'        => $request['order_name'],
             'order_price'       => $request['totalFee'],
             'payment_method'    => $request['paymentMethod'],
@@ -111,7 +126,7 @@ class CustomerRepository
             'account'           => $request['account'] ?? 'Not Member'
         ]);
         //Send Mail 
-        // $this->sendMail($order);
+        $this->sendMail($order);
 
         return response()->json(
             [
@@ -121,19 +136,25 @@ class CustomerRepository
         );
     }
 
+    public function generateOrderCode()
+    {
+        $timestamp = Carbon::now()->format('YmdHis');
+        $orderCode = 'EATCLEAN' . '_' . $timestamp;
+        return $orderCode;
+    }
     public function sendMail($order)
     {
         Mail::to('caonhatkhang2001@gmail.com')->send(new SendMail($order));
     }
 
-    public function vnPay($request)
+    public function vnPay($request, $orderCode = '')
     {
         $vnp_Url = "https://sandbox.vnpayment.vn/paymentv2/vpcpay.html";
         $vnp_Returnurl = "http://localhost:3000/";
         $vnp_TmnCode = "7UQF7KY0";
         $vnp_HashSecret = "MZTMGCIIEQKHEMGJPOHAKIUTMIYPKUQM";
 
-        $vnp_TxnRef = "MB100101111";  // Product code
+        $vnp_TxnRef = $orderCode;  // Product code
         $vnp_OrderInfo = 'Checkout';
         $vnp_OrderType = 'billpayment';
         $vnp_Amount = $request['totalFee'] * 100;

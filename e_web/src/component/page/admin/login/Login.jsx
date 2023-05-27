@@ -21,7 +21,7 @@ function Login(props) {
                     localStorage.setItem('account', JSON.stringify(response.data))
                 }
             }
-            setLoginNotice("Email or Password is wrong")
+            setLoginNotice("Tài khoản hoặc mật khẩu đã sai!")
         })
     }
     return (
@@ -29,46 +29,38 @@ function Login(props) {
             <div className=" row justify-content-center pt-5">
                 <div className=" col-md-8 ">
                     <div className="py-4" >
-                        <h1 className='text-center text-success'>Login</h1>
+                        <h1 className='text-center text-success'>ĐĂNG NHẬP</h1>
                     </div>
                     <form onSubmit={handleSubmit(onSubmit)}>
                         <div className="row mb-3 d-flex justify-content-center">
                             {loginNotice && (<span className="text-danger text-center mb-2">{loginNotice}</span>)}
                             <div className="col-md-6 ">
                                 <input
-                                    {...register("email", {
-                                        required: "Email is required",
-                                        pattern: {
-                                            value: /^[^@ ]+@[^@ ]+\.[^@ .]{2,}$/,
-                                            message: "Email is not valid."
-                                        }
+                                    {...register("account", {
+                                        required: "Vui lòng nhập tài khoản!",
                                     })}
-                                    name="email"
-                                    placeholder="Email"
+                                    name="account"
+                                    placeholder="Tài khoản"
                                     className="form-control form-control-lg"
                                 />
-                                {errors.email && (<span className="text-danger">{errors.email.message}</span>)}
+                                {errors.account && (<span className="text-danger">{errors.account.message}</span>)}
                             </div>
                         </div>
                         <div className="row mb-3 d-flex justify-content-center">
                             <div className="col-md-6">
                                 <input
                                     {...register("password", {
-                                        required: "Password is required",
-                                        minLength: {
-                                            value: 6,
-                                            message: "Password should be at-least 6 characters."
-                                        }
+                                        required: "Vui lòng nhập mật khẩu!",
                                     })}
                                     name="password"
-                                    placeholder="Password"
+                                    placeholder="Mật khẩu"
                                     type="password"
                                     className="form-control form-control-lg"
                                 />
                                 {errors.password && (<span className="text-danger">{errors.password.message}</span>)}
                             </div>
                         </div>
-                        <div className="row mb-3">
+                        {/* <div className="row mb-3">
                             <div className="col-md-6 offset-md-4 ">
                                 <div className="form-check">
                                     <div className='d-flex justify-content-start'>
@@ -79,10 +71,10 @@ function Login(props) {
                                     </div>
                                 </div>
                             </div>
-                        </div>
+                        </div> */}
                         <div className="d-flex justify-content-center ">
                             <button type='submit' className="btn btn-success btn-lg w-50">
-                                Login
+                                Đăng nhập
                             </button>
                         </div>
                     </form>

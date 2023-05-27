@@ -22,23 +22,23 @@ class RegisterController extends Controller
     public function register(Request $request)
     {
 
-        $data = $this->repo->getEmailByMember($request);
+        $data = $this->repo->getAccountByMember($request);
         if ($data) {
             return response()->json(
                 [
-                    'message'   => 'Email Already Exist',
+                    'message'   => 'Tài khoản đã tồn tại!',
                     'status'    => false
                 ]
             );
         } else {
             MstUser::create([
                 'name' => $request->name,
-                'email' => $request->email,
+                'account' => $request->account,
                 'password' => Hash::make($request->password),
             ]);
             return response()->json(
                 [
-                    'message'   => 'Account Register SuccessFully',
+                    'message'   => 'Đăng ký tài khoản thành công',
                     'status'    => true
                 ]
             );

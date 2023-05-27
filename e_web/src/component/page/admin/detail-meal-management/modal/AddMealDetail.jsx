@@ -80,7 +80,7 @@ function AddMealDetail(props) {
             >
                 <form onSubmit={handleSubmit(addMeal)}>
                     <Modal.Header>
-                        <Modal.Title id="example-custom-modal-styling-title">Add Meals</Modal.Title>
+                        <Modal.Title id="example-custom-modal-styling-title">THÊM MEAL</Modal.Title>
                     </Modal.Header>
                     <Modal.Body>
                         <div className="container-fluid">
@@ -149,12 +149,13 @@ function AddMealDetail(props) {
                         </div>
                     </Modal.Body>
                     <Modal.Footer>
-                        <Button variant="secondary" onClick={handleClose}>
-                            Close
-                        </Button>
                         <Button variant="primary" type='submit'>
-                            Save Changes
+                            Lưu thay đổi
                         </Button>
+                        <Button variant="secondary" onClick={handleClose}>
+                            Đóng
+                        </Button>
+
                     </Modal.Footer>
                 </form>
             </Modal>

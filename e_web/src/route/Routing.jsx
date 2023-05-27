@@ -15,6 +15,7 @@ import MealDetailContainer from '../component/page/customer/meals-detail/MealDet
 import OrderHistoryContainer from '../component/page/customer/order-history/OrderHistoryContainer';
 import DetailMealManagementContainer from '../component/page/admin/detail-meal-management/DetailMealManagementContainer';
 import OrderManagementContainer from '../component/page/admin/order-management/OrderManagementContainer';
+import ProfileContainer from '../component/page/customer/profile/ProfileContainer';
 
 function Routing(props) {
     const PrivateRoute = () => {

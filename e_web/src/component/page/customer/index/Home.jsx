@@ -4,6 +4,7 @@ import axios from 'axios';
 import { useState } from 'react';
 import { useEffect } from 'react';
 import { Link, NavLink } from 'react-router-dom';
+import Swal from 'sweetalert2';
 
 function Home(props) {
     const [dataList, setDataList] = useState();
@@ -19,6 +20,30 @@ function Home(props) {
         const formatter = new Intl.NumberFormat("vi-VN");
         return formatter.format(money);
     }
+    const paymentSuccess = () => {
+        const currentUrl = window.location.href
+        const url = new URL(currentUrl);
+        const vnp_ResponseCode = url.searchParams.get('vnp_ResponseCode');
+        if (vnp_ResponseCode == '00') {
+            Swal.fire({
+                position: 'top-end',
+                icon: 'success',
+                title: 'Thanh toán thành công',
+                text: 'Cảm ơn quý khách đã tin tưởng!',
+                showConfirmButton: false,
+                timer: 1500,
+                didOpen: () => {
+                    setTimeout(() => {
+                        url.search = '';
+                        window.history.replaceState({}, document.title, url.toString());
+                    }, 2000);
+                }
+            })
+        }
+    }
+    useEffect(() => {
+        paymentSuccess()
+    }, []);
     useEffect(() => {
         getMealData()
     }, []);

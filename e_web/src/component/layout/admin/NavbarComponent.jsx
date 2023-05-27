@@ -20,9 +20,9 @@ function NavBarComponent(props) {
     }, []);
     return (
         <nav className="navbar navbar-expand bg-white navbar-light sticky-top px-4 py-0 shadow-style">
-            <a href="index.html" className="navbar-brand d-flex d-lg-none me-4">
+            <div className="navbar-brand d-flex d-lg-none me-4">
                 <h2 className="text-success fw-bold mb-0">EAT CLEAN</h2>
-            </a>
+            </div>
             <a id='toggler' className="sidebar-toggler flex-shrink-0 text-decoration-none" style={{ cursor: 'pointer' }}>
                 <i className="fa fa-bars text-success"></i>
             </a>
@@ -32,7 +32,7 @@ function NavBarComponent(props) {
                         <i className="fa fa-envelope me-lg-2"></i>
                         <span className="d-none d-lg-inline-flex">Message</span>
                     </a>
-                    <div className="dropdown-menu dropdown-menu-end bg-light border-0 rounded-0 rounded-bottom m-0">
+                    {/* <div className="dropdown-menu dropdown-menu-end bg-light border-0 rounded-0 rounded-bottom m-0">
                         <a href="#" className="dropdown-item">
                             <div className="d-flex align-items-center">
                                 <img className="rounded-circle" src="img/user.jpg" alt="" />
@@ -64,7 +64,7 @@ function NavBarComponent(props) {
                         </a>
                         <hr className="dropdown-divider" />
                         <a href="#" className="dropdown-item text-center">See all message</a>
-                    </div>
+                    </div> */}
                 </div>
                 <div className="nav-item dropdown">
                     <a href="#" className="nav-link dropdown-toggle" data-bs-toggle="dropdown">
@@ -72,7 +72,7 @@ function NavBarComponent(props) {
                         <span className="d-none d-lg-inline-flex">{account.user.name}</span>
                     </a>
                     <div className="dropdown-menu dropdown-menu-end bg-light border-0 rounded-0 rounded-bottom m-0">
-                        <a onClick={handleLogout} className="dropdown-item">Log Out</a>
+                        <a onClick={handleLogout} className="dropdown-item">Đăng xuất</a>
                     </div>
                 </div>
             </div >

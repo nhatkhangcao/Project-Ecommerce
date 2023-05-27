@@ -15,6 +15,7 @@ class MstUser extends Authenticatable
         "name",
         "email",
         "password",
+        "account",
         "phone",
         "remember_token",
         "role",

@@ -8,9 +8,9 @@ use Illuminate\Http\Response;
 class RegisterRepository
 {
 
-    public function getEmailByMember($request)
+    public function getAccountByMember($request)
     {
-        $data = MstUser::where('email', $request->email)->first();
+        $data = MstUser::where('account', $request->account)->first();
         return $data;
     }
 }

@@ -52,13 +52,13 @@ function StepFour(props) {
                                     type='radio'
                                     label='VNPAY'
                                     {...register('paymentMethod')}
-                                    value='vnPay'
+                                    value='VNPAY'
                                 />
                                 <Form.Check
                                     type='radio'
                                     label='COD'
                                     {...register('paymentMethod')}
-                                    value='cod'
+                                    value='COD'
                                 />
                             </Form.Group>
                             <div className="text-start">

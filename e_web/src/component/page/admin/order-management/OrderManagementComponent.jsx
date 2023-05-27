@@ -36,21 +36,21 @@ function OrderManagementComponent(props) {
         <div className='container-fluid'>
             <div className="card shadow-style">
                 <div className="card-body">
-                    {/* {userData && userData.data && userData.data.length > 0 &&
+                    {orderData && orderData.data && orderData.data.length > 0 &&
                         <div className="d-flex justify-content-start pb-2">
-                            From {paginate && paginate.from}~{paginate && paginate.to} out of {paginate && paginate.total}&nbsp;<div className='text-danger'>User</div>
+                            Từ {paginate && paginate.from}~{paginate && paginate.to} tổng số &nbsp;<div className='text-danger'>{paginate && paginate.total} Đơn Hàng</div>
                         </div>
-                    } */}
+                    }
                     <div className='table-responsive'>
                         <table className="table table-bordered table-striped">
                             <thead className="bg-dark text-white">
                                 <tr>
                                     <th scope="col">#</th>
-                                    <th scope="col">Order Code</th>
+                                    <th scope="col">Mã đơn hàng</th>
                                     <th scope="col">Combo</th>
-                                    <th scope="col">Price</th>
-                                    <th scope="col">Status</th>
-                                    <th className='text-center' scope="col">Action</th>
+                                    <th scope="col">Giá</th>
+                                    <th scope="col">Trạng thái</th>
+                                    <th className='text-center' scope="col">Chức năng</th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -67,7 +67,7 @@ function OrderManagementComponent(props) {
                                             </td>
                                         </tr>
                                     ) :
-                                        <tr><td className='text-danger text-center'>NO DATA!</td></tr>
+                                        <tr><td className='text-danger text-center'>Không có dữ liệu!</td></tr>
                                 }
                             </tbody>
                         </table>
@@ -79,7 +79,7 @@ function OrderManagementComponent(props) {
                                 let className = link.active === true ? "page-item active" : "page-item"
                                 return (
                                     <li className={className} key={link.label}>
-                                        {/* <button className="page-link" onClick={e => getUserData(url)}>{link.label}</button> */}
+                                        <button className="page-link" onClick={e => getOrderData(url)}>{link.label}</button>
                                     </li>
                                 )
                             })

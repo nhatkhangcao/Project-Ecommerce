@@ -2,6 +2,7 @@ import axios from 'axios';
 import React from 'react';
 import { Link, NavLink, useNavigate } from 'react-router-dom';
 import FormModal from '../../page/customer/form-modal/Modal/FormModal';
+import ProfileContainer from '../../page/customer/profile/ProfileContainer';
 
 const NavBarComponent = () => {
     const navigate = useNavigate();
@@ -10,7 +11,7 @@ const NavBarComponent = () => {
     const handleLogout = () => {
         axios.post("http://127.0.0.1:8000/api/logout").then(() => {
             localStorage.removeItem('account_user');
-            window.location.reload(true);
+            navigate('/')
         });
     };
 
@@ -19,7 +20,7 @@ const NavBarComponent = () => {
     };
 
     return (
-        <nav className="navbar navbar-expand-lg navbar-light bg-light">
+        <nav className="navbar nav-bar-container navbar-expand-lg">
             <div className="container">
                 <Link to="/" className="text-success fw-bold navbar-brand">EAT CLEAN</Link>
                 <button
@@ -79,6 +80,7 @@ const NavBarComponent = () => {
                                     {account.user.name}
                                 </a>
                                 <ul className="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdownMenuLink1">
+                                    <li><a className="dropdown-item"><ProfileContainer /></a></li>
                                     <li><a onClick={handleHistory} className="dropdown-item">Lịch sử mua hàng</a></li>
                                     <li><a onClick={handleLogout} className="dropdown-item">Đăng xuất</a></li>
                                 </ul>

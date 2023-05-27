@@ -23,7 +23,6 @@ function DetailMealManagementComponent(props) {
     const searchMeal = (data) => {
         if (data.meal_name) {
             axios.post('http://127.0.0.1:8000/api/admin/search-meal-detail', data).then((response) => {
-                console.log(response.data)
                 setDataList(response.data)
                 paginate(response)
             });
@@ -81,7 +80,7 @@ function DetailMealManagementComponent(props) {
                                         </div>
                                         <div className="card-body">
                                             <h5 className="card-title">{item.meal_name}</h5>
-                                            <h5 className="card-title text-danger">Combo: {item.combo_type_text}</h5>
+                                            <h5 className="card-title text-white combo-style bg-success">{item.combo_type_text}</h5>
                                         </div>
                                         <div className="card-body d-flex justify-content-center">
                                             <div className="btn bg-light border text-primary me-2">
@@ -98,7 +97,7 @@ function DetailMealManagementComponent(props) {
                                 </div>
                             ))
                         ) : (
-                            <div className="text-danger text-center col col-lg-12">NO DATA!</div>
+                            <div className="text-danger text-center col col-lg-12">Không có dữ liệu!</div>
                         )}
                     </div>
                 </div>

@@ -35,8 +35,8 @@ function EditOderModal(props) {
             data: data.status
         }).then((response) => {
             Swal.fire(
-                'Good job!',
-                'Expense Edited Successfully',
+                'Cập nhật thông tin đơn hàng thành công!',
+                "Đơn hàng " + "[" + item.order_code + "]" + " đã được cập nhật.",
                 'success');
             getOrderData()
         });
@@ -47,32 +47,32 @@ function EditOderModal(props) {
             <i onClick={handleShow} className="far fa-edit pe-2 text-primary fw-bold" role="button" title="edit" />
             <Modal backdrop="static" show={show} onHide={handleClose}>
                 <Modal.Header closeButton>
-                    <Modal.Title>Update Order</Modal.Title>
+                    <Modal.Title>CẬP NHẬT ĐƠN HÀNG</Modal.Title>
                 </Modal.Header>
                 <Modal.Body>
                     <Form onSubmit={handleSubmit(editOrder)} >
                         <Form.Group>
-                            <Form.Label>Order Code:</Form.Label>
+                            <Form.Label>Mã đơn hàng:</Form.Label>
                             <Form.Control type="text" readOnly value={item.order_code} />
                         </Form.Group>
                         <Form.Group>
-                            <Form.Label>Order Name:</Form.Label>
+                            <Form.Label>Combo:</Form.Label>
                             <Form.Control type="text" readOnly value={item.order_name} />
                         </Form.Group>
                         <Form.Group>
-                            <Form.Label>Order Price:</Form.Label>
+                            <Form.Label>Giá:</Form.Label>
                             <Form.Control type="text" readOnly value={item.order_price} />
                         </Form.Group>
                         <Form.Group>
-                            <Form.Label>Payment Method:</Form.Label>
+                            <Form.Label>Phương thức thanh toán:</Form.Label>
                             <Form.Control type="text" readOnly value={item.payment_method} />
                         </Form.Group>
                         <Form.Group>
-                            <Form.Label>Account:</Form.Label>
+                            <Form.Label>Tài khoản:</Form.Label>
                             <Form.Control type="text" readOnly value={item.account} />
                         </Form.Group>
                         <Form.Group>
-                            <Form.Label>Address:</Form.Label>
+                            <Form.Label>Địa chỉ:</Form.Label>
                             <Form.Control type="text" readOnly value={item.address} />
                         </Form.Group>
                         <Form.Group>
@@ -80,19 +80,19 @@ function EditOderModal(props) {
                             <Form.Control type="text" readOnly value={item.email} />
                         </Form.Group>
                         <Form.Group>
-                            <Form.Label>Customer Name:</Form.Label>
+                            <Form.Label>Tên khách hàng:</Form.Label>
                             <Form.Control type="text" readOnly value={item.customer_name} />
                         </Form.Group>
                         <Form.Group>
-                            <Form.Label>Note:</Form.Label>
+                            <Form.Label>Lưu ý:</Form.Label>
                             <Form.Control type="text" readOnly value={item.note} />
                         </Form.Group>
                         <Form.Group>
                             <Form.Label>Phone:</Form.Label>
-                            <Form.Control type="text" readOnly value={item.phone} />
+                            <Form.Control type="text" readOnly value={"0" + item.phone} />
                         </Form.Group>
                         <Form.Group>
-                            <Form.Label>Status:</Form.Label>
+                            <Form.Label>Trạng thái:</Form.Label>
                             <select {...register("status")} className="form-select">
                                 <option value="0">Đơn hàng mới</option>
                                 <option value="1">Đang được giao</option>
@@ -101,10 +101,10 @@ function EditOderModal(props) {
                         </Form.Group>
                         <Form.Group className='d-flex justify-content-end pt-3'>
                             <Button className='me-3' variant="primary" type='submit'>
-                                Save Changes
+                                Lưu thay đổi
                             </Button>
                             <Button variant="secondary" onClick={handleClose}>
-                                Close
+                                Đóng
                             </Button>
                         </Form.Group>
                     </Form>

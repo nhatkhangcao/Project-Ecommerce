@@ -6,39 +6,62 @@ import { set, useForm } from 'react-hook-form';
 import Swal from "sweetalert2";
 
 function RegisterForm(props) {
-    const handleSwitchForm = props.handleSwitchForm
-    const [notice, setNotice] = useState()
+    const handleSwitchForm = props.handleSwitchForm;
+    const [notice, setNotice] = useState();
     const {
         register,
         handleSubmit,
         formState: { errors },
+        watch, // Add the watch function from react-hook-form
     } = useForm();
+
+    const password = watch('password'); // Get the value of the password field
 
     const handleRegister = (data) => {
         axios.get('http://127.0.0.1:8000/api/customer/register', {
             params: {
-                email: data.email,
+                account: data.account,
                 name: data.name,
                 password: data.password,
             }
         })
             .then((response) => {
                 if (response.data.status === false) {
-                    setNotice(response.data.message)
+                    setNotice(response.data.message);
                 } else {
-                    Swal.fire(
-                        'Deleted!',
-                        'Your data has been deleted.',
-                        'success'
-                    )
+                    Swal.fire({
+                        position: 'top-end',
+                        icon: 'success',
+                        title: 'Đăng ký tài khoản thành công',
+                        showConfirmButton: false,
+                        timer: 1500
+                    })
+                    setTimeout(() => {
+                        window.location.reload(true);
+                    }, 2000);
                 }
-            })
+            });
+    };
 
-    }
+    const validateConfirmPassword = (value) => {
+        if (value !== password) {
+            return 'Mật khẩu không khớp';
+        }
+        return true;
+    };
+
+    const validateAccount = (value) => {
+        const pattern = /^[a-zA-Z0-9]*$/;
+        if (!pattern.test(value)) {
+            return 'Tài khoản không được chứa ký tự đặc biệt';
+        }
+        return true;
+    };
+
     return (
         <Form onSubmit={handleSubmit(handleRegister)}>
             <Form.Group className="text-center mb-2">
-                {notice && (<span className="text-danger">{notice}</span>)}
+                {notice && <span className="text-danger">{notice}</span>}
             </Form.Group>
             <Form.Group className="mb-4">
                 <Form.Control
@@ -46,53 +69,57 @@ function RegisterForm(props) {
                     className='input-size'
                     type="text"
                     {...register("name", {
-                        required: "Name is required",
+                        required: "Vui lòng nhập tên!",
                     })}
-                    placeholder="Full Name"
+                    placeholder="Họ và tên"
                 />
-                {errors.name && (<span className="text-danger">{errors.name.message}</span>)}
+                {errors.name && <span className="text-danger">{errors.name.message}</span>}
             </Form.Group>
             <Form.Group className="mb-4">
                 <Form.Control
-                    id='email'
+                    id='account'
                     className='input-size'
                     type="text"
-                    {...register("email", {
-                        required: "Email is required",
+                    {...register("account", {
+                        required: "Vui lòng nhập tài khoản!",
+                        validate: validateAccount, // Add the custom validation function
                     })}
-                    placeholder="Email"
+                    placeholder="Tài khoản"
                 />
-                {errors.email && (<span className="text-danger">{errors.email.message}</span>)}
+                {errors.account && <span className="text-danger">{errors.account.message}</span>}
             </Form.Group>
             <Form.Group className="mb-4">
                 <Form.Control
                     id='password'
                     className='input-size'
                     type="password"
-                    placeholder="Password"
+                    placeholder="Mật khẩu"
                     {...register("password", {
-                        required: "Name is required",
+                        required: "Vui lòng nhập password!",
                     })}
                 />
-                {errors.name && (<span className="text-danger">{errors.password.message}</span>)}
+                {errors.password && <span className="text-danger">{errors.password.message}</span>}
             </Form.Group>
             <Form.Group className="mb-4">
                 <Form.Control
                     id='confirm_password'
                     className='input-size'
                     type="password"
-                    placeholder="Confirm Password"
-                    {...register("confirm_password")}
+                    placeholder="Xác nhận mật khẩu"
+                    {...register("confirm_password", {
+                        required: "Vui lòng nhập mật khẩu xác nhận!",
+                        validate: validateConfirmPassword, // Add the custom validation function
+                    })}
                 />
-                {errors.confirm_password && (<span className="text-danger">{errors.confirm_password.message}</span>)}
+                {errors.confirm_password && <span className="text-danger">{errors.confirm_password.message}</span>}
             </Form.Group>
             <Form.Group className='d-flex justify-content-center'>
                 <Button className='me-3 btn-login' variant="success" type='submit'>
-                    REGISTER
+                    ĐĂNG KÝ
                 </Button>
             </Form.Group>
             <Form.Group className='d-flex justify-content-center pt-1'>
-                Already have an account?<span className='ps-2 text-success fw-bold' style={{ cursor: 'pointer' }} onClick={handleSwitchForm}>Login</span>
+                Bạn đã có tài khoản?<span className='ps-2 text-success fw-bold' style={{ cursor: 'pointer' }} onClick={handleSwitchForm}>Đăng nhập</span>
             </Form.Group>
         </Form>
     );

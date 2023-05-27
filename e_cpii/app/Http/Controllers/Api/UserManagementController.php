@@ -21,22 +21,33 @@ class UserManagementController extends Controller
     public function getEmailByMember(Request $request)
     {
         $data = $this->repo->getEmailByMember($request->email);
-        if ($data) {
+        $account = $this->repo->getAccountByMember($request->account);
+        if ($account) {
             return response()->json(
                 [
-                    'message' => 'Email Exists',
+                    'type'      => 'account',
+                    'message'   => 'Tài khoản đã tồn tại',
+                    'status'    => false,
+                ]
+            );
+        } elseif ($data) {
+            return response()->json(
+                [
+                    'type'      => 'email',
+                    'message' => 'Email đã tồn tại!',
                     'status' => false,
                 ]
             );
         } else {
             return response()->json(
                 [
-                    'message' => 'Valid Email',
+                    'message' => 'Tạo người dùng thành công!',
                     'status' => true,
                 ]
             );
         }
     }
+
     public function edit($id, Request $request)
     {
         $updated = $this->repo->edit($id, $request->all());

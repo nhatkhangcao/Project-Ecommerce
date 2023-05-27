@@ -18,7 +18,10 @@ class MealDetailController extends Controller
     public function index()
     {
         $data = $this->repo->index();
-        return MealDetailResource::collection($data);
+        return [
+            'data'          => MealDetailResource::collection($data),
+            'paginateLink'  => $data
+        ];
     }
     public function getOption()
     {

@@ -34,13 +34,14 @@ function UserManagementContainer(props) {
 
     const handleDeleteUser = (item, e) => {
         Swal.fire({
-            title: 'Are you sure?',
-            text: "You want to delete " + "[" + item.name + "]",
-            icon: 'info',
+            title: 'Bạn chắc chắn chứ?',
+            text: "Bạn muốn xóa tài khoản " + "[" + item.account + "]",
+            icon: 'warning',
             showCancelButton: true,
             confirmButtonColor: '#3085d6',
             cancelButtonColor: '#d33',
-            confirmButtonText: 'Yes, delete it!'
+            cancelButtonText: 'Hủy bỏ',
+            confirmButtonText: 'Đồng ý!'
         }).then((result) => {
             if (result.isConfirmed) {
                 axios.post('http://127.0.0.1:8000/api/admin/user-deleted/' + item.id)
@@ -48,8 +49,8 @@ function UserManagementContainer(props) {
                         getUserData()
                     })
                 Swal.fire(
-                    'Deleted!',
-                    'Your data has been deleted.',
+                    'Đã xóa!',
+                    'Tài khoản đã được xóa thành công.',
                     'success'
                 )
             }

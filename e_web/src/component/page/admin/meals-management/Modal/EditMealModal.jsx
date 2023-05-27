@@ -64,8 +64,8 @@ function EditMealModal(props) {
         formData.append('combo_image', data.combo_image);
         axios.post('http://127.0.0.1:8000/api/admin/edit-meal/' + data.id, formData).then((response) => {
             Swal.fire(
-                'Good job!',
-                'Updated Successfully',
+                'Cập nhật combo thành công!',
+                "Combo " + "[" + mealList.combo_name + "]" + " đã được cập nhật.",
                 'success');
             getMealData()
         })
@@ -91,33 +91,33 @@ function EditMealModal(props) {
                             <div className="row">
                                 <div className="col-6">
                                     <div className="input-group form-group">
-                                        <label className='col-sm-2 col-form-label'>Combo</label>
+                                        <label className='col-sm-2 col-form-label'>Combo <span className='text-danger'>*</span></label>
                                         <div className='col-sm-10'>
                                             <input
                                                 type="text"
                                                 className="form-control"
                                                 {...register("combo_name", {
-                                                    required: "Meal name is required",
+                                                    required: "Vui lòng nhập combo!",
                                                 })}
                                             />
                                             {errors.combo_name && (<span className="text-danger">{errors.combo_name.message}</span>)}
                                         </div>
                                     </div>
                                     <div className="input-group form-group pt-2">
-                                        <label className='col-sm-2 col-form-label'>Price</label>
+                                        <label className='col-sm-2 col-form-label'>Giá <span className='text-danger'>*</span></label>
                                         <div className='col-sm-10'>
                                             <input
                                                 type="text"
                                                 className="form-control"
                                                 {...register("combo_price", {
-                                                    required: "Meal price is required",
+                                                    required: "Vui lòng nhập giá!",
                                                 })}
                                             />
                                             {errors.combo_price && (<span className="text-danger">{errors.combo_price.message}</span>)}
                                         </div>
                                     </div>
                                     <div className="input-group form-group pt-2">
-                                        <label className='col-sm-2 col-form-label'>Detail</label>
+                                        <label className='col-sm-2 col-form-label'>Mô tả</label>
                                         <div className='col-sm-10'>
                                             <input
                                                 type="text"
@@ -127,14 +127,14 @@ function EditMealModal(props) {
                                         </div>
                                     </div>
                                     <div className="input-group pt-2">
-                                        <label className='col-sm-2 col-form-label'>Describe</label>
+                                        <label className='col-sm-2 col-form-label'>Chi tiết</label>
                                         <textarea
                                             className="form-control"
                                             rows="6"
                                             {...register("description")}
                                         />
                                     </div>
-                                    <div className="input-group py-4">
+                                    {/* <div className="input-group py-4">
                                         <label className='col-sm-2 col-form-label'>Status</label>
                                         <div className='col-sm-10'>
                                             <select {...register("status")} className="form-select">
@@ -143,7 +143,7 @@ function EditMealModal(props) {
                                                 <option value="2">Sold Out</option>
                                             </select>
                                         </div>
-                                    </div>
+                                    </div> */}
                                 </div>
                                 <div className="col-md-5 ms-auto">
                                     <label className='col-sm-2 col-form-label pe-4'>Image</label>
@@ -157,11 +157,11 @@ function EditMealModal(props) {
                         </div>
                     </Modal.Body>
                     <Modal.Footer>
-                        <Button variant="secondary" onClick={handleClose}>
-                            Close
-                        </Button>
                         <Button variant="primary" type='submit'>
-                            Save Changes
+                            Lưu thay đổi
+                        </Button>
+                        <Button variant="secondary" onClick={handleClose}>
+                            Đóng
                         </Button>
                     </Modal.Footer>
                 </form>

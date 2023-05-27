@@ -17,7 +17,6 @@ function UserManagementComponent(props) {
         handleSubmit,
         reset,
     } = useForm();
-
     useEffect(() => {
         getUserData()
     }, []);
@@ -28,7 +27,7 @@ function UserManagementComponent(props) {
                     <form onSubmit={handleSubmit(searchUser)}>
                         <div className="row row-cols-auto">
                             <div className="col-3">
-                                <span className='fw-bold'>Name</span>
+                                <span className='fw-bold'>Họ Và Tên</span>
                                 <input
                                     className="form-control"
                                     {...register("name")}
@@ -62,7 +61,7 @@ function UserManagementComponent(props) {
                 <div className="card-body">
                     {userData && userData.data && userData.data.length > 0 &&
                         <div className="d-flex justify-content-start pb-2">
-                            From {paginate && paginate.from}~{paginate && paginate.to} out of {paginate && paginate.total}&nbsp;<div className='text-danger'>User</div>
+                            Từ {paginate && paginate.from}~{paginate && paginate.to} trong tổng số:&nbsp;<div className='text-danger'>{paginate && paginate.total}&nbsp;Tài khoản</div>
                         </div>
                     }
                     <div className='table-responsive'>
@@ -70,11 +69,11 @@ function UserManagementComponent(props) {
                             <thead className="bg-dark text-white">
                                 <tr>
                                     <th scope="col">#</th>
-                                    <th scope="col">Name</th>
+                                    <th scope="col">Họ Và Tên</th>
+                                    <th scope="col">Tài khoản</th>
                                     <th scope="col">Email</th>
-                                    <th scope="col">Phone</th>
-                                    <th scope="col">Role</th>
-                                    <th className='text-center' scope="col">Action</th>
+                                    <th scope="col">Quyền hạn</th>
+                                    <th className='text-center' scope="col">Chức năng</th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -83,8 +82,8 @@ function UserManagementComponent(props) {
                                         <tr key={item.id}>
                                             <th scope="row">{(userData.current_page - 1) * userData.per_page + index + 1}</th>
                                             <td>{item.name}</td>
+                                            <td>{item.account}</td>
                                             <td>{item.email}</td>
-                                            <td>{item.phone}</td>
                                             <td>{setRole(item.role)}</td>
                                             <td className='text-center' >
                                                 <EditUserModal item={item} getUserData={getUserData} />
@@ -92,7 +91,7 @@ function UserManagementComponent(props) {
                                             </td>
                                         </tr>
                                     ) :
-                                        <tr><td className='text-danger text-center'>NO DATA!</td></tr>
+                                        <tr><td className='text-danger text-center'>Không có dữ liệu!</td></tr>
                                 }
                             </tbody>
                         </table>

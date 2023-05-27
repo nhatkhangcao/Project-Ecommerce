@@ -4,7 +4,7 @@ import { Button, Form } from 'react-bootstrap';
 import { useForm } from 'react-hook-form';
 
 function LoginForm(props) {
-    const handleSwitchForm  = props.handleSwitchForm
+    const handleSwitchForm = props.handleSwitchForm
     const [loginNotice, setLoginNotice] = useState()
 
     const {
@@ -20,12 +20,12 @@ function LoginForm(props) {
                     localStorage.setItem('account_user', JSON.stringify(response.data))
                     window.location.reload(true)
                 } else {
-                    setLoginNotice("Email or Password is wrong")
+                    setLoginNotice("Tài khoản hoặc mật khẩu đã sai!")
                 }
             }).catch(function (error) { console.log(error) })
         })
     }
-    
+
     return (
         <Form onSubmit={handleSubmit(login)}>
             <Form.Group className="text-center mb-2">
@@ -33,35 +33,35 @@ function LoginForm(props) {
             </Form.Group>
             <Form.Group className="mb-4">
                 <Form.Control
-                    id='email'
+                    id='account'
                     className='input-size'
                     type="text"
-                    {...register("email", {
-                        required: "Email is required",
+                    {...register("account", {
+                        required: "Vui lòng nhập tài khoản",
                     })}
-                    placeholder="Email"
+                    placeholder="Tài khoản"
                 />
-                {errors.email && (<span className="text-danger">{errors.email.message}</span>)}
+                {errors.account && (<span className="text-danger">{errors.account.message}</span>)}
             </Form.Group>
             <Form.Group className="mb-4">
                 <Form.Control
                     id='password'
                     className='input-size'
                     type="password"
-                    placeholder="Password"
+                    placeholder="Mật khẩu"
                     {...register("password", {
-                        required: "Name is required",
+                        required: "Vui lòng nhập password",
                     })}
                 />
                 {errors.name && (<span className="text-danger">{errors.password.message}</span>)}
             </Form.Group>
             <Form.Group className='d-flex justify-content-center'>
                 <Button className='me-3 btn-login' variant="success" type='submit'>
-                    LOGIN
+                    ĐĂNG NHẬP
                 </Button>
             </Form.Group>
             <Form.Group className='d-flex justify-content-center pt-1'>
-                    Don't have an account?<span className='ps-2 text-success fw-bold' style={{cursor: 'pointer'}} onClick={handleSwitchForm}>Join us</span>
+                Bạn chưa có tài khoản?<span className='ps-2 text-success fw-bold' style={{ cursor: 'pointer' }} onClick={handleSwitchForm}>Tham gia ngay</span>
             </Form.Group>
         </Form>
     );

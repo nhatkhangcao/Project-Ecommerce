@@ -23,13 +23,14 @@ function MealManagementContainer(props) {
 
     const handleDeleteMeal = (item, e) => {
         Swal.fire({
-            title: 'Are you sure?',
-            text: "You want to delete?",
-            icon: 'info',
+            title: 'Bạn chắc chắn chứ?',
+            text: "Bạn muốn xóa combo " + "[" + item.combo_name + "]",
+            icon: 'warning',
             showCancelButton: true,
             confirmButtonColor: '#3085d6',
             cancelButtonColor: '#d33',
-            confirmButtonText: 'Yes, delete it!'
+            cancelButtonText: 'Hủy bỏ',
+            confirmButtonText: 'Đồng ý!'
         }).then((result) => {
             if (result.isConfirmed) {
                 axios.post('http://127.0.0.1:8000/api/admin/delete-meal/' + item.id)

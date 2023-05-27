@@ -27,27 +27,27 @@ function EditUserModal(props) {
             email: item.email,
             name: item.name,
             phone: item.phone,
-            id: item.id
+            id: item.id,
+            account: item.account
         }
     });
 
     const editUser = (item) => {
         axios.post('http://127.0.0.1:8000/api/admin/user-edited/' + item.id, item).then((response) => {
             Swal.fire(
-                'Good job!',
-                'Expense Edited Successfully',
+                'Cập nhật tài khoản thành công!',
+                "Tài khoản " + "[" + item.account + "]" + " đã được cập nhật.",
                 'success');
             getUserData()
         });
         setShow(false);
     }
-
     return (
         <>
             <i onClick={handleShow} className="far fa-edit pe-2 text-primary fw-bold" role="button" title="edit" />
             <Modal backdrop="static" show={show} onHide={handleClose}>
                 <Modal.Header closeButton>
-                    <Modal.Title>EDIT MEMBER</Modal.Title>
+                    <Modal.Title>CẬP NHẬT THÔNG TIN USER</Modal.Title>
                 </Modal.Header>
                 <Modal.Body>
                     <Form onSubmit={handleSubmit(editUser)} >
@@ -57,25 +57,30 @@ function EditUserModal(props) {
                                 disabled
                                 type="email"
                                 {...register("email")}
-                                placeholder="name@example.com"
                             />
                         </Form.Group>
                         <Form.Group className="mb-3" controlId="exampleForm.ControlInput1">
-                            <Form.Label>Name</Form.Label>
+                            <Form.Label>Tài khoản</Form.Label>
+                            <Form.Control
+                                type="email"
+                                disabled
+                                {...register("account")}
+                            />
+                        </Form.Group>
+                        <Form.Group className="mb-3" controlId="exampleForm.ControlInput1">
+                            <Form.Label>Họ và tên</Form.Label>
                             <Form.Control
                                 type="name"
-                                placeholder="Example"
                                 {...register("name", {
-                                    required: "Name is required",
+                                    required: "Vui lòng nhập họ và tên!",
                                 })}
                             />
                             {errors.name && (<span className="text-danger">{errors.name.message}</span>)}
                         </Form.Group>
                         <Form.Group className="mb-3" controlId="exampleForm.ControlInput1">
-                            <Form.Label>Phone</Form.Label>
+                            <Form.Label>Số điện thoại</Form.Label>
                             <Form.Control
                                 type="text"
-                                placeholder="Example"
                                 {...register("phone")}
                             />
                         </Form.Group>
@@ -101,10 +106,10 @@ function EditUserModal(props) {
                         </Form.Group> */}
                         <Form.Group className='d-flex justify-content-end'>
                             <Button className='me-3' variant="primary" type='submit'>
-                                Save Changes
+                                Lưu thay đổi
                             </Button>
                             <Button variant="secondary" onClick={handleClose}>
-                                Close
+                                Đóng
                             </Button>
                         </Form.Group>
                     </Form>

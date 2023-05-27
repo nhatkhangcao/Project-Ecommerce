@@ -64,8 +64,8 @@ function EditMealDetail(props) {
         formData.append('day', data.day);
         axios.post('http://127.0.0.1:8000/api/admin/edit-meal-detail/' + data.id, formData).then((response) => {
             Swal.fire(
-                'Good job!',
-                'Updated Successfully',
+                'Cập nhật thành công!',
+                'Meal đã được cập nhật',
                 'success');
             getMealDetail()
             setShow(false)
@@ -82,7 +82,7 @@ function EditMealDetail(props) {
     }, []);
     return (
         <>
-            <i onClick={handleShow} className="fas fa-pen">&nbsp;<span>Edit</span></i>
+            <i onClick={handleShow} className="fas fa-pen">&nbsp;<span>Update</span></i>
             <Modal
                 backdrop='static'
                 show={show}
@@ -91,7 +91,7 @@ function EditMealDetail(props) {
             >
                 <form onSubmit={handleSubmit(editMeal)}>
                     <Modal.Header>
-                        <Modal.Title id="example-custom-modal-styling-title">Edit Meals</Modal.Title>
+                        <Modal.Title id="example-custom-modal-styling-title">CẬP NHẬT MEAL</Modal.Title>
                     </Modal.Header>
                     <Modal.Body>
                         <div className="container-fluid">
@@ -103,7 +103,7 @@ function EditMealDetail(props) {
                                             <select {...register('combo_type')}
                                                 className='form-select'>
                                                 {option.map((option) => (
-                                                    <option defaultValue={mealList.combo_type} key={option.id} value={option.value}>
+                                                    <option defaultValu e={mealList.combo_type} key={option.id} value={option.value}>
                                                         {option.label}
                                                     </option>
                                                 ))}
@@ -111,7 +111,7 @@ function EditMealDetail(props) {
                                         </div>
                                     </div>
                                     <div className="input-group form-group pt-2">
-                                        <label className='col-sm-2 col-form-label'>Ngày</label>
+                                        <label className='col-sm-2 col-form-label'>Thứ</label>
                                         <div className='col-sm-10'>
                                             <select {...register("day")} className="form-select">
                                                 <option value="2">2</option>
@@ -136,7 +136,7 @@ function EditMealDetail(props) {
                                         </div>
                                     </div>
                                     <div className="input-group form-group pt-2">
-                                        <label className='col-sm-2 col-form-label'>Detail</label>
+                                        <label className='col-sm-2 col-form-label'>Mô tả</label>
                                         <div className='col-sm-10'>
                                             <textarea
                                                 className="form-control"
@@ -154,15 +154,14 @@ function EditMealDetail(props) {
                                     </div>
                                 </div>
                             </div>
-                            <hr className="border-2 border-top border-bottom border-secondary" />
                         </div>
                     </Modal.Body>
                     <Modal.Footer>
-                        <Button variant="secondary" onClick={handleClose}>
-                            Close
-                        </Button>
                         <Button variant="primary" type='submit'>
-                            Save Changes
+                            Lưu thay đổi
+                        </Button>
+                        <Button variant="secondary" onClick={handleClose}>
+                            Đóng
                         </Button>
                     </Modal.Footer>
                 </form>

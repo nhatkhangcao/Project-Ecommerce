@@ -10,8 +10,7 @@ class LoginRepository
 
     public function createTokenUser($request)
     {
-        $token = MstUser::where('email', $request->email)->first();
+        $token = MstUser::where('account', $request->account)->first();
         return $token->createToken('token')->plainTextToken;
     }
-
 }

@@ -5,9 +5,9 @@ function SideBarComponent(props) {
     return (
         <div className="sidebar pb-3 ">
             <nav className="navbar nav-bg">
-                <a href="index.html" className="navbar-brand mx-4 mb-3">
+                <div className="navbar-brand mx-4 mb-3">
                     <h3 className="text-success fw-bold">EAT CLEAN</h3>
-                </a>
+                </div>
                 <div className="navbar-nav w-100">
                     <NavLink to="dashboard" className={({ isActive }) => isActive ? 'active nav-item nav-link' : 'text-dark nav-item nav-link'}>
                         <i className="fa fa-tachometer-alt me-2"></i>
@@ -29,7 +29,10 @@ function SideBarComponent(props) {
                             <a href="element.html" className="dropdown-item">Other Elements</a>
                         </div>
                     </div> */}
-                    <Link to="order-management" className="nav-item nav-link"><i className="fas fa-cart-plus me-2"></i>Order</Link>
+                    <NavLink to="order-management" className={({ isActive }) => isActive ? 'active nav-item nav-link' : 'text-dark nav-item nav-link'}>
+                        <i className="fas fa-cart-plus me-2"></i>
+                        Order
+                    </NavLink>
                     <Link to="customer-management" className="nav-item nav-link"><i className="fas fa-users me-2"></i>Customer</Link>
                     <NavLink to="user-management" className={({ isActive }) => isActive ? 'active nav-item nav-link' : 'text-dark nav-item nav-link'}>
                         <i className="fas fa-user-cog me-2"></i>

@@ -21,10 +21,21 @@ const OrderHistoryContainer = () => {
         })
     }
     const checkStatus = (status) => {
-        if (status === 1) {
-            return 'completed'
+        if (status == 0) {
+            return 'Đơn hàng mới'
+        } else if (status == 1) {
+            return 'Đang được giao'
         } else {
-            return 'cancelled'
+            return 'Đã giao'
+        }
+    }
+    const statusText = (status) => {
+        if (status == 0) {
+            return 'bg-success'
+        } else if (status == 1) {
+            return 'bg-warning'
+        } else {
+            return 'bg-danger'
         }
     }
     useEffect(() => {
@@ -32,13 +43,17 @@ const OrderHistoryContainer = () => {
     }, []);
     return (
         <div className="container order-history">
-            <h2 className="mb-3">Order History</h2>
+            <h3 className="mb-3">Lịch sử đặt hàng</h3>
             <div className="row">
                 {orderHistory && orderHistory.length > 0 ? orderHistory.map((order) => (
                     <div className="col-md-12" key={order.id}>
                         <div className="order-card">
                             <div className="order-info">
-                                <span>Sản phẩm: </span>
+                                <span>Mã đơn hàng: </span>
+                                <span>{order.order_code}</span>
+                            </div>
+                            <div className="order-info">
+                                <span>Combo:  </span>
                                 <span>{order.order_name}</span>
                             </div>
                             <div className="order-info">
@@ -49,8 +64,8 @@ const OrderHistoryContainer = () => {
                                 <span>Giá: </span>
                                 <span>{formatVND(order.order_price)}VNĐ</span>
                             </div>
-                            <div className="order-status">
-                                <span className={checkStatus(order.status)}>Trạng thái</span>
+                            <div className="order-status text-white">
+                                <span className={statusText(order.status)}>{checkStatus(order.status)}</span>
                             </div>
                         </div>
                     </div>

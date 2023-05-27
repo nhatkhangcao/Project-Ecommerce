@@ -19,7 +19,7 @@ class LoginController extends Controller
     public function login(Request $request)
     {
         $account = [
-            'email' => $request->email,
+            'account' => $request->account,
             'password' => $request->password,
         ];
         if (Auth::attempt($account)) {
