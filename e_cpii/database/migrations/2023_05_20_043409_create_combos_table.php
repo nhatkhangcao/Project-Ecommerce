@@ -16,13 +16,12 @@ return new class extends Migration
         Schema::create('combos', function (Blueprint $table) {
             $table->id();
             $table->string('combo_name');
-            $table->string('combo_image');
             $table->integer('combo_price');
-            $table->integer('type');
-            $table->string('detail');
-            $table->string('description');
-            $table->tinyInteger('deleted')->default(0)->comment('0=active, 1=deleted');
-            $table->tinyInteger('status')->default('0')->comment('0=on-sale, 1=stop-selling, 2=sold-out');
+            $table->integer('meal_number');
+            $table->string('combo_image')->nullable();
+            $table->integer('calories');
+            $table->string('detail')->nullable();
+            $table->string('description')->nullable();
             $table->timestamps();
         });
     }

@@ -23,6 +23,7 @@ function RegisterForm(props) {
                 account: data.account,
                 name: data.name,
                 password: data.password,
+                email: data.email
             }
         })
             .then((response) => {
@@ -58,10 +59,43 @@ function RegisterForm(props) {
         return true;
     };
 
+    const validateEmail = (value) => {
+        const pattern = /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i;
+        if (!pattern.test(value)) {
+            return 'Email không hợp lệ';
+        }
+        return true;
+    };
     return (
         <Form onSubmit={handleSubmit(handleRegister)}>
             <Form.Group className="text-center mb-2">
                 {notice && <span className="text-danger">{notice}</span>}
+            </Form.Group>
+            <Form.Group className="mb-4">
+                <Form.Control
+                    id='account'
+                    className='input-size'
+                    type="text"
+                    {...register("account", {
+                        required: "Vui lòng nhập tài khoản!",
+                        validate: validateAccount,
+                    })}
+                    placeholder="Tài khoản"
+                />
+                {errors.account && <span className="text-danger">{errors.account.message}</span>}
+            </Form.Group>
+            <Form.Group className="mb-4">
+                <Form.Control
+                    id='email'
+                    className='input-size'
+                    type="text"
+                    {...register("email", {
+                        required: "Vui lòng nhập email!",
+                        validate: validateEmail,
+                    })}
+                    placeholder="Email"
+                />
+                {errors.email && <span className="text-danger">{errors.email.message}</span>}
             </Form.Group>
             <Form.Group className="mb-4">
                 <Form.Control
@@ -74,19 +108,6 @@ function RegisterForm(props) {
                     placeholder="Họ và tên"
                 />
                 {errors.name && <span className="text-danger">{errors.name.message}</span>}
-            </Form.Group>
-            <Form.Group className="mb-4">
-                <Form.Control
-                    id='account'
-                    className='input-size'
-                    type="text"
-                    {...register("account", {
-                        required: "Vui lòng nhập tài khoản!",
-                        validate: validateAccount, // Add the custom validation function
-                    })}
-                    placeholder="Tài khoản"
-                />
-                {errors.account && <span className="text-danger">{errors.account.message}</span>}
             </Form.Group>
             <Form.Group className="mb-4">
                 <Form.Control

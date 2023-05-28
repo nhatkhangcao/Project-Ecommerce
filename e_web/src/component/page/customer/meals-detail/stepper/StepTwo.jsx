@@ -34,9 +34,9 @@ function StepTwo(props) {
             {
               Object.values(data).map((comboItem, dayIndex) => (
                 <div key={dayIndex}>
-                  <div className="row">
+                  {/* <div className="row">
                     <h4 className='text-start'><b>Thứ {dayIndex + 2}</b></h4>
-                  </div>
+                  </div> */}
                   {
                     comboItem && comboItem.length > 0 ? comboItem.map((item, index) =>
                       <div key={index} className="row align-items-center pb-2">

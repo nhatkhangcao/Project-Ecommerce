@@ -104,7 +104,7 @@ function Home(props) {
                             </div>
                         ))
                     ) : (
-                        <div className="text-danger text-center col-12">NO DATA!</div>
+                        <div className="text-danger text-center col-12">Không có dữ liệu!</div>
                     )}
                 </div>
             </div>

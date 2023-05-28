@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\Api\Customer\CustomerLoginController;
 use App\Http\Controllers\Api\CustomerController;
+use App\Http\Controllers\Api\DataAnalystController;
 use App\Http\Controllers\Api\LoginController;
 use App\Http\Controllers\Api\MealController;
 use App\Http\Controllers\Api\MealDetailController;
@@ -50,15 +51,20 @@ Route::prefix('admin')->group(function () {
     //Order Management
     Route::get('/order', [OrderManagementController::class, 'index']);
     Route::post('/order-edit/{id}', [OrderManagementController::class, 'edit']);
+
+    //Data Analyst
+    Route::get('/data-analyst', [DataAnalystController::class, 'index']);
 });
 // });
 
 Route::prefix('customer')->group(function () {
     Route::get('/list', [CustomerController::class, 'index']);
+    Route::post('/customer-info', [CustomerController::class, 'getInfoCustomer']);
     Route::get('/combo-list', [CustomerController::class, 'comboList']);
     Route::get('/order-history', [CustomerController::class, 'getOrderHistory']);
     Route::get('/register', [RegisterController::class, 'register']);
     Route::post('/calories-calculate', [CustomerController::class, 'caloriesCalculate']);
     Route::post('/get-data-by-combo', [CustomerController::class, 'getDataByCombo']);
     Route::post('/payment', [CustomerController::class, 'payment']);
+    Route::post('/update-info-customer/{id}', [CustomerController::class, 'updateInfoCustomer']);
 });

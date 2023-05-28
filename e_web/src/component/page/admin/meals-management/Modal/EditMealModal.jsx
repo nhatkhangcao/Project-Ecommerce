@@ -35,7 +35,8 @@ function EditMealModal(props) {
             detail: mealList.detail,
             description: mealList.description,
             combo_image: mealList.combo_image,
-            status: mealList.status
+            meal_number: mealList.meal_number
+            // status: mealList.status
         },
     });
 
@@ -62,6 +63,7 @@ function EditMealModal(props) {
         formData.append('detail', data.detail);
         formData.append('description', data.description);
         formData.append('combo_image', data.combo_image);
+        formData.append('meal_number', data.meal_number);
         axios.post('http://127.0.0.1:8000/api/admin/edit-meal/' + data.id, formData).then((response) => {
             Swal.fire(
                 'Cập nhật combo thành công!',
@@ -69,7 +71,6 @@ function EditMealModal(props) {
                 'success');
             getMealData()
         })
-        console.log(data)
         setShow(false)
 
     };
@@ -114,6 +115,19 @@ function EditMealModal(props) {
                                                 })}
                                             />
                                             {errors.combo_price && (<span className="text-danger">{errors.combo_price.message}</span>)}
+                                        </div>
+                                    </div>
+                                    <div className="input-group form-group pt-2">
+                                        <label className='col-sm-2 col-form-label'>Số món</label>
+                                        <div className='col-sm-10'>
+                                            <select {...register("meal_number")} className="form-select">
+                                                <option value="1">1</option>
+                                                <option value="2">2</option>
+                                                <option value="3">3</option>
+                                                <option value="4">4</option>
+                                                <option value="5">5</option>
+                                                <option value="6">6</option>
+                                            </select>
                                         </div>
                                     </div>
                                     <div className="input-group form-group pt-2">

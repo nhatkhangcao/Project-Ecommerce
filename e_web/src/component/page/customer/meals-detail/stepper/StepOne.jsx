@@ -10,12 +10,12 @@ function StepOne(props) {
     const radios = [
         { name: '6 ngày', value: '6' },
         { name: '5 ngày', value: '5' },
-        { name: '4 ngày', value: '4' },
+        { name: '1 ngày', value: '4' },
     ];
     const days = [
         { name: '3 bữa', value: '3' },
         { name: '2 bữa', value: '2' },
-        { name: '1 bữa', value: '1' },
+        { name: '3 bữa', value: '1' },
     ];
     const test = () => {
         console.log(radioValue)
@@ -47,7 +47,7 @@ function StepOne(props) {
             </div>
             <div>
                 <div className="row">
-                    <span>2. Chọn số bữa trong ngày</span>
+                    <span>Chọn số bữa trong ngày</span>
                 </div>
                 <div className="row pt-3">
                     <ButtonGroup>

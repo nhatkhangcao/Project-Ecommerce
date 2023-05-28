@@ -5,6 +5,7 @@ namespace App\Repositories;
 use App\Mail\SendMail;
 use App\Models\Combo;
 use App\Models\Meal;
+use App\Models\MstCustomer;
 use App\Models\Order;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\Mail;
@@ -53,10 +54,26 @@ class CustomerRepository
             'higherCarb' => $higherCarb,
         ];
         $recommend =  $this->comboRecommend(round($goal));
+        if (!empty($request['account'])) {
+            $customer = MstCustomer::where('account', $request['account'])->first();
+            $goalText = 'Tăng cân';
+            if ($request['goal'] == 0) {
+                $goalText = 'Giảm cân';
+            } elseif ($request['goal'] == 1) {
+                $goalText = 'Giữ cân';
+            }
+            if ($customer) {
+                $customer->height       = $request['height'];
+                $customer->body_weight  = $request['weight'];
+                $customer->goal         = $goalText;
+                $customer->calories_in  = round($goal);
+                $customer->save();
+            }
+        }
         return [
             'goal'         => round($goal),
             'marco'        => $marco,
-            'recommend'    => $recommend
+            'recommend'    => $recommend,
         ];
     }
     public function comboRecommend($calories = 0)
@@ -212,5 +229,20 @@ class CustomerRepository
                 'data'      => $orderHistory
             ]
         );
+    }
+
+    public function getCustomerInformation($account)
+    {
+        $customer = MstCustomer::where('deleted', 0)->where('account', $account)->first();
+        return $customer;
+    }
+    public function updateInfoCustomer($id, $request)
+    {
+
+        $dataUpdate = MstCustomer::find($id)->update([
+            'phone' => $request->phone,
+            'name'  => $request->name
+        ]);
+        return $dataUpdate;
     }
 }

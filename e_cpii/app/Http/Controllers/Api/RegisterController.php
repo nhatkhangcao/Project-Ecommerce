@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
+use App\Models\MstCustomer;
 use App\Models\MstUser;
 use App\Repositories\LoginRepository;
 use App\Repositories\RegisterRepository;
@@ -23,6 +24,7 @@ class RegisterController extends Controller
     {
 
         $data = $this->repo->getAccountByMember($request);
+        $emailData = $this->repo->getEmailByMember($request);
         if ($data) {
             return response()->json(
                 [
@@ -30,11 +32,25 @@ class RegisterController extends Controller
                     'status'    => false
                 ]
             );
+        } elseif ($emailData) {
+            return response()->json(
+                [
+                    'message'   => 'Email đã tồn tại!',
+                    'status'    => false
+                ]
+            );
         } else {
             MstUser::create([
-                'name' => $request->name,
-                'account' => $request->account,
-                'password' => Hash::make($request->password),
+                'name'      => $request->name,
+                'account'   => $request->account,
+                'email'     => $request->email,
+                'role'      => 0,
+                'password'  => Hash::make($request->password),
+            ]);
+            MstCustomer::create([
+                'account'   => $request->account,
+                'email'     => $request->email,
+                'name'      => $request->name,
             ]);
             return response()->json(
                 [

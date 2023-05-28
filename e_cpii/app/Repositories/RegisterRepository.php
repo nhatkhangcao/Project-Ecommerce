@@ -13,4 +13,9 @@ class RegisterRepository
         $data = MstUser::where('account', $request->account)->first();
         return $data;
     }
+    public function getEmailByMember($request)
+    {
+        $data = MstUser::where('email', $request->email)->first();
+        return $data;
+    }
 }

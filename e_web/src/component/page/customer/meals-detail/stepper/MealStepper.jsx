@@ -164,13 +164,13 @@ function Stepper(props) {
     return (
         <CDBContainer className="text-center">
             <div className="d-flex justify-content-center mt-3">
-                <CDBBtn
+                {/* <CDBBtn
                     color={activeStep === 1 ? "danger" : "dark"}
                     className="me-3 turn-off-cursor"
                     disabled={activeStep === 1 || activeStep === 2 || activeStep === 3 || activeStep === 4}
                 >
                     Chọn bữa
-                </CDBBtn>
+                </CDBBtn> */}
                 <CDBBtn
                     color={activeStep === 2 ? "danger" : "dark"}
                     disabled={activeStep === 1 || activeStep === 2 || activeStep === 3 || activeStep === 4}
@@ -236,7 +236,7 @@ function Stepper(props) {
                 />}
 
             <div className="d-flex justify-content-end">
-                {activeStep > 1 && (
+                {activeStep > 2 && (
                     <button className="btn bg-dark text-white me-3" onClick={handlePrev}>
                         Previous
                     </button>

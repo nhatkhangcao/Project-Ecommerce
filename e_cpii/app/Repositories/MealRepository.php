@@ -10,13 +10,14 @@ class MealRepository
 {
     public function index()
     {
-        return Combo::where('deleted', 0)->paginate(10);
+        return Combo::paginate(10);
     }
     public function add($request)
     {
         $dataCreate = [
             'combo_name' => $request->combo_name,
             'combo_price' => $request->combo_price,
+            'meal_number'   => $request->meal_number,
             'description' => $request->description,
             'detail' => $request->detail,
             'status' => $request->status,
@@ -41,11 +42,12 @@ class MealRepository
     public function edit($id, $request)
     {
         $dataUpdate = [
-            'combo_name' => $request->combo_name,
-            'combo_price' => $request->combo_price,
-            'description' => $request->description,
-            'detail' => $request->detail,
-            'status' => $request->status
+            'combo_name'    => $request->combo_name,
+            'combo_price'   => $request->combo_price,
+            'description'   => $request->description,
+            'detail'        => $request->detail,
+            'meal_number'   => $request->meal_number,
+            'status'        => $request->status
         ];
         if ($request->file('combo_image')) {
             $file = $request->file('combo_image');

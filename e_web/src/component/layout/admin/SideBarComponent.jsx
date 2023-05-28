@@ -38,7 +38,7 @@ function SideBarComponent(props) {
                         <i className="fas fa-user-cog me-2"></i>
                         User
                     </NavLink>
-                    <Link to="mail" className="nav-item nav-link"><i className="fas fa-envelope me-2"></i>Mail</Link>
+                    {/* <Link to="mail" className="nav-item nav-link"><i className="fas fa-envelope me-2"></i>Mail</Link> */}
                     <Link to="chat" className="nav-item nav-link"><i className="fas fa-comment-dots me-2"></i>Chat</Link>
                 </div>
             </nav>

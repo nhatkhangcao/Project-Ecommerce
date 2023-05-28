@@ -15,13 +15,10 @@ return new class extends Migration
     {
         Schema::create('meals', function (Blueprint $table) {
             $table->id();
+            $table->string('combo_type');
             $table->string('meal_name');
-            $table->string('meal_image');
-            $table->integer('meal_price');
-            $table->integer('combo_type');
+            $table->string('meal_image')->nullable();
             $table->string('meal_detail');
-            $table->tinyInteger('deleted')->default(0)->comment('0=active, 1=deleted');
-            $table->tinyInteger('status')->default('0')->comment('0=on-sale, 1=stop-selling, 2=sold-out');
             $table->timestamps();
         });
     }
@@ -33,6 +30,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('products');
+        Schema::dropIfExists('meals');
     }
 };

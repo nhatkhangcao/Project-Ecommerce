@@ -45,4 +45,12 @@ class CustomerController extends Controller
     {
         return $this->repo->getOrderHistoryByAccount($request->all());
     }
+    public function getInfoCustomer(Request $request)
+    {
+        return $this->repo->getCustomerInformation($request->params['account']);
+    }
+    public function updateInfoCustomer($id, Request $request)
+    {
+        return $this->repo->updateInfoCustomer($id, $request);
+    }
 }

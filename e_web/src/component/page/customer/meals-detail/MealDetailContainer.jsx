@@ -31,7 +31,7 @@ function MealDetailContainer(props) {
                         <div className="col-md-6 align-self-center">
                             <h2 className="mb-3 text-success">{item.combo_name}</h2>
                             <p>Giá trị dinh dưỡng: {item.detail}</p>
-                            <p className="font-weight-bold text-danger">Giá: {formatVND(item.combo_price)}VNĐ (4 Bữa)</p>
+                            <p className="font-weight-bold text-danger">Giá: {formatVND(item.combo_price)}VNĐ ({item.description} món)</p>
                             <p className='text-success'>Một số điểm đặc biệt của sản phẩm EatClean:</p>
                             <ul className="list-unstyled">
                                 <li>{item.description}</li>

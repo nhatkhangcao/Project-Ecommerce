@@ -46,9 +46,9 @@ function AddMealModal(props) {
         formData.append('combo_name', data.combo_name);
         formData.append('combo_price', data.combo_price);
         formData.append('detail', data.detail);
-        formData.append('status', data.status);
         formData.append('description', data.description);
         formData.append('combo_image', image);
+        formData.append('meal_number', data.meal_number);
 
         axios.post('http://127.0.0.1:8000/api/admin/add-meal', formData)
             .then((response) => {
@@ -106,6 +106,19 @@ function AddMealModal(props) {
                                                 })}
                                             />
                                             {errors.combo_price && (<span className="text-danger">{errors.combo_price.message}</span>)}
+                                        </div>
+                                    </div>
+                                    <div className="input-group form-group pt-2">
+                                        <label className='col-sm-2 col-form-label'>Số món</label>
+                                        <div className='col-sm-10'>
+                                            <select {...register("meal_number")} className="form-select">
+                                                <option value="1">1</option>
+                                                <option value="2">2</option>
+                                                <option value="3">3</option>
+                                                <option value="4">4</option>
+                                                <option value="5">5</option>
+                                                <option value="6">6</option>
+                                            </select>
                                         </div>
                                     </div>
                                     <div className="input-group form-group pt-2">

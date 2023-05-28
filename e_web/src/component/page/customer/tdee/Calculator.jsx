@@ -5,6 +5,7 @@ import { useForm } from 'react-hook-form';
 import { Link } from 'react-router-dom';
 
 function Calculator(props) {
+    const account = JSON.parse(localStorage.getItem('account_user'))?.user?.account;
     const [recommend, setRecommend] = useState({})
     const [calories, setCalories] = useState({
         goal: "",
@@ -22,7 +23,7 @@ function Calculator(props) {
             age: "20",
             height: "170",
             weight: "60",
-
+            account: account ?? ''
         }
     });
     const formatVND = (money) => {
@@ -101,6 +102,15 @@ function Calculator(props) {
                                         />
                                         {errors.height && <span className='text-danger'>Vui lòng nhập chiều cao là số dương</span>}
                                     </div>
+                                </div>
+                            </div>
+                            <div className="form-group row">
+                                <div className="col-sm-7">
+                                    <input
+                                        type='hidden'
+                                        name='account'
+                                        {...register("account")}
+                                    />
                                 </div>
                             </div>
                             <div className="col-md-6">
