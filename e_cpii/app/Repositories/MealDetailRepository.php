@@ -10,7 +10,7 @@ class MealDetailRepository
 {
     public function index()
     {
-        return Meal::where('deleted', 0)->paginate(10);
+        return Meal::orderBy('id', 'DESC')->paginate(10);
     }
     public function add($request)
     {
@@ -18,7 +18,6 @@ class MealDetailRepository
         $dataCreate = [
             'meal_name'     => $request->meal_name,
             'meal_detail'   => $request->meal_detail,
-            'day'           => $request->day,
             'combo_type'    => $comboType
         ];
         if ($request->file('meal_image')) {
@@ -40,13 +39,9 @@ class MealDetailRepository
     }
     public function edit($id, $request)
     {
-        $comboType = Combo::where('id', $request->combo_type)->first()->combo_name;
         $dataUpdate = [
             'meal_name'     => $request->meal_name,
             'meal_detail'   => $request->meal_detail,
-            'day'           => $request->day,
-            'combo_type'    => $comboType,
-            'status'        => $request->status
         ];
         if ($request->file('meal_image')) {
             $file = $request->file('meal_image');
@@ -59,20 +54,19 @@ class MealDetailRepository
     }
     public function delete($id)
     {
-        $dataDelete = Meal::find($id)->update(['deleted' => 1]);
+        $dataDelete = Meal::find($id)->delete();
         return $dataDelete;
     }
 
     public function searchMeal($request)
     {
-        $dataSearch = Meal::where('deleted', 0);
         if (isset($request['meal_name'])) {
-            $dataSearch->where('meal_name', 'LIKE', '%' . $request['meal_name'] . '%');
+            $dataSearch = Meal::where('meal_name', 'LIKE', '%' . $request['meal_name'] . '%');
         }
         return $dataSearch->orderBy('id', 'DESC')->paginate(10);
     }
     public function getOptionCombo()
     {
-        return Combo::where('deleted', 0)->get();
+        return Combo::get();
     }
 }

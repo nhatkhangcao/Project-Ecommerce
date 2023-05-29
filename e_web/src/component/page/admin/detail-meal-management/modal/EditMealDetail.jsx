@@ -34,7 +34,6 @@ function EditMealDetail(props) {
             meal_name: mealList.meal_name,
             meal_detail: mealList.meal_detail,
             meal_image: mealList.meal_image,
-            day: mealList.day,
             combo_type: mealList.combo_type
         },
     });
@@ -60,8 +59,6 @@ function EditMealDetail(props) {
         formData.append('meal_name', data.meal_name);
         formData.append('meal_detail', data.meal_detail);
         formData.append('meal_image', data.meal_image);
-        formData.append('combo_type', data.combo_type);
-        formData.append('day', data.day);
         axios.post('http://127.0.0.1:8000/api/admin/edit-meal-detail/' + data.id, formData).then((response) => {
             Swal.fire(
                 'Cập nhật thành công!',
@@ -82,7 +79,7 @@ function EditMealDetail(props) {
     }, []);
     return (
         <>
-            <i onClick={handleShow} className="fas fa-pen">&nbsp;<span>Update</span></i>
+            <i onClick={handleShow} className="fas fa-pen">&nbsp;<span>Edit</span></i>
             <Modal
                 backdrop='static'
                 show={show}
@@ -91,7 +88,7 @@ function EditMealDetail(props) {
             >
                 <form onSubmit={handleSubmit(editMeal)}>
                     <Modal.Header>
-                        <Modal.Title id="example-custom-modal-styling-title">CẬP NHẬT MEAL</Modal.Title>
+                        <Modal.Title id="example-custom-modal-styling-title">CHỈNH SỬA MÓN ĂN</Modal.Title>
                     </Modal.Header>
                     <Modal.Body>
                         <div className="container-fluid">
@@ -100,36 +97,22 @@ function EditMealDetail(props) {
                                     <div className="input-group form-group">
                                         <label className='col-sm-2 col-form-label'>Combo</label>
                                         <div className='col-sm-10'>
-                                            <select {...register('combo_type')}
-                                                className='form-select'>
-                                                {option.map((option) => (
-                                                    <option defaultValu e={mealList.combo_type} key={option.id} value={option.value}>
-                                                        {option.label}
-                                                    </option>
-                                                ))}
-                                            </select>
+                                            <input
+                                                disabled
+                                                type="text"
+                                                className="form-control"
+                                                {...register("combo_type")}
+                                            />
                                         </div>
                                     </div>
                                     <div className="input-group form-group pt-2">
-                                        <label className='col-sm-2 col-form-label'>Thứ</label>
-                                        <div className='col-sm-10'>
-                                            <select {...register("day")} className="form-select">
-                                                <option value="2">2</option>
-                                                <option value="3">3</option>
-                                                <option value="4">4</option>
-                                                <option value="5">5</option>
-                                                <option value="6">6</option>
-                                            </select>
-                                        </div>
-                                    </div>
-                                    <div className="input-group form-group pt-2">
-                                        <label className='col-sm-2 col-form-label'>Meal</label>
+                                        <label className='col-sm-2 col-form-label'>Món ăn</label>
                                         <div className='col-sm-10'>
                                             <input
                                                 type="text"
                                                 className="form-control"
                                                 {...register("meal_name", {
-                                                    required: "Meal name is required",
+                                                    required: "Vui lòng nhập món ăn!",
                                                 })}
                                             />
                                             {errors.meal_name && (<span className="text-danger">{errors.meal_name.message}</span>)}

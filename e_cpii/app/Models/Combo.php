@@ -14,6 +14,7 @@ class Combo extends Model
         "combo_name",
         "combo_image",
         "combo_price",
+        "calories",
         "meal_number",
         "detail",
         "description",

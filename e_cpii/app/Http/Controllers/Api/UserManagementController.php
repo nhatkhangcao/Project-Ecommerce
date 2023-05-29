@@ -65,7 +65,7 @@ class UserManagementController extends Controller
     {
         $dataDelete = $this->repo->delete($id);
         return response()->json(
-            ['message' => 'User is deleted']
+            ['message' => 'Thao toán thành công!']
         );
     }
     public function search(Request $request)

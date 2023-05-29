@@ -32,8 +32,8 @@ function AddUserModal(props) {
                 if (response.data.status === true) {
                     axios.post('http://127.0.0.1:8000/api/admin/user-added', data).then((response) => {
                         Swal.fire(
-                            'Good job!',
-                            'Expense Added Successfully',
+                            'Thành công!',
+                            'Tài khoản mới đã được tạo',
                             'success');
                     });
                     getUserData()

@@ -14,7 +14,7 @@ class CustomerRepository
 {
     public function index()
     {
-        return Meal::where('deleted', 0)->get();
+        return Meal::get();
     }
     public function caloriesCalculate($request)
     {
@@ -83,26 +83,19 @@ class CustomerRepository
         $minValue = $calories - $range;
         $maxValue = $calories + $range;
 
-        $recommend = Combo::where('deleted', 0)
-            ->whereBetween('calories', [$minValue, $maxValue])
+        $recommend = Combo::whereBetween('calories', [$minValue, $maxValue])
             ->get();
         return $recommend;
     }
     public function comboList()
     {
-        return Combo::where('deleted', 0)->get();
+        return Combo::get();
     }
 
     public function getDataByCombo($request)
     {
-        $data = Meal::where('combo_type', $request->input('combo_name'))
-            ->whereIn('day', [1, 2, 3, 4, 5, 6])
-            ->orderBy('day')
-            ->get()
-            ->groupBy('day')
-            ->map(function ($items) {
-                return $items;
-            });
+        $data = Meal::where('combo_type', $request->input('combo_name'))->get();
+
         if ($data->isNotEmpty()) {
             return response()->json(
                 [
@@ -138,8 +131,6 @@ class CustomerRepository
             'customer_name'     => $request['name'],
             'note'              => $request['note'],
             'phone'             => $request['phone'],
-            'deleted'           => 0,
-            'status'            => 0,
             'account'           => $request['account'] ?? 'Not Member'
         ]);
         //Send Mail 
@@ -238,7 +229,6 @@ class CustomerRepository
     }
     public function updateInfoCustomer($id, $request)
     {
-
         $dataUpdate = MstCustomer::find($id)->update([
             'phone' => $request->phone,
             'name'  => $request->name

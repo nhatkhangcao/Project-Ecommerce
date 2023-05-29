@@ -13,7 +13,7 @@ function DetailMealManagementContainer(props) {
         }
         axios.get(url).then((response) => {
             setDataList(response.data)
-            pagination(response.data.paginateLink)
+            pagination(response)
         });
     }
     const handleDeleteMeal = (item, e) => {

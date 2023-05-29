@@ -95,9 +95,11 @@ function Home(props) {
                                             alt="..."
                                         />
                                         <div className="card-body">
-                                            <h5 className="card-title text-success">{item.combo_name}</h5>
-                                            <h6>{item.detail}</h6>
-                                            <p className="card-text text-danger">{formatVND(item.combo_price)} VNĐ</p>
+                                            <div className='d-flex justify-content-between'>
+                                                <h5 className="card-title text-success">{item.combo_name}</h5>
+                                                <span className='card-title text-secondary'>{item.calories} calories</span>
+                                            </div>
+                                            <p className="card-text text-danger">Giá: {formatVND(item.combo_price)} VNĐ</p>
                                         </div>
                                     </div>
                                 </Link>

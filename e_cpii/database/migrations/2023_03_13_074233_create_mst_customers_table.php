@@ -15,8 +15,8 @@ return new class extends Migration
     {
         Schema::create('mst_customers', function (Blueprint $table) {
             $table->id();
-            $table->string('email')->unique();
-            $table->string('account')->unique();
+            $table->string('email');
+            $table->string('account');
             $table->string('name');
             $table->integer('body_weight');
             $table->integer('height');

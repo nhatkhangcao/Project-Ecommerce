@@ -23,6 +23,10 @@ function Routing(props) {
         axios.defaults.headers.common['Authorization'] = `Bearer ${JSON.parse(localStorage.getItem('account'))?.token}`;
         return isAuthorize ? <Outlet /> : <Navigate to="/page-not-match" />;
     }
+
+    const loginResponse = JSON.parse(localStorage.getItem('account'));
+    const account = loginResponse?.user?.role;
+
     return (
         <>
             <Routes>
@@ -33,7 +37,7 @@ function Routing(props) {
                         <Route exact path='dashboard' element={<Dashboard />} />
                         <Route exact path='meal-management' element={<MealManagementContainer />} />
                         <Route exact path='meal-detail-management' element={<DetailMealManagementContainer />} />
-                        <Route exact path='user-management' element={<UserManagementContainer />} />
+                        {account == 2 && <Route exact path='user-management' element={<UserManagementContainer />} />}
                         <Route exact path='order-management' element={<OrderManagementContainer />} />
                     </Route>
                 </Route>

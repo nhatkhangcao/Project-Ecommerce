@@ -20,7 +20,6 @@ class MealDetailResource extends JsonResource
             'id'                => $this->id ?? ' ',
             'meal_name'         => $this->meal_name ?? ' ',
             'meal_image'        => $this->meal_image ?? ' ',
-            'day'               => $this->day ?? ' ',
             'meal_detail'       => $this->meal_detail ?? ' ',
             'combo_type'        => $comboType ?? ' ',
             'combo_type_text'   => $this->combo_type ?? ' '

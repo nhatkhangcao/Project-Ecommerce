@@ -35,7 +35,8 @@ function EditMealModal(props) {
             detail: mealList.detail,
             description: mealList.description,
             combo_image: mealList.combo_image,
-            meal_number: mealList.meal_number
+            meal_number: mealList.meal_number,
+            calories: mealList.calories
             // status: mealList.status
         },
     });
@@ -64,6 +65,8 @@ function EditMealModal(props) {
         formData.append('description', data.description);
         formData.append('combo_image', data.combo_image);
         formData.append('meal_number', data.meal_number);
+        formData.append('calories', data.calories);
+        
         axios.post('http://127.0.0.1:8000/api/admin/edit-meal/' + data.id, formData).then((response) => {
             Swal.fire(
                 'Cập nhật combo thành công!',
@@ -85,23 +88,21 @@ function EditMealModal(props) {
             >
                 <form onSubmit={handleSubmit(editMeal)}>
                     <Modal.Header>
-                        <Modal.Title id="example-custom-modal-styling-title">Edit Meals</Modal.Title>
+                        <Modal.Title id="example-custom-modal-styling-title">CHỈNH SỬA COMBO</Modal.Title>
                     </Modal.Header>
                     <Modal.Body>
                         <div className="container-fluid">
                             <div className="row">
                                 <div className="col-6">
                                     <div className="input-group form-group">
-                                        <label className='col-sm-2 col-form-label'>Combo <span className='text-danger'>*</span></label>
+                                        <label className='col-sm-2 col-form-label'>Combo</label>
                                         <div className='col-sm-10'>
                                             <input
+                                                disabled
                                                 type="text"
                                                 className="form-control"
-                                                {...register("combo_name", {
-                                                    required: "Vui lòng nhập combo!",
-                                                })}
+                                                {...register("combo_name")}
                                             />
-                                            {errors.combo_name && (<span className="text-danger">{errors.combo_name.message}</span>)}
                                         </div>
                                     </div>
                                     <div className="input-group form-group pt-2">
@@ -118,7 +119,7 @@ function EditMealModal(props) {
                                         </div>
                                     </div>
                                     <div className="input-group form-group pt-2">
-                                        <label className='col-sm-2 col-form-label'>Số món</label>
+                                        <label className='col-sm-2 col-form-label'>Số món <span className='text-danger'>*</span></label>
                                         <div className='col-sm-10'>
                                             <select {...register("meal_number")} className="form-select">
                                                 <option value="1">1</option>
@@ -128,6 +129,20 @@ function EditMealModal(props) {
                                                 <option value="5">5</option>
                                                 <option value="6">6</option>
                                             </select>
+                                        </div>
+                                    </div>
+                                    <div className="input-group form-group pt-2">
+                                        <label className='col-sm-2 col-form-label '>Calories <span className='text-danger'>*</span></label>
+                                        <div className='col-sm-10'>
+                                            <input
+                                                type="number"
+                                                className="form-control"
+                                                {...register("calories", {
+                                                    min: 0,
+                                                    required: "Vui lòng nhập calories!",
+                                                })}
+                                            />
+                                            {errors.calories && <span className='text-danger'>Vui lòng nhập calories là số dương!</span>}
                                         </div>
                                     </div>
                                     <div className="input-group form-group pt-2">

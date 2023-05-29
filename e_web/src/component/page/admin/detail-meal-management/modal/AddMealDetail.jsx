@@ -45,26 +45,19 @@ function AddMealDetail(props) {
         formData.append('meal_detail', data.meal_detail);
         formData.append('meal_image', data.meal_image);
         formData.append('combo_type', data.combo_type);
-        formData.append('day', data.day);
         axios.post('http://127.0.0.1:8000/api/admin/add-meal-detail/', formData).then((response) => {
-            console.log(response.data)
-            if (!response.data.status) {
-                setNotice({ meal_exist: 'Meal Exist!' })
-            } else {
                 Swal.fire(
-                    'Good job!',
-                    'Updated Successfully',
+                    'THÀNH CÔNG!',
+                    'Món ăn đã được thêm vào',
                     'success');
                 getMealDetail()
                 setShow(false)
-            }
         })
     };
     const comboOption = () => {
         axios.get('http://127.0.0.1:8000/api/admin/combo-option').then((response) => {
             setOption(response.data.data)
         })
-
     }
     useEffect(() => {
         comboOption()
@@ -80,7 +73,7 @@ function AddMealDetail(props) {
             >
                 <form onSubmit={handleSubmit(addMeal)}>
                     <Modal.Header>
-                        <Modal.Title id="example-custom-modal-styling-title">THÊM MEAL</Modal.Title>
+                        <Modal.Title id="example-custom-modal-styling-title">THÊM MÓN ĂN</Modal.Title>
                     </Modal.Header>
                     <Modal.Body>
                         <div className="container-fluid">
@@ -100,30 +93,16 @@ function AddMealDetail(props) {
                                         </div>
                                     </div>
                                     <div className="input-group form-group pt-2">
-                                        <label className='col-sm-2 col-form-label'>Ngày</label>
-                                        <div className='col-sm-10'>
-                                            <select {...register("day")} className="form-select">
-                                                <option value="2">2</option>
-                                                <option value="3">3</option>
-                                                <option value="4">4</option>
-                                                <option value="5">5</option>
-                                                <option value="6">6</option>
-                                            </select>
-                                        </div>
-                                    </div>
-                                    <div className="input-group form-group pt-2">
-                                        <label className='col-sm-2 col-form-label'>Meal</label>
+                                        <label className='col-sm-2 col-form-label'>Món ăn</label>
                                         <div className='col-sm-10'>
                                             <input
                                                 type="text"
                                                 className="form-control"
                                                 {...register("meal_name", {
-                                                    required: "Meal name is required",
+                                                    required: "Vui lòng nhập món ăn!",
                                                 })}
                                             />
-                                            {errors.meal_name && (<span className="text-danger">{errors.meal_name.message}</span>)
-                                                || (notice && <span className="text-danger">{notice.meal_exist}</span>)
-                                            }
+                                            {errors.meal_name && (<span className="text-danger">{errors.meal_name.message}</span>)}
                                         </div>
                                     </div>
                                     <div className="input-group form-group pt-2">

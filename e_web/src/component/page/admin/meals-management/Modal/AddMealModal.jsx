@@ -49,7 +49,7 @@ function AddMealModal(props) {
         formData.append('description', data.description);
         formData.append('combo_image', image);
         formData.append('meal_number', data.meal_number);
-
+        formData.append('calories', data.calories);
         axios.post('http://127.0.0.1:8000/api/admin/add-meal', formData)
             .then((response) => {
                 if (!response.data.status) {
@@ -119,6 +119,20 @@ function AddMealModal(props) {
                                                 <option value="5">5</option>
                                                 <option value="6">6</option>
                                             </select>
+                                        </div>
+                                    </div>
+                                    <div className="input-group form-group pt-2">
+                                        <label className='col-sm-2 col-form-label '>Calories</label>
+                                        <div className='col-sm-10'>
+                                            <input
+                                                type="number"
+                                                className="form-control"
+                                                {...register("calories", {
+                                                    min: 0,
+                                                    required: 'Vui lòng nhập calories!'
+                                                })}
+                                            />
+                                            {errors.calories && <span className='text-danger'>Vui lòng nhập calories là số dương!</span>}
                                         </div>
                                     </div>
                                     <div className="input-group form-group pt-2">

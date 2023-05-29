@@ -80,9 +80,15 @@ function EditUserModal(props) {
                         <Form.Group className="mb-3" controlId="exampleForm.ControlInput1">
                             <Form.Label>Số điện thoại</Form.Label>
                             <Form.Control
-                                type="text"
-                                {...register("phone")}
+                                {...register("phone", {
+                                    required: "Vui lòng nhập số điện thoại!",
+                                    min: {
+                                        value: 1,
+                                        message: "Vui lòng không nhập số âm!",
+                                    },
+                                })}
                             />
+                            {errors.phone && (<span className="text-danger">{errors.phone.message}</span>)}
                         </Form.Group>
                         {/* <Form.Group className="mb-3" controlId="exampleForm.ControlInput1">
                             <Form.Label>Password</Form.Label>

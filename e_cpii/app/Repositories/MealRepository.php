@@ -10,17 +10,17 @@ class MealRepository
 {
     public function index()
     {
-        return Combo::paginate(10);
+        return Combo::orderBy('id', 'DESC')->paginate(10);
     }
     public function add($request)
     {
         $dataCreate = [
-            'combo_name' => $request->combo_name,
-            'combo_price' => $request->combo_price,
+            'combo_name'    => $request->combo_name,
+            'combo_price'   => $request->combo_price,
             'meal_number'   => $request->meal_number,
-            'description' => $request->description,
-            'detail' => $request->detail,
-            'status' => $request->status,
+            'description'   => $request->description,
+            'detail'        => $request->detail,
+            'calories'      => $request->calories
         ];
         if ($request->file('combo_image')) {
             $file = $request->file('combo_image');
@@ -42,12 +42,11 @@ class MealRepository
     public function edit($id, $request)
     {
         $dataUpdate = [
-            'combo_name'    => $request->combo_name,
             'combo_price'   => $request->combo_price,
             'description'   => $request->description,
             'detail'        => $request->detail,
             'meal_number'   => $request->meal_number,
-            'status'        => $request->status
+            'calories'      => $request->calories,
         ];
         if ($request->file('combo_image')) {
             $file = $request->file('combo_image');
@@ -60,15 +59,14 @@ class MealRepository
     }
     public function delete($id)
     {
-        $dataDelete = Combo::find($id)->update(['deleted' => 1]);
+        $dataDelete = Combo::find($id)->delete();
         return $dataDelete;
     }
 
     public function searchCombo($request)
     {
-        $dataSearch = Combo::where('deleted', 0);
         if (isset($request['combo_name'])) {
-            $dataSearch->where('combo_name', 'LIKE', '%' . $request['combo_name'] . '%');
+            $dataSearch = Combo::where('combo_name', 'LIKE', '%' . $request['combo_name'] . '%');
         }
         return $dataSearch->orderBy('id', 'DESC')->paginate(10);
     }

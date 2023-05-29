@@ -18,7 +18,7 @@ return new class extends Migration
             $table->string('combo_type');
             $table->string('meal_name');
             $table->string('meal_image')->nullable();
-            $table->string('meal_detail');
+            $table->string('meal_detail')->nullable();
             $table->timestamps();
         });
     }

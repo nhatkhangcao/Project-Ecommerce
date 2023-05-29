@@ -2,6 +2,8 @@ import React, { useEffect } from 'react';
 import { useForm } from 'react-hook-form';
 import AddUserModal from './modal/AddUserModal';
 import EditUserModal from './modal/EditUserModal';
+import Swal from 'sweetalert2';
+import axios from 'axios';
 
 function UserManagementComponent(props) {
     const getUserData = props.getUserData
@@ -12,6 +14,36 @@ function UserManagementComponent(props) {
     const clearSearch = props.clearSearch
     const setRole = props.setRole
 
+    function blockUser(user) {
+        let lock = '';
+        if (!user.deleted) {
+            lock = 'BLOCK';
+        }
+        else {
+            lock = 'UNBLOCK';
+        }
+        Swal.fire({
+            title: 'Bạn chắc chắn chứ?',
+            text: "Bạn muốn " + lock + " [" + user.account + "]",
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#3085d6',
+            cancelButtonColor: '#d33',
+            confirmButtonText: lock
+        }).then((result) => {
+            if (result.isConfirmed) {
+                axios.post('http://127.0.0.1:8000/api/admin/user-deleted/' + user.id,)
+                    .then(response => {
+                        getUserData()
+                    })
+                Swal.fire(
+                    'Thực hiện thao tác thành công!',
+                    '.....',
+                    'success'
+                )
+            }
+        })
+    }
     const {
         register,
         handleSubmit,
@@ -87,7 +119,7 @@ function UserManagementComponent(props) {
                                             <td>{setRole(item.role)}</td>
                                             <td className='text-center' >
                                                 <EditUserModal item={item} getUserData={getUserData} />
-                                                <i onClick={(e) => handleDeleteUser(item, e)} role="button" className="fas fa-user-times text-danger" title="delete"></i>
+                                                <i onClick={() => blockUser(item)} class="ms-2 fas fa-user-lock text-secondary"></i>
                                             </td>
                                         </tr>
                                     ) :

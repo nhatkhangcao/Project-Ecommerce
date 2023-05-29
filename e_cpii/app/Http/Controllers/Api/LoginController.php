@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
+use App\Models\MstUser;
 use App\Repositories\LoginRepository;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -22,6 +23,17 @@ class LoginController extends Controller
             'account' => $request->account,
             'password' => $request->password,
         ];
+        $checkAccountBlock = MstUser::where('account', $request->account)->first();
+        if ($checkAccountBlock) {
+            if ($checkAccountBlock->deleted == 1) {
+                return response()->json(
+                    [
+                        'message' => 'Tài khoản đã bị block',
+                        'status'  => false
+                    ]
+                );
+            }
+        }
         if (Auth::attempt($account)) {
             $token = $this->repo->createTokenUser($request);
             return response()->json(
@@ -31,7 +43,7 @@ class LoginController extends Controller
                         'role' => auth()->user()->role,
                         'account'   => auth()->user()->account
                     ],
-                    'message'   => 'Login Successfully',
+                    'message'   => 'Đăng nhập thành công',
                     'token'     => $token,
                     'status'    => true
                 ]
@@ -39,7 +51,7 @@ class LoginController extends Controller
         }
         return response()->json(
             [
-                'message' => 'Password or Email is Wrong',
+                'message' => 'Mật khẩu hoặc tài khoản đã sai',
                 'status'  => false
             ]
         );

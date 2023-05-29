@@ -3,11 +3,10 @@ import React from 'react';
 function StepThree(props) {
     const item = props.item
     const fee = props.fee
-    const feeTotal = props.feeTotal
-    const radioValue = props.radioValue
-    const cartPrice = props.cartPrice
     const handleChangeFee = props.handleChangeFee
     const shipFee = props.shipFee
+    const formatVND = props.formatVND
+    const totalFee = props.totalFee
     return (
         <div className='container'>
             <div className="sp-card">
@@ -31,18 +30,10 @@ function StepThree(props) {
                                 </div>
                                 <div className="row align-items-center">
                                     <div className="col">
-                                        <div className="h5 row fw-bold">Số ngày</div>
+                                        <div className="h5 row fw-bold">Số món</div>
                                     </div>
                                     <div className="col">
-                                        <div className="h5 row">{radioValue.day} ngày/1 tuần</div>
-                                    </div>
-                                </div>
-                                <div className="row align-items-center">
-                                    <div className="col">
-                                        <div className="h5 row fw-bold">Số bữa</div>
-                                    </div>
-                                    <div className="col">
-                                        <div className="h5 row">{radioValue.meal} bữa/1 ngày</div>
+                                        <div className="h5 row">{item.meal_number} món</div>
                                     </div>
                                 </div>
                             </div>
@@ -80,7 +71,7 @@ function StepThree(props) {
                                         <div className="h5 row fw-bold">Giá Gói</div>
                                     </div>
                                     <div className="col">
-                                        <div>{cartPrice()}VND</div>
+                                        <div>{formatVND(item.combo_price)} VND</div>
                                     </div>
                                 </div>
                                 <div className="row py-1">
@@ -95,7 +86,7 @@ function StepThree(props) {
                         </div>
                         <hr className="border-2 border-top border-bottom border-secondary" />
                         <div className='d-flex h5 justify-content-end fw-bold'>
-                            <span >TỔNG TIỀN: <span className='text-danger'>{feeTotal()} VND</span></span>
+                            <span >TỔNG TIỀN: <span className='text-danger'>{formatVND(totalFee())} VND</span></span>
                         </div>
                     </div>
                 </div >

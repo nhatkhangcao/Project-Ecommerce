@@ -8,7 +8,7 @@ class OrderManagementRepository
 {
     public function index()
     {
-        return Order::where('deleted', 0)->orderBy('id', 'DESC')->paginate(10);
+        return Order::orderBy('id', 'DESC')->paginate(10);
     }
     public function edit($id, $request)
     {

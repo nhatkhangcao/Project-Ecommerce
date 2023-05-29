@@ -21,7 +21,7 @@ function Login(props) {
                     localStorage.setItem('account', JSON.stringify(response.data))
                 }
             }
-            setLoginNotice("Tài khoản hoặc mật khẩu đã sai!")
+            setLoginNotice(response.data.message)
         })
     }
     return (
