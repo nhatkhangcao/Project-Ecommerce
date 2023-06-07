@@ -11,7 +11,8 @@ class DataAnalystRepository
     {
         //Order today
         $today = now()->format('Y-m-d');
-        $order = Order::whereDate('created_at', $today);
+        $order = Order::whereDate('created_at', $today)
+            ->where('status', '!=', 3);
         $memberCount = MstUser::whereDate('created_at', $today)->count();
         $orderInfo = $order->get();
         $totalSale = 0;

@@ -53,4 +53,9 @@ class CustomerController extends Controller
     {
         return $this->repo->updateInfoCustomer($id, $request);
     }
+    public function cancelOrder(Request $request)
+    {
+
+        return $this->repo->cancelOrder($request->params['orderId']);
+    }
 }

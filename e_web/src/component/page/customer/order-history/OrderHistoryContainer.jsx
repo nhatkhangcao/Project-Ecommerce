@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import moment from 'moment';
+import Swal from 'sweetalert2';
 
 const OrderHistoryContainer = () => {
     const [orderHistory, setOrderHistory] = useState();
@@ -25,8 +26,10 @@ const OrderHistoryContainer = () => {
             return 'Đơn hàng mới'
         } else if (status == 1) {
             return 'Đang được giao'
-        } else {
+        } else if (status == 2) {
             return 'Đã giao'
+        } else {
+            return 'Đã hủy'
         }
     }
     const statusText = (status) => {
@@ -34,9 +37,38 @@ const OrderHistoryContainer = () => {
             return 'bg-success'
         } else if (status == 1) {
             return 'bg-warning'
-        } else {
+        } else if (status == 2) {
             return 'bg-danger'
+        } else {
+            return 'bg-secondary'
         }
+    }
+
+    const handleCancelOrder = (orderId) => {
+        Swal.fire({
+            title: 'Bạn có chắc muốn hủy đơn hàng này?',
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#3085d6',
+            cancelButtonColor: '#d33',
+            cancelButtonText: 'Hủy bỏ',
+            confirmButtonText: 'Đồng ý!'
+        }).then((result) => {
+            if (result.isConfirmed) {
+                axios.post("http://127.0.0.1:8000/api/customer/cancel-oder", {
+                    params: { orderId }
+                }).then((response) => {
+                    getListOrderHistory()
+                })
+                Swal.fire(
+                    'Đã hủy!',
+                    'Đơn hàng của bạn đã được hủy.',
+                    'success'
+                )
+
+            }
+        })
+
     }
     useEffect(() => {
         getListOrderHistory()
@@ -64,8 +96,17 @@ const OrderHistoryContainer = () => {
                                 <span>Giá: </span>
                                 <span>{formatVND(order.order_price)}VNĐ</span>
                             </div>
-                            <div className="order-status text-white">
-                                <span className={statusText(order.status)}>{checkStatus(order.status)}</span>
+                            <div className='d-flex justify-content-between'>
+                                <div className="order-status text-white">
+                                    <span className={statusText(order.status)}>{checkStatus(order.status)}</span>
+                                </div>
+                                {
+                                    order && order.status == 0 &&
+                                    <div className="order-status text-white text-start">
+                                        <span onClick={(e) => handleCancelOrder(order.id)} style={{ cursor: 'pointer' }} className='bg-dark '>Hủy đơn hàng</span>
+                                    </div>
+                                }
+
                             </div>
                         </div>
                     </div>

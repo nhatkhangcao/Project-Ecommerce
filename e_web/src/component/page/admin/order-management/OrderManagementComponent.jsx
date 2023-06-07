@@ -15,8 +15,10 @@ function OrderManagementComponent(props) {
             return 'Đơn hàng mới'
         } else if (status == 1) {
             return 'Đang được giao'
-        } else {
+        } else if (status == 2) {
             return 'Đã giao'
+        } else {
+            return 'Đã hủy'
         }
     }
     const statusText = (status) => {
@@ -24,8 +26,10 @@ function OrderManagementComponent(props) {
             return 'text-success fw-bold'
         } else if (status == 1) {
             return 'text-warning fw-bold'
-        } else {
+        } else if (status == 2) {
             return 'text-danger fw-bold'
+        } else {
+            return 'text-secondary fw-bold'
         }
     }
 

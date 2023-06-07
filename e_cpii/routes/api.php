@@ -67,4 +67,5 @@ Route::prefix('customer')->group(function () {
     Route::post('/get-data-by-combo', [CustomerController::class, 'getDataByCombo']);
     Route::post('/payment', [CustomerController::class, 'payment']);
     Route::post('/update-info-customer/{id}', [CustomerController::class, 'updateInfoCustomer']);
+    Route::post('/cancel-oder', [CustomerController::class, 'cancelOrder']);
 });

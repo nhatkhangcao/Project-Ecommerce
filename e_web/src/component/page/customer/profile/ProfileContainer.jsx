@@ -105,11 +105,11 @@ function ProfileContainer(props) {
                         </Form.Group>
                         <Form.Group controlId="age">
                             <Form.Label className='fw-bold'>Chiều cao</Form.Label>
-                            <Form.Control className='ms-4' plaintext readOnly defaultValue={dataList.height} />
+                            <Form.Control className='ms-4' plaintext readOnly defaultValue={dataList.height + ' cm'} />
                         </Form.Group>
                         <Form.Group controlId="age">
                             <Form.Label className='fw-bold'>Cân nặng</Form.Label>
-                            <Form.Control className='ms-4' plaintext readOnly defaultValue={dataList.body_weight} />
+                            <Form.Control className='ms-4' plaintext readOnly defaultValue={dataList.body_weight + ' kg'} />
                         </Form.Group>
                         <Form.Group controlId="age">
                             <Form.Label className='fw-bold'>Mục tiêu</Form.Label>

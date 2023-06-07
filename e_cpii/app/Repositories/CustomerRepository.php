@@ -129,6 +129,7 @@ class CustomerRepository
             'address'           => $request['address'],
             'email'             => $request['email'],
             'customer_name'     => $request['name'],
+            'status'            => 0,
             'note'              => $request['note'],
             'phone'             => $request['phone'],
             'account'           => $request['account'] ?? 'Not Member'
@@ -212,7 +213,6 @@ class CustomerRepository
     public function getOrderHistoryByAccount($request)
     {
         $orderHistory = Order::where('account', $request['account'])
-            ->where('deleted', 0)
             ->orderByDesc('created_at')
             ->get();
         return response()->json(
@@ -224,7 +224,7 @@ class CustomerRepository
 
     public function getCustomerInformation($account)
     {
-        $customer = MstCustomer::where('deleted', 0)->where('account', $account)->first();
+        $customer = MstCustomer::where('account', $account)->first();
         return $customer;
     }
     public function updateInfoCustomer($id, $request)
@@ -234,5 +234,11 @@ class CustomerRepository
             'name'  => $request->name
         ]);
         return $dataUpdate;
+    }
+    public function cancelOrder($orderId)
+    {
+        $dataCancel = Order::find($orderId)->update([
+            'status' => 3
+        ]);
     }
 }

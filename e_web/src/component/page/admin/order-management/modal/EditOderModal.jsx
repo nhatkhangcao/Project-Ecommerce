@@ -30,6 +30,7 @@ function EditOderModal(props) {
         }
     });
 
+
     const editOrder = (data) => {
         axios.post('http://127.0.0.1:8000/api/admin/order-edit/' + data.id, {
             data: data.status
@@ -94,9 +95,10 @@ function EditOderModal(props) {
                         <Form.Group>
                             <Form.Label>Trạng thái:</Form.Label>
                             <select {...register("status")} className="form-select">
-                                <option value="0">Đơn hàng mới</option>
-                                <option value="1">Đang được giao</option>
-                                <option value="2">Đã giao</option>
+                                <option className='fw-bold' disabled={item.status != 0} value="0">Đơn hàng mới</option>
+                                <option className='fw-bold' disabled={item.status == 2 || item.status == 3} value="1">Đang được giao</option>
+                                <option className='fw-bold' disabled={item.status == 0 || item.status == 3} value="2">Đã giao</option>
+                                <option className='fw-bold' disabled={item.status == 0 || item.status == 1 || item.status == 2} value="3">Đã hủy</option>
                             </select>
                         </Form.Group>
                         <Form.Group className='d-flex justify-content-end pt-3'>

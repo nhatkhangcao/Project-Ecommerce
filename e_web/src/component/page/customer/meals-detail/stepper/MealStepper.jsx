@@ -109,9 +109,6 @@ function Stepper(props) {
             account: account ?? ''
         }
     });
-    const test = () => {
-        console.log(totalFee())
-    }
     // Payment
     const payment = (data) => {
         axios.post("http://127.0.0.1:8000/api/customer/payment", data).then((response) => {
@@ -139,7 +136,6 @@ function Stepper(props) {
     }, []);
     return (
         <CDBContainer className="text-center">
-            <button onClick={test}>test</button>
             <div className="d-flex justify-content-center mt-3">
                 <CDBBtn
                     color={activeStep === 1 ? "danger" : "dark"}
