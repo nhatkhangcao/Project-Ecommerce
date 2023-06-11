@@ -47,13 +47,13 @@ Route::prefix('admin')->group(function () {
     Route::get('combo-option', [MealDetailController::class, 'getOption']);
     Route::post('add-meal-detail', [MealDetailController::class, 'add']);
     Route::post('search-meal-detail', [MealDetailController::class, 'searchMeal']);
-
+    Route::post('upload-file', [MealDetailController::class, 'handleUploadFile']);
     //Order Management
     Route::get('/order', [OrderManagementController::class, 'index']);
     Route::post('/order-edit/{id}', [OrderManagementController::class, 'edit']);
-
     //Data Analyst
     Route::get('/data-analyst', [DataAnalystController::class, 'index']);
+    Route::get('/chart-analyst', [DataAnalystController::class, 'chart']);
 });
 // });
 

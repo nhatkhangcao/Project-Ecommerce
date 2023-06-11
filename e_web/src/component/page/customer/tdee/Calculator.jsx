@@ -78,7 +78,7 @@ function Calculator(props) {
                             </div>
                             <div className="col-md-6">
                                 <div className="form-group row">
-                                    <label className="col-sm-4">Cân nặng</label>
+                                    <label className="col-sm-4">Cân nặng (kg)</label>
                                     <div className="col-sm-7">
                                         <input
                                             name="weight"
@@ -92,7 +92,7 @@ function Calculator(props) {
                             </div>
                             <div className="col-md-6">
                                 <div className="form-group row">
-                                    <label className="col-sm-4">Chiều cao</label>
+                                    <label className="col-sm-4">Chiều cao (cm)</label>
                                     <div className="col-sm-7">
                                         <input
                                             name="height"

@@ -23,12 +23,12 @@ class DatabaseSeeder extends Seeder
         //     'name' => 'Test User',
         //     'email' => 'test@example.com',
         // ]);
-        DB::table('mst_users')->insert([
-            'name' => 'admin',
-            'account' => 'admin',
-            'email' => 'admin@gmail.com',
-            'password' => Hash::make('123456'),
-        ]);
+        // DB::table('mst_users')->insert([
+        //     'name' => 'admin',
+        //     'account' => 'admin',
+        //     'email' => 'admin@gmail.com',
+        //     'password' => Hash::make('123456'),
+        // ]);
         // DB::table('combos')->insert([
         //     'combo_name'    => 'Monster',
         //     'combo_image'   => 'uploads/monster.jpg',
@@ -45,5 +45,6 @@ class DatabaseSeeder extends Seeder
         //     'meal_detail'  => 'Good for health',
         //     'deleted'       => 0,
         // ]);
+        $this->call(MonthlyDataSeeder::class);
     }
 }

@@ -12,12 +12,7 @@ class Meal extends Model
     protected $fillable = [
         "meal_name",
         "meal_image",
-        "meal_price",
         "meal_detail",
         "combo_type",
-        "day",
-        "status",
-        "role",
-        "deleted"
     ];
 }

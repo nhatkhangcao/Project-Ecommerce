@@ -62,7 +62,7 @@ function EditMealDetail(props) {
         axios.post('http://127.0.0.1:8000/api/admin/edit-meal-detail/' + data.id, formData).then((response) => {
             Swal.fire(
                 'Cập nhật thành công!',
-                'Meal đã được cập nhật',
+                'Món ăn đã được cập nhật',
                 'success');
             getMealDetail()
             setShow(false)

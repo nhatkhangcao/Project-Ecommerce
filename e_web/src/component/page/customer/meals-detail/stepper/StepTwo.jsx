@@ -20,16 +20,16 @@ function StepTwo(props) {
               data && data.data && data.data.length > 0 ? data.data.map((item, index) =>
                 <div key={index} className="row align-items-center">
                   <div className="col-12 col-md-3 mb-3 mb-md-0">
-                    <img className="img-fluid rounded-2" src={`http://localhost:8000/${item.meal_image}`} alt="Meal Image" />
+                    <img className="img-fluid rounded-2 image-container" style={{ width: '150px' }} src={`http://localhost:8000/${item.meal_image}`} alt="Meal Image" />
                   </div>
                   <div className="col-12 col-md-4 mb-3 mb-md-0">
                     <div className="row fw-bold">{item.meal_name}</div>
                     <div className="row text-start text-secondary">{item.meal_detail}</div>
                   </div>
                   <div className="col col-md-4 ms-3 d-flex align-items-center justify-content-center justify-content-md-end">
-                    <button className="btn btn-outline-secondary me-2" onClick={() => decrementQuantity(index)}>-</button>
+                    <button className="btn btn-outline-secondary me-2" onClick={() => decrementQuantity(index, item)}>-</button>
                     <span>{quantity?.[index] || 0}</span>
-                    <button className="btn btn-outline-secondary ms-2" onClick={() => incrementQuantity(index)}>+</button>
+                    <button className="btn btn-outline-secondary ms-2" onClick={() => incrementQuantity(index, item)}>+</button>
                   </div>
                   <hr className="border-2 border-bottom border-secondary mt-3" />
                 </div>

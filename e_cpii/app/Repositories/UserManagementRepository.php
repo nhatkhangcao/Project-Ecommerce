@@ -11,7 +11,7 @@ class UserManagementRepository
 
     public function index()
     {
-        $data = MstUser::where('role', 1)->select('id', 'name', 'email', 'role', 'deleted', 'phone', 'account')->orderBy('id', 'DESC')->paginate(10);
+        $data = MstUser::whereBetween('role', [0, 1])->select('id', 'name', 'email', 'role', 'deleted', 'phone', 'account')->orderBy('id', 'DESC')->paginate(10);
         return $data;
     }
     public function getEmailByMember($request)
@@ -34,9 +34,9 @@ class UserManagementRepository
     {
         $dataDelete = MstUser::find($id);
         if ($dataDelete->deleted == 1) {
-            $dataDelete = MstUser::find($id)->update(['deleted'=>0]);
+            $dataDelete = MstUser::find($id)->update(['deleted' => 0]);
         } else {
-            $dataDelete = MstUser::find($id)->update(['deleted'=>1]);
+            $dataDelete = MstUser::find($id)->update(['deleted' => 1]);
         }
     }
     public function search($request)

@@ -8,6 +8,7 @@ import StepTwo from "./StepTwo";
 import StepThree from "./StepThree";
 import StepFour from "./StepFour";
 import axios from "axios";
+import Loader from 'react-loader-spinner'
 
 function Stepper(props) {
     //Account
@@ -15,10 +16,22 @@ function Stepper(props) {
     const account = loginResponse?.user?.account;
     // Initialize
     const item = props.item;
+    const [isLoading, setIsLoading] = useState(false);
     const navigate = useNavigate();
     const [data, setData] = useState({})
     const [activeStep, setActiveStep] = useState(1);
+    const [mealQuantitySelect, setMealQuantitySelect] = useState({})
 
+    const defaultValues = {
+        name: '',
+        phone: '',
+        note: '',
+        address: '',
+        email: '',
+        paymentMethod: 'COD',
+        order_name: item.combo_name,
+        account: account ?? '',
+    };
     // Move Step
     const handleNextPrevClick = (step) => {
         setActiveStep(step);
@@ -36,13 +49,16 @@ function Stepper(props) {
 
     // Get Data By Combo
     const getDataByCombo = () => {
+        setIsLoading(true);
         axios.post("http://127.0.0.1:8000/api/customer/get-data-by-combo",
             { combo_name: item.combo_name }
         ).then((response) => {
             if (response.data.status) {
                 setData(response.data)
             }
-        })
+        }).finally(() => {
+            setIsLoading(false);
+        });
     }
 
     //Transfer VND
@@ -53,13 +69,24 @@ function Stepper(props) {
 
     // Calculator total quantity
     const [quantity, setQuantity] = useState({});
-    const incrementQuantity = (itemIndex) => {
+    const incrementQuantity = (itemIndex, meal) => {
         setQuantity((prevQuantity) => ({
             ...prevQuantity,
             [itemIndex]: (prevQuantity[itemIndex] || 0) + 1,
         }));
+        setMealQuantitySelect((prevQuantity) => {
+            const updatedQuantity = {
+                ...prevQuantity,
+            };
+            updatedQuantity[itemIndex] = {
+                ...updatedQuantity[itemIndex],
+                meal_name: meal?.meal_name,
+                quantity: (updatedQuantity[itemIndex]?.quantity || 0) + 1,
+            };
+            return updatedQuantity;
+        });
     };
-    const decrementQuantity = (itemIndex) => {
+    const decrementQuantity = (itemIndex, meal) => {
         setQuantity((prevQuantity) => {
             const updatedQuantity = {
                 ...prevQuantity,
@@ -69,7 +96,21 @@ function Stepper(props) {
             }
             return updatedQuantity;
         });
+
+        setMealQuantitySelect((prevQuantity) => {
+            const updatedQuantity = {
+                ...prevQuantity,
+            };
+            updatedQuantity[itemIndex] = {
+                ...updatedQuantity[itemIndex],
+                meal_name: meal?.meal_name,
+                quantity: (updatedQuantity[itemIndex]?.quantity || 0) - 1,
+            };
+            return updatedQuantity;
+        });
     };
+
+
     const totalMealSelect = () => {
         return Object.values(quantity).reduce((total, itemQuantity) => total + itemQuantity, 0);
     };
@@ -88,7 +129,10 @@ function Stepper(props) {
     }
     //Total Fee (Ship+Combo)
     const totalFee = () => {
-        return item.combo_price + fee * 1000
+        if (item && fee) {
+            return item.combo_price + fee * 1000
+        }
+        return 0
     }
     //  -----------Step Four Logic------------ //
     const {
@@ -97,21 +141,16 @@ function Stepper(props) {
         formState: { errors },
         setValue
     } = useForm({
-        defaultValues: {
-            name: '',
-            phone: '',
-            note: '',
-            address: '',
-            email: '',
-            paymentMethod: 'COD',
-            totalFee: totalFee(),
-            order_name: item.combo_name,
-            account: account ?? ''
-        }
+        defaultValues: defaultValues
     });
     // Payment
     const payment = (data) => {
-        axios.post("http://127.0.0.1:8000/api/customer/payment", data).then((response) => {
+        const formData = {
+            ...data,
+            totalFee: totalFee(),
+            detailMeal: getListSelect
+        };
+        axios.post("http://127.0.0.1:8000/api/customer/payment", formData).then((response) => {
             if (data.paymentMethod === 'COD') {
                 Swal.fire({
                     icon: 'success',
@@ -131,18 +170,27 @@ function Stepper(props) {
         })
     }
 
+    const getListSelect = Object.entries(mealQuantitySelect)
+        .map(([itemIndex, { meal_name, quantity }]) => {
+            return quantity > 0 ? `${meal_name} x ${quantity}, ` : '';
+        });
+
+    const test = () => {
+        console.log(123)
+    }
     useEffect(() => {
         getDataByCombo()
     }, []);
     return (
         <CDBContainer className="text-center">
+            <button onClick={test}>Test</button>
             <div className="d-flex justify-content-center mt-3">
                 <CDBBtn
                     color={activeStep === 1 ? "danger" : "dark"}
                     disabled={activeStep === 1 || activeStep === 2 || activeStep === 3}
                     className="me-3"
                 >
-                    Chọn ngày
+                    Chọn món
                 </CDBBtn>
                 <CDBBtn
                     color={activeStep === 2 ? "danger" : "dark"}
@@ -175,6 +223,7 @@ function Stepper(props) {
                     totalFee={totalFee}
                     formatVND={formatVND}
                     fee={fee}
+                    getListSelect={getListSelect}
                     shipFee={shipFee}
                     item={item}
                     handleChangeFee={handleChangeFee}

@@ -4,6 +4,7 @@ import { useEffect } from 'react';
 import { useForm } from 'react-hook-form';
 import AddMealDetail from './modal/AddMealDetail';
 import EditMealDetail from './modal/EditMealDetail';
+import Swal from 'sweetalert2';
 
 function DetailMealManagementComponent(props) {
     const getMealDetail = props.getMealDetail
@@ -26,6 +27,36 @@ function DetailMealManagementComponent(props) {
                 setDataList(response.data)
                 paginate(response)
             });
+        }
+    }
+    const uploadFile = (file) => {
+        const formData = new FormData();
+        formData.append('file', file);
+        axios.post('http://127.0.0.1:8000/api/admin/upload-file', formData).then((response) => {
+            if (response.data.status) {
+                Swal.fire({
+                    position: 'top-end',
+                    icon: 'success',
+                    title: 'Upload File thành công!',
+                    showConfirmButton: false,
+                    timer: 1500
+                })
+                getMealDetail();
+            } else {
+                Swal.fire({
+                    position: 'top-end',
+                    icon: 'error',
+                    title: 'File không hợp lệ!',
+                    showConfirmButton: false,
+                    timer: 1500
+                })
+            }
+        })
+    };
+    const handleUploadFile = (event) => {
+        const file = event.target.files[0];
+        if (file) {
+            uploadFile(file);
         }
     }
     const clearSearch = (data) => {
@@ -53,6 +84,12 @@ function DetailMealManagementComponent(props) {
                                 <button className='btn bg-primary text-white'>
                                     <AddMealDetail getMealDetail={getMealDetail} />
                                 </button>
+                                <div className='image-upload btn btn-success ms-3'>
+                                    <input id="file-input" type="file" onChange={handleUploadFile} />
+                                    <label for="file-input">
+                                        <i class="fas fa-file-excel" />
+                                    </label>
+                                </div>
                             </div>
                             <div className="col">
                                 <button type='submit' className="btn bg-dark text-white me-4">
@@ -115,8 +152,8 @@ function DetailMealManagementComponent(props) {
                         }
                     </ul>
                 </nav>
-            </div>
-        </div>
+            </div >
+        </div >
     );
 }
 

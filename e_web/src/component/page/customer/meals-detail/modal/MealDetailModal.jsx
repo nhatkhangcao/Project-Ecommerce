@@ -12,7 +12,7 @@ function MealDetailModal(props) {
     }
     return (
         <>
-            <span onClick={handleShow} role="button" title="login">COMBO TUẦN</span>
+            <span onClick={handleShow} role="button" title="login">ĐẶT MÓN</span>
             <Modal backdrop="static" show={show} size='lg' onHide={handleClose} dialogClassName="modal-dialog-scrollable">
                 <Modal.Header className="text-center" closeButton>
                     <Modal.Title className='text-title w-100 fw-bold text-success' >{item.combo_name}</Modal.Title>

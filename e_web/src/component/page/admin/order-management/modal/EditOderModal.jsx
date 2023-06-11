@@ -61,6 +61,10 @@ function EditOderModal(props) {
                             <Form.Control type="text" readOnly value={item.order_name} />
                         </Form.Group>
                         <Form.Group>
+                            <Form.Label>Combo:</Form.Label>
+                            <Form.Control type="text" readOnly value={item.detail} />
+                        </Form.Group>
+                        <Form.Group>
                             <Form.Label>Giá:</Form.Label>
                             <Form.Control type="text" readOnly value={item.order_price} />
                         </Form.Group>

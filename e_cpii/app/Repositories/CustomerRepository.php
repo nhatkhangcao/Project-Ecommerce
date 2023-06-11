@@ -121,10 +121,12 @@ class CustomerRepository
         if ($request['paymentMethod'] === "VNPAY") {
             $url = $this->vnPay($request, $orderCode);
         }
+
         $order = Order::create([
             'order_code'        => $orderCode,
             'order_name'        => $request['order_name'],
             'order_price'       => $request['totalFee'],
+            'detail'            => implode(" ", $request['detailMeal']) ?? '',
             'payment_method'    => $request['paymentMethod'],
             'address'           => $request['address'],
             'email'             => $request['email'],
@@ -140,6 +142,7 @@ class CustomerRepository
         return response()->json(
             [
                 'status'    => true,
+                'de'        => implode(" ", $request['detailMeal']),
                 'url'       => $url,
             ]
         );

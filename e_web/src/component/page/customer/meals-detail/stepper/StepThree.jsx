@@ -7,6 +7,7 @@ function StepThree(props) {
     const shipFee = props.shipFee
     const formatVND = props.formatVND
     const totalFee = props.totalFee
+    const getListSelect = props.getListSelect
     return (
         <div className='container'>
             <div className="sp-card">
@@ -36,6 +37,14 @@ function StepThree(props) {
                                         <div className="h5 row">{item.meal_number} món</div>
                                     </div>
                                 </div>
+                                <div className="row align-items-center">
+                                    <div className="col">
+                                        <div className="h5 row fw-bold">Chi tiết</div>
+                                    </div>
+                                    <div className="col">
+                                        <div className="h5 row">{getListSelect}</div>
+                                    </div>
+                                </div>
                             </div>
                         </div>
                         <hr className="border-2 border-top border-bottom border-secondary" />
@@ -51,10 +60,24 @@ function StepThree(props) {
                                         <div className="h5 row fw-bold">Địa chỉ </div>
                                     </div>
                                     <div className="col">
-                                        <select defaultValue={fee ?? 10} onChange={(e) => handleChangeFee(e)} className="form-select">
-                                            <option value="10">Quận 1</option>
-                                            <option value="20">Quận 2</option>
+                                        <select defaultValue={fee ?? 20} onChange={(e) => handleChangeFee(e)} className="form-select">
+                                            <option value="35">Quận 1</option>
+                                            <option value="30">Quận 2</option>
                                             <option value="30">Quận 3</option>
+                                            <option value="40">Quận 4</option>
+                                            <option value="50">Quận 5</option>
+                                            <option value="30">Quận 6</option>
+                                            <option value="20">Quận 7</option>
+                                            <option value="30">Quận 8</option>
+                                            <option value="25">Quận 9</option>
+                                            <option value="25">Quận 10</option>
+                                            <option value="20">Quận 11</option>
+                                            <option value="30">Quận 12</option>
+                                            <option value="45">Quận Bình Thạnh</option>
+                                            <option value="25">Quận Gò Vấp</option>
+                                            <option value="30">Quận Bình Tân</option>
+                                            <option value="35">Quận Tân Bình</option>
+                                            <option value="40">Quận Tân Phú</option>
                                         </select>
                                     </div>
                                 </div>

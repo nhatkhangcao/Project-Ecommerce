@@ -34,7 +34,7 @@ function DetailMealManagementContainer(props) {
                     })
                 Swal.fire(
                     'Bạn chắc chắn chứ!',
-                    'B.',
+                    '...',
                     'success'
                 )
             }

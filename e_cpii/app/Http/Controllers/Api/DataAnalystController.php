@@ -17,4 +17,8 @@ class DataAnalystController extends Controller
     {
         return $this->repo->index();
     }
+    public function chart()
+    {
+        return $this->repo->getChart();
+    }
 }

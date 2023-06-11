@@ -77,7 +77,8 @@ function Home(props) {
             </div>
             <div className="container mt-3" style={{ paddingRight: '15px', paddingLeft: '15px' }}>
                 <h1 className="text-center py-3">COMBO</h1>
-                <h4 onClick={textData} className="text-center pb-4">Tôi tin rằng các combo dưới đây sẽ phù hợp với bạn...</h4>
+                <h4 onClick={textData} className="text-center">Tôi tin rằng những combo sau đây sẽ hoàn hảo cho bạn!</h4>
+                <h5 className='text-center pb-4'>Mang lại sự kết hợp tuyệt vời giữa hương vị thơm ngon và thành phần dinh dưỡng cân đối ...</h5>
                 <div className="row row-cols-1 row-cols-sm-2 row-cols-md-3 row-cols-lg-4 g-2 g-md-3 text-decoration-none text-dark">
                     {dataList && dataList.length > 0 ? (
                         dataList.map((item, index) => (
@@ -147,7 +148,7 @@ function Home(props) {
                 <h1 className='text-center'>Tin tức HOT</h1>
                 <div className="latest-news">
                     <div className="latest-news__card">
-                        <div className="latest-news__card-img"><img alt='' src={"images/fruit.png"} /></div>
+                        <div className="latest-news__card-img"><img alt='' src={"images/bf.jpg"} /></div>
                         <div className="latest-news__card-text">
                             <span className="date">1 giờ trước</span>
                             <h2>Tại sao bữa sáng quan trọng đến vậy?</h2>
@@ -155,7 +156,7 @@ function Home(props) {
                         </div>
                     </div>
                     <div className="latest-news__card">
-                        <div className="latest-news__card-img"><img alt='' src={"images/fruit.png"} /></div>
+                        <div className="latest-news__card-img"><img alt='' src={"images/el.jpg"} /></div>
                         <div className="latest-news__card-text">
                             <span className="date">4 ngày trước</span>
                             <h2>Ăn sạch là gì?</h2>
@@ -163,7 +164,7 @@ function Home(props) {
                         </div>
                     </div>
                     <div className="latest-news__card">
-                        <div className="latest-news__card-img"><img alt='' src={"images/fruit.png"} /></div>
+                        <div className="latest-news__card-img"><img alt='' src={"images/m.jpg"} /></div>
                         <div className="latest-news__card-text">
                             <span className="date">15 tháng 5, 2023</span>
                             <h2>Sữa hạng nhất so với sữa thông thường như thế nào?</h2>

@@ -4,9 +4,12 @@ namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
 use App\Http\Resources\ComboOptionResource;
-use App\Http\Resources\MealDetailResource;
 use App\Repositories\MealDetailRepository;
+use Illuminate\Support\Facades\Validator;
+use Illuminate\Http\Response;
+use Maatwebsite\Excel\Facades\Excel;
 use Illuminate\Http\Request;
+use App\Imports\Import;
 
 class MealDetailController extends Controller
 {
@@ -62,5 +65,23 @@ class MealDetailController extends Controller
     {
         $dataSearch = $this->repo->searchMeal($request);
         return $dataSearch;
+    }
+    public function handleUploadFile(Request $request)
+    {
+        $validator = Validator::make($request->all(), [
+            'file' => 'required|file|mimes:xls,xlsx',
+        ]);
+        if ($validator->fails()) {
+            return response()->json([
+                'message' => $validator->errors(),
+                'status' => false
+            ]);
+        }
+        $file = $request->file('file');
+        Excel::import(new Import(), $file);
+        return response()->json([
+            'message' => 'Success',
+            'status' => true
+        ]);
     }
 }

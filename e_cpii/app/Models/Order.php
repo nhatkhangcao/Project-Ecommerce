@@ -20,7 +20,7 @@ class Order extends Model
         "customer_name",
         "note",
         "phone",
-        "deleted",
+        "detail",
         "status",
         "created_at"
     ];

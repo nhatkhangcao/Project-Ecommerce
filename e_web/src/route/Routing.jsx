@@ -1,5 +1,6 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import axios from 'axios';
+import { BrowserRouter } from 'react-router-dom';
 import { Navigate, Outlet, Route, Routes } from 'react-router-dom';
 import PageNotMatch from '../component/layout/PageNotMatch';
 import AdminContainer from '../component/page/admin/AdminContainer';
@@ -15,30 +16,34 @@ import MealDetailContainer from '../component/page/customer/meals-detail/MealDet
 import OrderHistoryContainer from '../component/page/customer/order-history/OrderHistoryContainer';
 import DetailMealManagementContainer from '../component/page/admin/detail-meal-management/DetailMealManagementContainer';
 import OrderManagementContainer from '../component/page/admin/order-management/OrderManagementContainer';
-import ProfileContainer from '../component/page/customer/profile/ProfileContainer';
 
 function Routing(props) {
+    const [account, setAccount] = useState()
     const PrivateRoute = () => {
         const isAuthorize = localStorage.getItem('account');
         axios.defaults.headers.common['Authorization'] = `Bearer ${JSON.parse(localStorage.getItem('account'))?.token}`;
         return isAuthorize ? <Outlet /> : <Navigate to="/page-not-match" />;
     }
-
-    const loginResponse = JSON.parse(localStorage.getItem('account'));
-    const account = loginResponse?.user?.role;
-
+    const getAccount = () => {
+        const loginResponse = JSON.parse(localStorage.getItem('account'));
+        const account = loginResponse?.user?.role;
+        setAccount(account)
+    }
+    useEffect(() => {
+        getAccount();
+    }, []);
     return (
-        <>
+        <BrowserRouter>
             <Routes>
                 //ADMIN ROUTING
                 <Route exact path='admin/login' element={<Login />} />
                 <Route exact path='admin/' element={<PrivateRoute />}>
                     <Route element={<AdminContainer />}>
                         <Route exact path='dashboard' element={<Dashboard />} />
-                        <Route exact path='meal-management' element={<MealManagementContainer />} />
-                        <Route exact path='meal-detail-management' element={<DetailMealManagementContainer />} />
+                        {account == 1 && <Route exact path='meal-management' element={<MealManagementContainer />} />}
+                        {account == 1 && <Route exact path='meal-detail-management' element={<DetailMealManagementContainer />} />}
                         {account == 2 && <Route exact path='user-management' element={<UserManagementContainer />} />}
-                        <Route exact path='order-management' element={<OrderManagementContainer />} />
+                        {account == 1 && <Route exact path='order-management' element={<OrderManagementContainer />} />}
                     </Route>
                 </Route>
                 //CUSTOMER ROUTING
@@ -52,7 +57,7 @@ function Routing(props) {
                 //PAGE NOT MATCH
                 <Route exact path='*' element={<PageNotMatch />} />
             </Routes>
-        </>
+        </BrowserRouter>
     );
 }
 
