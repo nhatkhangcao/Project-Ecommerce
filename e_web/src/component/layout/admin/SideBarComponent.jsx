@@ -16,26 +16,20 @@ function SideBarComponent(props) {
                         <i className="fa fa-tachometer-alt me-2"></i>
                         Dashboard
                     </NavLink>
-                    {
-                        account == 1 && <NavLink to="meal-management" className={({ isActive }) => isActive ? 'active nav-item nav-link' : 'text-dark nav-item nav-link'}>
-                            <i className="fas fa-utensils me-2" />
-                            Combo
-                        </NavLink>
-                    }
-                    {
-                        account == 1 &&
-                        <NavLink to="meal-detail-management" className={({ isActive }) => isActive ? 'active nav-item nav-link' : 'text-dark nav-item nav-link'}>
-                            <i class="fas fa-drumstick-bite me-2"></i>
-                            Meal Detail
-                        </NavLink>
-                    }
-                    {
-                        account == 1 &&
-                        <NavLink to="order-management" className={({ isActive }) => isActive ? 'active nav-item nav-link' : 'text-dark nav-item nav-link'}>
-                            <i className="fas fa-cart-plus me-2"></i>
-                            Order
-                        </NavLink>
-                    }
+                    <NavLink to="meal-management" className={({ isActive }) => isActive ? 'active nav-item nav-link' : 'text-dark nav-item nav-link'}>
+                        <i className="fas fa-utensils me-2" />
+                        Combo
+                    </NavLink>
+                    <NavLink to="meal-detail-management" className={({ isActive }) => isActive ? 'active nav-item nav-link' : 'text-dark nav-item nav-link'}>
+                        <i class="fas fa-drumstick-bite me-2"></i>
+                        Meal Detail
+                    </NavLink>
+
+                    <NavLink to="order-management" className={({ isActive }) => isActive ? 'active nav-item nav-link' : 'text-dark nav-item nav-link'}>
+                        <i className="fas fa-cart-plus me-2"></i>
+                        Order
+                    </NavLink>
+
                     {/* <Link to="customer-management" className="nav-item nav-link"><i className="fas fa-users me-2"></i>Customer</Link> */}
                     {
                         account == 2 &&

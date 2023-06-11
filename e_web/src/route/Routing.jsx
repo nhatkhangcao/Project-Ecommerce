@@ -40,10 +40,10 @@ function Routing(props) {
                 <Route exact path='admin/' element={<PrivateRoute />}>
                     <Route element={<AdminContainer />}>
                         <Route exact path='dashboard' element={<Dashboard />} />
-                        {account == 1 && <Route exact path='meal-management' element={<MealManagementContainer />} />}
-                        {account == 1 && <Route exact path='meal-detail-management' element={<DetailMealManagementContainer />} />}
+                        <Route exact path='meal-management' element={<MealManagementContainer />} />
+                        <Route exact path='meal-detail-management' element={<DetailMealManagementContainer />} />
                         {account == 2 && <Route exact path='user-management' element={<UserManagementContainer />} />}
-                        {account == 1 && <Route exact path='order-management' element={<OrderManagementContainer />} />}
+                        <Route exact path='order-management' element={<OrderManagementContainer />} />
                     </Route>
                 </Route>
                 //CUSTOMER ROUTING

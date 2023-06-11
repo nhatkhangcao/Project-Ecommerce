@@ -19,7 +19,6 @@ function Login(props) {
                 if (response.data?.user.role === 2 || response.data?.user.role === 1) {
                     navigate('/admin/dashboard', { replace: true });
                     localStorage.setItem('account', JSON.stringify(response.data))
-                    window.location.reload()
                 }
             }
             setLoginNotice(response.data.message)
